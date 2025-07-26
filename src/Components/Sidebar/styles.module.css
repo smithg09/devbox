@@ -1,0 +1,103 @@
+.sidebarContainer {
+  height: 100%;
+  padding: 18px;
+  padding-top: 25px;
+  padding-left: 5px;
+  padding-inline: 5px;
+  padding-right: 5px;
+  box-shadow: var(--mantine-shadow-sm);
+  font-size: 15px;
+  user-select: none;
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.headerSection {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.activeItem {
+  font-style: normal;
+  font-weight: bold;
+  color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-gray-2));
+  box-shadow: 0 0 2px 0.2px light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-6));
+  background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+}
+
+.collapsedIconsContainer {
+  padding: 10px;
+  overflow: auto;
+}
+
+.collapsedIconItem {
+  cursor: pointer;
+  display: flex;
+  justify-content: start;
+  padding: 5px;
+  border-radius: 5px;
+
+  &:hover {
+    box-shadow: 0 0 2px 0.2px light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-6));
+    background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+  }
+}
+
+.collapsedHeaderSection {
+  margin-bottom: -10px;
+  margin-left: 5px;
+}
+
+.navigationSection {
+  gap: 0px;
+  overflow: auto;
+}
+
+.navigationItem {
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: 4px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  color: light-dark(black, var(--mantine-color-gray-2));
+  font-weight: 500;
+  min-width: max-content;
+  margin: 1px;
+}
+
+.navigationItem:hover {
+  color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-blue-0));
+  box-shadow: 0 0 2px 0.2px light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-6));
+  background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+
+  .itemDragHandle {
+    cursor: grab;
+    visibility: visible;
+  }
+}
+
+.itemContent {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-direction: row;
+  text-align: center;
+  align-self: center;
+}
+
+.itemDragHandle {
+  cursor: grab;
+  visibility: hidden;
+}
+
+.selectedNavigationItem {
+  font-style: normal;
+  font-weight: bold;
+  color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-gray-2));
+  box-shadow: 0 0 2px 0.2px light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-6));
+  background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+}

@@ -1,0 +1,84 @@
+{
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
+    },
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/icon.png", "icons/icon.ico"],
+    "resources": [],
+    "externalBin": [],
+    "copyright": "",
+    "category": "DeveloperTool",
+    "shortDescription": "Developer Tools",
+    "longDescription": "A cross-platform collection of developer friendly utilities provides essential tools to streamline software development and enhance productivity.",
+    "macOS": {
+      "frameworks": [],
+      "minimumSystemVersion": "",
+      "exceptionDomain": "",
+      "signingIdentity": null,
+      "entitlements": null
+    },
+    "linux": {
+      "deb": {
+        "depends": []
+      }
+    },
+    "licenseFile": "LICENSE",
+    "createUpdaterArtifacts": true
+  },
+  "build": {
+    "beforeBundleCommand": "node scripts/compress.mjs",
+    "frontendDist": "../dist",
+    "beforeDevCommand": "yarn dev",
+    "beforeBuildCommand": "yarn build",
+    "devUrl": "http://localhost:3000"
+  },
+  "productName": "Devbox",
+  "mainBinaryName": "devbox",
+  "version": "0.1.1",
+  "identifier": "com.smith.devbox",
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEE1RDRCNkNFQTVBRERBMTQKUldRVTJxMmx6cmJVcFR3UWtxdnZWdVlCL3RRVUFwOE9ReDB3cDc3VGd4NjVJOGtzQnJZZDlUU24K",
+      "endpoints": ["https://github.com/smithg09/devbox/releases/latest/download/latest.json"]
+    }
+  },
+  "app": {
+    "macOSPrivateApi": true,
+    "security": {
+      "assetProtocol": {
+        "enable": true,
+        "scope": ["http://asset.localhost"]
+      },
+      "dangerousDisableAssetCspModification": ["style-src"],
+      "csp": {
+        "connect-src": [
+          "ipc:",
+          "http://ipc.localhost",
+          "http://asset.localhost",
+          "tauri://localhost",
+          "asset://localhost"
+        ],
+        "default-src": [
+          "'self'",
+          "blob:",
+          "data:",
+          "filesystem:",
+          "ws:",
+          "wss:",
+          "http:",
+          "https:",
+          "tauri:",
+          "asset:"
+        ],
+        "worker-src": ["'self'", "blob:", "https://unpkg.com"],
+        "script-src": ["'self'", "'unsafe-inline'"],
+        "style-src": ["'self'", "'unsafe-inline'"]
+      }
+    },
+    "windows": []
+  }
+}

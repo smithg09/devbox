@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevBox</title>
+    
+    <!-- Geist Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@450&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Prevent print shortcut -->
+    <script>
+      window.onkeydown = function (e) {
+        if (e.code === "KeyP" && e.ctrlKey) {
+          return false;
+        }
+        // on cmd + R, reload the page
+        if (e.code === "KeyR" && e.metaKey) {
+          window.location.reload();
+          return false;
+        }
+        if (e.code === "F3") return false;
+      };
+    </script>
+    <script>
+      const global = globalThis;
+    </script>
+    <style nonce="222">
+      @media print {
+        html,
+        body {
+          display: none; /* hide whole page */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Disable right-click context menu
+      document.addEventListener("contextmenu", (event) =>
+        event.preventDefault()
+      );
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
