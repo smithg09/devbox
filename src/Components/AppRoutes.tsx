@@ -7,6 +7,7 @@ import { tools } from "@/constants/tools";
 const componentMap = {
   jwt: loadable(() => import("../Features/jwt/JWT")) as React.ComponentType,
   markdown: loadable(() => import("../Features/markdown/Markdown")) as React.ComponentType,
+  "har-viewer": loadable(() => import("../Features/har/HarViewer")) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools
