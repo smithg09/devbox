@@ -8,6 +8,9 @@ const componentMap = {
   jwt: loadable(() => import("../Features/jwt/JWT")) as React.ComponentType,
   markdown: loadable(() => import("../Features/markdown/Markdown")) as React.ComponentType,
   "har-viewer": loadable(() => import("../Features/har/HarViewer")) as React.ComponentType,
+  "ssh-keys": loadable(() => import("../Features/ssh/SSH")) as React.ComponentType,
+  "svg-preview": loadable(() => import("../Features/svg/Svg")) as React.ComponentType,
+  ids: loadable(() => import("../Features/ids/Ids")) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools
