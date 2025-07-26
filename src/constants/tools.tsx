@@ -1,4 +1,11 @@
-import { BsKey, BsMarkdown, BsGlobe } from "react-icons/bs";
+import {
+  BsKey,
+  BsMarkdown,
+  BsGlobe,
+  BsShieldLock,
+  BsFiletypeSvg,
+  BsPersonVcard,
+} from "react-icons/bs";
 
 export const tools = [
   {
@@ -18,5 +25,23 @@ export const tools = [
     path: "/har-viewer",
     icon: <BsGlobe />,
     text: "HAR Viewer",
+  },
+  {
+    id: "ssh-keys",
+    path: "/ssh-keys",
+    icon: <BsShieldLock />,
+    text: "SSH Keys",
+  },
+  {
+    id: "svg-preview",
+    path: "/svg-preview",
+    icon: <BsFiletypeSvg />,
+    text: "SVG Preview",
+  },
+  {
+    id: "ids",
+    path: "/ids",
+    icon: <BsPersonVcard />,
+    text: "ID Generator",
   },
 ];
