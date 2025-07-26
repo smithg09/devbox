@@ -1,0 +1,196 @@
+.anchor {
+  display: none !important;
+}
+
+/* Enhanced markdown preview styles */
+.markdown-preview {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: var(--mantine-color-text);
+  background-color: red;
+}
+.markdown-preview > div {
+  --color-canvas-default: var(--mantine-color-dark-9) !important;
+}
+
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3,
+.markdown-preview h4,
+.markdown-preview h5,
+.markdown-preview h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.markdown-preview h1 {
+  font-size: 2em;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  padding-bottom: 0.3em;
+}
+
+.markdown-preview h2 {
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  padding-bottom: 0.3em;
+}
+
+.markdown-preview p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.markdown-preview blockquote {
+  margin: 0;
+  padding: 0 1em;
+  color: var(--mantine-color-gray-6);
+  border-left: 4px solid var(--mantine-color-gray-3);
+}
+
+.markdown-preview code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: var(--mantine-color-gray-1);
+  border-radius: 3px;
+  font-family: "Monaco", "Consolas", "Courier New", monospace;
+}
+
+.markdown-preview pre {
+  padding: 1em;
+  overflow: auto;
+  background-color: var(--mantine-color-gray-1);
+  border-radius: 6px;
+  border: 1px solid var(--mantine-color-gray-3);
+}
+
+.markdown-preview pre code {
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+}
+
+.markdown-preview table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  margin: 1em 0;
+}
+
+.markdown-preview th,
+.markdown-preview td {
+  padding: 8px 12px;
+  border: 1px solid var(--mantine-color-gray-3);
+  text-align: left;
+}
+
+.markdown-preview th {
+  background-color: var(--mantine-color-gray-1);
+  font-weight: 600;
+}
+
+.markdown-preview ul,
+.markdown-preview ol {
+  padding-left: 2em;
+  margin: 1em 0;
+}
+
+.markdown-preview li {
+  margin: 0.25em 0;
+}
+
+.markdown-preview hr {
+  height: 2px;
+  background-color: var(--mantine-color-gray-3);
+  border: none;
+  margin: 2em 0;
+}
+
+.markdown-preview img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.markdown-preview a {
+  color: var(--mantine-color-blue-6);
+  text-decoration: none;
+}
+
+.markdown-preview a:hover {
+  text-decoration: underline;
+}
+
+/* Custom scrollbar for preview */
+.markdown-preview::-webkit-scrollbar {
+  width: 8px;
+}
+
+.markdown-preview::-webkit-scrollbar-track {
+  background: var(--mantine-color-gray-1);
+  border-radius: 4px;
+}
+
+.markdown-preview::-webkit-scrollbar-thumb {
+  background: var(--mantine-color-gray-4);
+  border-radius: 4px;
+}
+
+.markdown-preview::-webkit-scrollbar-thumb:hover {
+  background: var(--mantine-color-gray-5);
+}
+
+/* Dark mode support */
+[data-mantine-color-scheme="dark"] .markdown-preview {
+  color: var(--mantine-color-gray-0);
+}
+
+[data-mantine-color-scheme="dark"] .markdown-preview h1,
+[data-mantine-color-scheme="dark"] .markdown-preview h2 {
+  border-bottom-color: var(--mantine-color-gray-7);
+}
+
+[data-mantine-color-scheme="dark"] .markdown-preview blockquote {
+  color: var(--mantine-color-gray-4);
+  border-left-color: var(--mantine-color-gray-7);
+}
+
+[data-mantine-color-scheme="dark"] .markdown-preview code {
+  background-color: var(--mantine-color-gray-8);
+}
+
+[data-mantine-color-scheme="dark"] .markdown-preview pre {
+  background-color: var(--mantine-color-gray-8);
+  border-color: var(--mantine-color-gray-7);
+}
+
+[data-mantine-color-scheme="dark"] .markdown-preview th,
+[data-mantine-color-scheme="dark"] .markdown-preview td {
+  border-color: var(--mantine-color-gray-7);
+}
+
+[data-mantine-color-scheme="dark"] .markdown-preview th {
+  background-color: var(--mantine-color-gray-8);
+}
+
+[data-mantine-color-scheme="dark"] .markdown-preview hr {
+  background-color: var(--mantine-color-gray-7);
+}
+
+[data-mantine-color-scheme="dark"] .markdown-preview::-webkit-scrollbar-track {
+  background: var(--mantine-color-gray-8);
+}
+
+[data-mantine-color-scheme="dark"] .markdown-preview::-webkit-scrollbar-thumb {
+  background: var(--mantine-color-gray-6);
+}
+
+[data-mantine-color-scheme="dark"] .markdown-preview::-webkit-scrollbar-thumb:hover {
+  background: var(--mantine-color-gray-5);
+}

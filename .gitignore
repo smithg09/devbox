@@ -10,3 +10,4 @@ stats.html
 .yarn
 .eslintcache
 .env
+.github/copilot-instructions.md

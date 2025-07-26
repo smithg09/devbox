@@ -1,4 +1,4 @@
-import { BsKey } from "react-icons/bs";
+import { BsKey, BsMarkdown } from "react-icons/bs";
 
 export const tools = [
   {
@@ -6,5 +6,11 @@ export const tools = [
     path: "/jwt",
     icon: <BsKey />,
     text: "JWT Tools",
+  },
+  {
+    id: "markdown",
+    path: "/markdown",
+    icon: <BsMarkdown />,
+    text: "Markdown",
   },
 ];
