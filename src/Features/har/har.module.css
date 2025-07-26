@@ -1,0 +1,7 @@
+.customBadge {
+  border: 1.2px solid var(--mantine-color-gray-7);
+}
+
+.customBadge:hover {
+    background-color: var(--mantine-primary-color-filled-hover);
+}

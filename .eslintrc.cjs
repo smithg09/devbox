@@ -42,6 +42,7 @@ module.exports = {
     "react/prop-types": "off",
     "no-unused-vars": "off",
     "no-useless-escape": "off", 
+    "no-undef": "off",
     "react/no-unescaped-entities": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
     "@typescript-eslint/explicit-function-return-type": "off",
