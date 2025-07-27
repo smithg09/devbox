@@ -1,0 +1,118 @@
+.container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header {
+  background: var(--mantine-color-gray-0);
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  flex-shrink: 0;
+}
+
+:global([data-mantine-color-scheme="dark"]) .header {
+  background: var(--mantine-color-dark-8);
+  border-bottom: 1px solid var(--mantine-color-dark-4);
+}
+
+.content {
+  overflow: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 80px);
+}
+
+.patternInput {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-size: 14px;
+}
+
+.testInput {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-size: 14px;
+  min-height: 120px;
+}
+
+.resultsPanel {
+  background: var(--mantine-color-gray-0);
+  border: 1px solid var(--mantine-color-gray-3);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+:global([data-mantine-color-scheme="dark"]) .resultsPanel {
+  background: var(--mantine-color-dark-8);
+  border: 1px solid var(--mantine-color-dark-4);
+}
+
+.matchHighlight {
+  background: #ffd700;
+  color: #000;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.groupHighlight {
+  background: #90ee90;
+  color: #000;
+  padding: 1px 3px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.cheatSheetPanel {
+  background: var(--mantine-color-gray-0);
+  border: 1px solid var(--mantine-color-gray-3);
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+:global([data-mantine-color-scheme="dark"]) .cheatSheetPanel {
+  background: var(--mantine-color-dark-8);
+  border: 1px solid var(--mantine-color-dark-4);
+}
+
+.patternLibraryItem {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.patternLibraryItem:hover {
+  background: var(--mantine-color-gray-1);
+}
+
+:global([data-mantine-color-scheme="dark"]) .patternLibraryItem:hover {
+  background: var(--mantine-color-dark-6);
+}
+
+.debugStep {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-size: 12px;
+  padding: 8px;
+  background: var(--mantine-color-gray-0);
+  border-left: 3px solid var(--mantine-color-blue-4);
+  margin: 4px 0;
+}
+
+:global([data-mantine-color-scheme="dark"]) .debugStep {
+  background: var(--mantine-color-dark-7);
+  border-left: 3px solid var(--mantine-color-blue-6);
+}
+
+.performanceMetrics {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-size: 12px;
+}
+
+.regexDiagram {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  background: var(--mantine-color-gray-0);
+  border: 1px solid var(--mantine-color-gray-3);
+  padding: 16px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+:global([data-mantine-color-scheme="dark"]) .regexDiagram {
+  background: var(--mantine-color-dark-8);
+  border: 1px solid var(--mantine-color-dark-4);
+}
