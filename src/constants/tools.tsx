@@ -5,6 +5,7 @@ import {
   BsShieldLock,
   BsFiletypeSvg,
   BsPersonVcard,
+  BsClock,
 } from "react-icons/bs";
 
 export const tools = [
@@ -25,6 +26,12 @@ export const tools = [
     path: "/har-viewer",
     icon: <BsGlobe />,
     text: "HAR Viewer",
+  },
+  {
+    id: "cron",
+    path: "/cron",
+    icon: <BsClock />,
+    text: "Cron",
   },
   {
     id: "ssh-keys",

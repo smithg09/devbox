@@ -11,6 +11,7 @@ const componentMap = {
   "ssh-keys": loadable(() => import("../Features/ssh/SSH")) as React.ComponentType,
   "svg-preview": loadable(() => import("../Features/svg/Svg")) as React.ComponentType,
   ids: loadable(() => import("../Features/ids/Ids")) as React.ComponentType,
+  cron: loadable(() => import("../Features/cron/Cron")) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools
