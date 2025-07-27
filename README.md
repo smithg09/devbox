@@ -5,20 +5,78 @@
 </p>
 
 <p align="center">
-  <strong>A cross-platform collection of developer-friendly utilities</strong>
+  <strong>A cross-platform collection of developer utilities</strong>
 </p>
-
-<!-- <p align="center">
-  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License">
-  <img src="https://img.shields.io/github/issues/smithg09/devbox" alt="GitHub issues">
-  <img src="https://img.shields.io/github/stars/smithg09/devbox" alt="GitHub stars">
-  <img src="https://img.shields.io/github/v/release/smithg09/devbox" alt="Latest release">
-</p> -->
-
-DevBox is a lightweight, cross-platform desktop application built with Tauri (Rust + React) that provides essential tools to streamline software development and enhance productivity. Unlike electron-based alternatives, DevBox offers a smaller bundle size (~10MB installer) while maintaining native performance.
-
----
 
 <p align="center">
-  Made with ❤️ by developers, for developers
+Devbox is a lightweight, cross-platform desktop application built with Tauri (Rust + React) that provides essential tools to streamline software development and enhance productivity.
 </p>
+
+## Screenshot
+<p align="center">
+  <img src="public/appscreenshot.png" alt="DevBox Logo">
+</p>
+
+## Roadmap
+
+### Features
+- [x] Move tool position 
+- [x] Quick access icon on menu
+- [ ] Grouped tools
+- [ ] Hide/Unhide tools
+- [ ] Smart clipboard
+- [ ] Dashboard
+  - [ ] Pin notes
+  - [ ] Frequently used tools
+  - [ ] All tools
+  - [ ] Add Custom RSS Feed (maybe) 
+- [ ] Quick access tools from menu toolbar (maybe)
+- [ ] Tools shortcut from MAC spotlight (maybe) 
+
+### Tools
+- [x] JWT
+- [x] Markdown
+- [x] SVG
+- [x] Cron
+- [x] ID Generator
+- [x] Regex Tester
+- [x] Bundle Analyzer
+- [x] SSH
+- [x] HAR Viewer
+- [ ] REST API Testing
+- [ ] Graphql API Testing
+- [ ] EPOCH Convertor
+- [ ] URL Parser
+- [ ] URL Encoder
+- [ ] Diff tools
+- [ ] CSS Playground
+- [ ] Scratch Pad (code)
+- [ ] Color Testing
+- [ ] Quick Type
+- [ ] Password Generator
+- [ ] Stateless password
+- [ ] QR Code Generator
+- [ ] Lorem Ipsum
+- [ ] Harmonies
+- [ ] Faker
+- [ ] HTML Formatter
+- [ ] CSS Formatter
+- [ ] JS/TS Formatter
+- [ ] JSON Formatter
+- [ ] SQL Formatter
+- [ ] HTML Preview
+- [ ] PDF View
+- [ ] Base64 Text (encode/decode)
+- [ ] Color Utils
+- [ ] JSON <> YAML
+- [ ] Hashing Text
+- [ ] Hasing Files
+- [ ] Notes
+- [ ] World clock
+- [ ] HMAC Generator
+- [ ] Unix Time Converter
+- [ ] Backslash Escape/Unescape
+- [ ] Certificate Decoder X.509
+- [ ] WebSocket Client
+- [ ] Mock API Server / Webhook test
+- [ ] DNS Lookup Tool

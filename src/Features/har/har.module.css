@@ -3,5 +3,5 @@
 }
 
 .customBadge:hover {
-    background-color: var(--mantine-primary-color-filled-hover);
+  background-color: var(--mantine-primary-color-filled-hover);
 }
