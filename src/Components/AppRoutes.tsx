@@ -12,6 +12,9 @@ const componentMap = {
   "svg-preview": loadable(() => import("../Features/svg/Svg")) as React.ComponentType,
   ids: loadable(() => import("../Features/ids/Ids")) as React.ComponentType,
   cron: loadable(() => import("../Features/cron/Cron")) as React.ComponentType,
+  bundlephobia: loadable(
+    () => import("../Features/bundlephobia/Bundlephobia")
+  ) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools
