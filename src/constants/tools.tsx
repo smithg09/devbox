@@ -7,6 +7,7 @@ import {
   BsPersonVcard,
   BsClock,
   BsBox,
+  BsRegex,
 } from "react-icons/bs";
 
 export const tools = [
@@ -21,6 +22,12 @@ export const tools = [
     path: "/markdown",
     icon: <BsMarkdown />,
     text: "Markdown",
+  },
+  {
+    id: "regex",
+    path: "/regex",
+    icon: <BsRegex />,
+    text: "Regex Tester",
   },
   {
     id: "har-viewer",

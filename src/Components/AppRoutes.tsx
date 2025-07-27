@@ -15,6 +15,7 @@ const componentMap = {
   bundlephobia: loadable(
     () => import("../Features/bundlephobia/Bundlephobia")
   ) as React.ComponentType,
+  regex: loadable(() => import("../Features/regex/RegexAdvanced")) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools
