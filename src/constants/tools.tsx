@@ -6,6 +6,7 @@ import {
   BsFiletypeSvg,
   BsPersonVcard,
   BsClock,
+  BsBox,
 } from "react-icons/bs";
 
 export const tools = [
@@ -44,6 +45,12 @@ export const tools = [
     path: "/svg-preview",
     icon: <BsFiletypeSvg />,
     text: "SVG Preview",
+  },
+  {
+    id: "bundlephobia",
+    path: "/bundlephobia",
+    icon: <BsBox />,
+    text: "Bundle Analyzer",
   },
   {
     id: "ids",
