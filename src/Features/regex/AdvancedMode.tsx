@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
 import {
-  Stack,
-  TextInput,
-  Textarea,
-  Group,
-  Checkbox,
-  Paper,
-  Text,
+  Badge,
   Box,
   Button,
-  Badge,
-  CopyButton,
-  Tabs,
-  ScrollArea,
   Card,
+  Checkbox,
+  CopyButton,
+  Group,
   Modal,
+  Paper,
+  ScrollArea,
+  Stack,
+  Tabs,
+  Text,
+  TextInput,
+  Textarea,
 } from "@mantine/core";
-import { BsCopy, BsCheck, BsEye } from "react-icons/bs";
-import { RegexEngine } from "./RegexEngine";
-import { RegexTestResult, RegexFlags } from "./types";
+import React, { useEffect, useState } from "react";
+import { BsCheck, BsCopy, BsEye } from "react-icons/bs";
 import { PatternLibrary } from "./PatternLibrary";
-import { RegexDiagram } from "./RegexDiagram";
 import classes from "./RegexAdvanced.module.css";
+import { RegexDiagram } from "./RegexDiagram";
+import { RegexEngine } from "./RegexEngine";
+import { RegexFlags, RegexTestResult } from "./types";
 
 interface AdvancedModeProps {
   showPatternLibrary: boolean;
@@ -275,7 +275,7 @@ export const AdvancedMode = ({
                   <ScrollArea h={200}>
                     <Stack gap="xs">
                       {result.matches.map((match, index) => (
-                        <Card key={index} p="xs" withBorder>
+                        <Card key={index} p="xs">
                           <Group justify="space-between">
                             <Text size="sm" fw={500}>
                               Match {index + 1}
@@ -300,7 +300,7 @@ export const AdvancedMode = ({
                 <ScrollArea h={200}>
                   <Stack gap="xs">
                     {result.groups.map((group, index) => (
-                      <Card key={index} p="xs" withBorder>
+                      <Card key={index} p="xs">
                         <Group justify="space-between">
                           <Text size="sm" fw={500}>
                             Group {group.index + 1}

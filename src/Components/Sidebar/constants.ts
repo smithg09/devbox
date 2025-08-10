@@ -5,7 +5,7 @@ export const SIDEBAR_CONSTANTS = {
     LARGE: 20,
   },
   SPACING: {
-    ITEM_MARGIN_TOP: 6,
+    ITEM_MARGIN_TOP: 2,
   },
   SCROLL_BEHAVIOR: {
     BLOCK: "center" as const,

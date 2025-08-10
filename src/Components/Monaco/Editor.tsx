@@ -1,4 +1,4 @@
-import Editor, { DiffEditor, DiffOnMount, OnMount, EditorProps } from "@monaco-editor/react";
+import Editor, { DiffEditor, DiffOnMount, EditorProps, OnMount } from "@monaco-editor/react";
 import { editor } from "monaco-editor";
 import { defaultMonacoTheme, monacoOnMountHandler, setMonacoTheme } from "./utils";
 

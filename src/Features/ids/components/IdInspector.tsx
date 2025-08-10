@@ -1,21 +1,21 @@
+import { CopyButton } from "@/Components/CopyButton";
 import {
+  Badge,
   Button,
   Card,
+  Divider,
   Group,
+  SimpleGrid,
   Stack,
   Text,
   TextInput,
   Title,
-  Badge,
-  Divider,
-  SimpleGrid,
 } from "@mantine/core";
 import { useInputState } from "@mantine/hooks";
 import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
-import { CopyButton } from "@/Components/CopyButton";
-import { inspectId } from "../utils/validators";
 import { IdInspectionResult } from "../types/ids";
+import { inspectId } from "../utils/validators";
 
 export default function IdInspector() {
   const [inputId, setInputId] = useInputState("");
@@ -39,7 +39,7 @@ export default function IdInspector() {
   };
 
   return (
-    <Card withBorder p="md" mb={12} style={{ overflow: "visible" }}>
+    <Card p="md" mb={12} style={{ overflow: "visible" }}>
       <Stack gap="md">
         <Group align="flex-end">
           <Title order={4} c="dimmed">

@@ -1,0 +1,119 @@
+/* Custom GraphiQL Styles for DevBox */
+
+.graphiql-container {
+  --color-primary: var(--mantine-primary-color-filled) !important;
+}
+
+.graphiql-container,
+.graphiql {
+  font-family:
+    "Geist",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
+}
+
+button[data-value="short-keys"],
+button[data-value="settings"] {
+  display: none !important;
+}
+
+.graphiql-container {
+  background: var(--mantine-color-dark-7) !important;
+}
+
+.graphiql-editor,
+.graphiql-container .graphiql-editors,
+.graphiql-tab.graphiql-tab-active,
+.graphiql-response {
+  background: #1a1a19 !important;
+}
+
+.graphiql-response {
+  border-radius: var(--mantine-radius-md);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.monaco-editor {
+  overflow: hidden !important;
+}
+
+.graphiql-container .graphiql-editors {
+  border-radius: 0 var(--mantine-radius-md) var(--mantine-radius-md) var(--mantine-radius-md);
+}
+
+.graphiql-container .graphiql-sessions {
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--mantine-color-dark-6) !important;
+}
+
+.graphiql-sessions {
+  margin-top: 0 !important;
+}
+
+button.graphiql-execute-button {
+  background: var(--mantine-primary-color-filled) !important;
+}
+button.graphiql-execute-button:hover {
+  background: var(--mantine-primary-color-filled-hover) !important;
+}
+
+/* Fix Monaco editor background in GraphiQL to match app theme */
+.graphiql-container .monaco-editor,
+.graphiql-container .monaco-editor .margin,
+.graphiql-container .monaco-editor .monaco-editor-background,
+.graphiql-container .monaco-editor-hover,
+.graphiql-container .monaco-editor .inputarea.ime-input,
+.graphiql-container .monaco-editor .overflow-guard {
+  background-color: #1a1a19 !important;
+}
+
+.graphiql-container .monaco-editor .view-lines .view-line {
+  background-color: transparent !important;
+}
+
+.graphiql-container .monaco-editor .current-line,
+.graphiql-container .monaco-editor .current-line-exact {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+.graphiql-container .monaco-editor .selected-text {
+  background-color: rgba(173, 214, 255, 0.15) !important;
+}
+
+.graphiql-container .monaco-editor .line-numbers,
+.graphiql-container .monaco-editor .line-numbers.active-line-number {
+  color: #858585 !important;
+}
+
+/* Force consistent Monaco theme in GraphiQL */
+.graphiql-container .monaco-editor.vs-dark,
+.graphiql-container .monaco-editor.clouds-midnight {
+  background-color: #1a1a19 !important;
+}
+
+.graphiql-container .monaco-editor .view-line span {
+  background-color: transparent !important;
+}
+
+/* Ensure scrollbars match theme */
+.graphiql-container .monaco-editor .monaco-scrollable-element > .scrollbar {
+  background-color: transparent !important;
+}
+
+.graphiql-container .monaco-editor .monaco-scrollable-element .slider {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.graphiql-container .monaco-editor .monaco-scrollable-element .slider:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}

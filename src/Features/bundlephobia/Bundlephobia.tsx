@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react";
 import {
-  TextInput,
+  ActionIcon,
+  Alert,
+  Badge,
+  Box,
   Button,
   Card,
-  Text,
-  Group,
-  Stack,
-  Badge,
-  Alert,
-  Progress,
-  ActionIcon,
-  Tooltip,
   CopyButton,
-  SimpleGrid,
-  Box,
-  Select,
   Flex,
+  Group,
+  Progress,
+  Select,
+  SimpleGrid,
+  Stack,
+  Text,
+  TextInput,
+  Tooltip,
 } from "@mantine/core";
-import { BsSearch, BsTrash, BsDownload, BsGithub, BsCheck, BsCopy } from "react-icons/bs";
 import { notifications } from "@mantine/notifications";
+import { useEffect, useState } from "react";
+import { BsCheck, BsCopy, BsDownload, BsGithub, BsSearch, BsTrash } from "react-icons/bs";
 
 interface DependencyInfo {
   name: string;
@@ -347,7 +347,7 @@ const NestedTreeMap = ({ packageInfo }: { packageInfo: PackageInfo }) => {
   const totalSize = mainPackageSize + dependenciesSize;
 
   return (
-    <Card withBorder p="md">
+    <Card p="md">
       <Text size="lg" fw={600} mb="md">
         Bundle Size Visualization
       </Text>
@@ -867,7 +867,7 @@ export default function Bundlephobia() {
       {currentPackage && (
         <Stack gap="lg">
           {/* Main Package Info */}
-          <Card withBorder p="md">
+          <Card p="md">
             <Group justify="space-between" mb="md">
               <div>
                 <Text size="xl" fw={700} mb="xs">
@@ -1018,7 +1018,7 @@ export default function Bundlephobia() {
 
           {/* Dependency Visualization */}
           {currentPackage.dependencies && currentPackage.dependencies.length > 0 && (
-            <Card withBorder p="md">
+            <Card p="md">
               <Group justify="space-between" mb="md">
                 <Text size="lg" fw={600}>
                   Dependencies ({currentPackage.dependencies.length} direct)

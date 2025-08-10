@@ -7,6 +7,7 @@ export type SidebarTool = {
   iconColor?: string;
   text: string;
   extra?: string;
+  description?: string;
 };
 
 export type DropDownItem = {

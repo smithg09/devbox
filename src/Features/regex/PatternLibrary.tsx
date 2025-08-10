@@ -1,20 +1,20 @@
 import {
-  Stack,
-  Text,
-  Group,
-  Badge,
-  Code,
-  ScrollArea,
-  Card,
-  Tabs,
   ActionIcon,
+  Badge,
+  Card,
+  Code,
   CopyButton,
+  Group,
+  ScrollArea,
+  Stack,
+  Tabs,
+  Text,
   Tooltip,
 } from "@mantine/core";
-import { BsLink, BsCalendar, BsCopy, BsCheck } from "react-icons/bs";
+import { BsCalendar, BsCheck, BsCopy, BsLink } from "react-icons/bs";
 import { patternLibrary } from "./constants";
-import { RegexFlags } from "./types";
 import classes from "./RegexAdvanced.module.css";
+import { RegexFlags } from "./types";
 
 interface PatternLibraryProps {
   onPatternSelect: (pattern: string, flags: Partial<RegexFlags>) => void;
@@ -32,7 +32,6 @@ export const PatternLibrary = ({ onPatternSelect }: PatternLibraryProps) => {
     <Card
       key={pattern.id}
       p="sm"
-      withBorder
       className={classes.patternLibraryItem}
       onClick={() => handlePatternClick(pattern)}
     >

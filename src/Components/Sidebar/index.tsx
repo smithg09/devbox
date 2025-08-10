@@ -1,16 +1,18 @@
 import { Box, Divider, Group, Select, Stack, Text, Tooltip, useMantineTheme } from "@mantine/core";
-import React, { cloneElement, ReactElement, useCallback, useEffect, useMemo } from "react";
+import { cloneElement, ReactElement, useCallback, useEffect, useMemo } from "react";
 
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import cx from "clsx";
+import { useLocation, useNavigate } from "react-router-dom";
 import classes from "./styles.module.css";
 
-import { BsSearch } from "react-icons/bs";
-import { DragDropContext, Draggable, Droppable, OnDragEndResponder } from "@hello-pangea/dnd";
-import { DropDownItem, Props } from "./types";
-import { useSidebarState } from "@/hooks/useSidebarState";
 import { useSidebarShortcuts } from "@/hooks/useSidebarShortcuts";
+import { useSidebarState } from "@/hooks/useSidebarState";
+import { DragDropContext, Draggable, Droppable, OnDragEndResponder } from "@hello-pangea/dnd";
+import { useLocalStorage } from "@mantine/hooks";
+import { BsGear, BsSearch } from "react-icons/bs";
+import { SidebarConfig } from "../Settings";
 import { SIDEBAR_CONSTANTS } from "./constants";
+import { DropDownItem, Props } from "./types";
 
 export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
   const location = useLocation();
@@ -19,6 +21,15 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
 
   const { sidebarTools, updateSidebarOrder } = useSidebarState();
   const { searchInputRef } = useSidebarShortcuts({ collapsed, setCollapsed });
+  const [sidebarConfig] = useLocalStorage<SidebarConfig>({
+    key: "sidebarConfig",
+    defaultValue: {
+      showDescription: false,
+      hiddenTools: [],
+    },
+  });
+
+  const { showDescription, hiddenTools } = sidebarConfig;
 
   useEffect(() => {
     const active = document.querySelector(`.${classes.activeItem}`);
@@ -68,8 +79,12 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
       w={"auto"}
       px="sm"
       align={collapsed ? "center" : undefined}
+      gap={10}
     >
-      <Stack className={collapsed ? classes.collapsedHeaderSection : classes.headerSection} gap={2}>
+      <Stack
+        className={cx(classes.headerSection, { [classes.collapsedHeaderSection]: collapsed })}
+        gap={2}
+      >
         <Group wrap="nowrap" align="center" gap={2} ml={-4}>
           <Box style={{ color: "#324298" }} p={8} pb={4} size={32}>
             <svg
@@ -119,7 +134,7 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
         />
       </Stack>
 
-      {collapsed && <Divider w="100%" />}
+      {collapsed && <Divider w="90%" mx="auto" />}
 
       {!collapsed ? (
         <Stack className={classes.navigationSection}>
@@ -127,54 +142,68 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
             <Droppable droppableId="droppable">
               {provided => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {sidebarTools.map((tool, index) => (
-                    <Draggable key={tool.id} draggableId={tool.id.toString()} index={index}>
-                      {provided => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={{
-                            ...provided.draggableProps.style,
-                            userSelect: "none",
-                          }}
-                        >
-                          <Box
-                            key={tool.id}
-                            className={cx(classes.navigationItem, {
-                              [classes.selectedNavigationItem]: location.pathname === tool.to,
-                            })}
-                            mt={SIDEBAR_CONSTANTS.SPACING.ITEM_MARGIN_TOP}
-                            onClick={() => handleNavigation(tool.to)}
+                  {sidebarTools
+                    .filter(tool => !hiddenTools.includes(tool.id))
+                    .map((tool, index) => (
+                      <Draggable key={tool.id} draggableId={tool.id.toString()} index={index}>
+                        {provided => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={{
+                              ...provided.draggableProps.style,
+                              userSelect: "none",
+                            }}
+                            title={tool.description}
                           >
-                            <Box className={classes.itemContent}>
-                              {cloneElement(tool.icon as ReactElement, {
-                                size: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM,
-                                background: theme.colors?.blue[5],
+                            <Box
+                              key={tool.id}
+                              className={cx(classes.navigationItem, {
+                                [classes.selectedNavigationItem]: location.pathname === tool.to,
                               })}
-                              {tool.extra ? (
-                                <Tooltip label={tool.extra}>
+                              mt={showDescription ? SIDEBAR_CONSTANTS.SPACING.ITEM_MARGIN_TOP : 5}
+                              onClick={() => handleNavigation(tool.to)}
+                            >
+                              <Box className={classes.itemContent} w="100%">
+                                {cloneElement(tool.icon as ReactElement, {
+                                  size: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM,
+                                  background: theme.colors?.blue[5],
+                                  flex: 1,
+                                  style: { minWidth: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM },
+                                  className: "demo-test",
+                                })}
+                                <Box w="80%">
                                   <Text
                                     size="xs"
-                                    fw={location.pathname === tool.to ? "500" : "400"}
-                                    c="red"
-                                    component={Link}
-                                    to={tool.to}
+                                    fw={location.pathname === tool.to ? "600" : "450"}
                                   >
                                     {tool.text}
                                   </Text>
-                                </Tooltip>
-                              ) : (
-                                <Text size="xs" fw={location.pathname === tool.to ? "600" : "450"}>
-                                  {tool.text}
-                                </Text>
-                              )}
+                                  {showDescription && tool.description && (
+                                    <Text
+                                      size="xs"
+                                      c="dimmed"
+                                      mt={2}
+                                      w="100%"
+                                      styles={{
+                                        root: {
+                                          whiteSpace: "nowrap",
+                                          overflow: "hidden",
+                                          textOverflow: "ellipsis",
+                                        },
+                                      }}
+                                    >
+                                      {tool.description}
+                                    </Text>
+                                  )}
+                                </Box>
+                              </Box>
                             </Box>
-                          </Box>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
                   {provided.placeholder}
                 </div>
               )}
@@ -184,7 +213,7 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
       ) : (
         <Stack className={classes.collapsedIconsContainer}>
           {sidebarTools.map(tool => (
-            <Tooltip label={tool.text} key={tool.id} position="left">
+            <Tooltip label={tool.text} key={tool.id} position="left" multiline>
               <Box
                 className={cx(classes.collapsedIconItem, {
                   [classes.activeItem]: location.pathname === tool.to,
@@ -200,6 +229,28 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
           ))}
         </Stack>
       )}
+
+      <Divider w="90%" mx="auto" mt={0} />
+      <Stack className={classes.settingsSection}>
+        <Box
+          className={cx(classes.navigationItem, {
+            [classes.selectedNavigationItem]: location.pathname === "/settings",
+          })}
+          onClick={() => handleNavigation("/settings")}
+        >
+          <Box className={classes.itemContent} w="100%">
+            <BsGear
+              size={SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM}
+              style={{ minWidth: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM }}
+            />
+            <Box w="80%">
+              <Text size="xs" fw={location.pathname === "/settings" ? "600" : "450"}>
+                Settings
+              </Text>
+            </Box>
+          </Box>
+        </Box>
+      </Stack>
     </Stack>
   );
 };

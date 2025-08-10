@@ -1,14 +1,21 @@
 import { LazyStore } from "@tauri-apps/plugin-store";
 
-export type SettingsKey = "sidebarTools";
-// | 'theme'
-
 export interface SettingsValues {
   sidebarTools: string[];
   // theme: 'light' | 'dark' | 'auto';
 }
 
-export const AVAILABLE_SETTINGS_KEYS: SettingsKey[] = ["sidebarTools"] as const;
+export type SettingsKey = keyof SettingsValues;
+
+// Define default values for all settings
+export const DEFAULT_SETTINGS_VALUES: SettingsValues = {
+  sidebarTools: [],
+};
+
+// IMPORTANT might skip keys if not defined in DEFAULT_SETTINGS_VALUES like for optional settings
+export const AVAILABLE_SETTINGS_KEYS: SettingsKey[] = Object.keys(
+  DEFAULT_SETTINGS_VALUES
+) as SettingsKey[];
 
 /**
  * Application settings store
@@ -41,12 +48,9 @@ class SettingsStore {
   }
 
   private async setDefaults(): Promise<void> {
-    // Define default values for all settings
-    const defaults: SettingsValues = {
-      sidebarTools: [],
-    };
-
-    await Promise.all(Object.entries(defaults).map(([key, value]) => this.store.set(key, value)));
+    await Promise.all(
+      Object.entries(DEFAULT_SETTINGS_VALUES).map(([key, value]) => this.store.set(key, value))
+    );
 
     await this.store.save();
   }
