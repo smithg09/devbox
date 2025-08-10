@@ -239,15 +239,21 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
           onClick={() => handleNavigation("/settings")}
         >
           <Box className={classes.itemContent} w="100%">
-            <BsGear
-              size={SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM}
-              style={{ minWidth: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM }}
-            />
-            <Box w="80%">
-              <Text size="xs" fw={location.pathname === "/settings" ? "600" : "450"}>
-                Settings
-              </Text>
-            </Box>
+            {collapsed ? (
+              <BsGear size={SIDEBAR_CONSTANTS.ICON_SIZE.LARGE} />
+            ) : (
+              <>
+                <BsGear
+                  size={SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM}
+                  style={{ minWidth: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM }}
+                />
+                <Box w="80%">
+                  <Text size="xs" fw={location.pathname === "/settings" ? "600" : "450"}>
+                    Settings
+                  </Text>
+                </Box>
+              </>
+            )}
           </Box>
         </Box>
       </Stack>

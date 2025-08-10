@@ -1,7 +1,7 @@
 import { tools } from "@/constants/tools";
 import { Box, Checkbox, Group, Stack, Switch, Table, Text, TextInput, Title } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface SidebarConfig {
   showDescription: boolean;
@@ -17,6 +17,10 @@ export default function Settings() {
     },
   });
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    console.log("Registered Tools", tools);
+  }, []);
 
   const handleToggle = async (checked: boolean) => {
     const newConfig = { ...sidebarConfig, showDescription: checked };
