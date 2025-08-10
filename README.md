@@ -54,6 +54,7 @@ Devbox is a lightweight, cross-platform desktop application built with Tauri (Ru
 - [x] HMAC Generator
 - [x] Backslash Escape/Unescape
 - [x] DNS Lookup Tool
+- [x] Certificate Decoder X.509
 - [ ] Diff tools
 - [ ] CSS Playground
 - [ ] Scratch Pad (code)
@@ -79,6 +80,5 @@ Devbox is a lightweight, cross-platform desktop application built with Tauri (Ru
 - [ ] Hasing Files
 - [ ] Notes
 - [ ] World clock
-- [ ] Certificate Decoder X.509
 - [ ] WebSocket Client
 - [ ] Mock API Server / Webhook test

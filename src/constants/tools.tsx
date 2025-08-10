@@ -11,6 +11,7 @@ import {
   BsPercent,
   BsPersonVcard,
   BsRegex,
+  BsShieldCheck,
   BsShieldLock,
 } from "react-icons/bs";
 import { SiJsonwebtokens } from "react-icons/si";
@@ -114,6 +115,13 @@ export const tools = [
     icon: <BsHash />,
     text: "HMAC Generator",
     description: "Compute HMAC signatures using Web Crypto",
+  },
+  {
+    id: "certificate-decoder",
+    path: "/x509",
+    icon: <BsShieldCheck />,
+    text: "Certificate Decoder",
+    description: "Decode X.509 certs and CSRs, view fields, extensions, fingerprints",
   },
   {
     id: "url-parser",

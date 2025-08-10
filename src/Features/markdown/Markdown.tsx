@@ -1,9 +1,9 @@
-import { Button, Group, Stack, Text, SegmentedControl, Box, CopyButton } from "@mantine/core";
-import { BsFileEarmarkText, BsEye, BsLayoutSplit, BsCheck, BsCopy, BsSave } from "react-icons/bs";
 import { demoMdFile } from "@/Features/markdown/constants";
-import { useState } from "react";
-import { useFile } from "@/hooks";
 import MarkdownEditor from "@/Features/markdown/Editor";
+import { useFile } from "@/hooks";
+import { Box, Button, CopyButton, Group, SegmentedControl, Stack, Text } from "@mantine/core";
+import { useState } from "react";
+import { BsCheck, BsCopy, BsEye, BsFileEarmarkText, BsLayoutSplit, BsSave } from "react-icons/bs";
 
 const Markdown = () => {
   const [viewMode, setViewMode] = useState<"editor" | "both" | "preview">("both");
@@ -100,5 +100,3 @@ const Markdown = () => {
 };
 
 export default Markdown;
-
-// TODO: Save previous text,... db?
