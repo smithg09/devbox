@@ -1,5 +1,5 @@
 import type { MantineThemeOverride } from "@mantine/core";
-import { Card, Checkbox, Container, createTheme, Paper, rem, Select } from "@mantine/core";
+import { Card, Checkbox, Container, createTheme, Paper, rem, Select, Tooltip } from "@mantine/core";
 
 const CONTAINER_SIZES: Record<string, string> = {
   xxs: rem("200px"),
@@ -89,6 +89,17 @@ export const theme: MantineThemeOverride = createTheme({
     Checkbox: Checkbox.extend({
       defaultProps: {
         radius: "sm",
+      },
+    }),
+    Tooltip: Tooltip.extend({
+      defaultProps: {
+        radius: "md",
+        withArrow: true,
+        arrowSize: 10,
+        arrowOffset: 10,
+        fz: "var(--mantine-font-size-xs)",
+        fw: "var(--mantine-font-weight-normal)",
+        lh: "var(--mantine-line-height-sm)",
       },
     }),
   },
