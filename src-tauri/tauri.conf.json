@@ -7,7 +7,10 @@
       "digestAlgorithm": "sha256",
       "timestampUrl": ""
     },
-    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/icon.png", "icons/icon.ico"],
+    "icon": [
+      "icons/icon.png",
+      "icons/icon.icns"
+    ],
     "resources": [],
     "externalBin": [],
     "copyright": "",
@@ -43,7 +46,9 @@
   "plugins": {
     "updater": {
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEE1RDRCNkNFQTVBRERBMTQKUldRVTJxMmx6cmJVcFR3UWtxdnZWdVlCL3RRVUFwOE9ReDB3cDc3VGd4NjVJOGtzQnJZZDlUU24K",
-      "endpoints": ["https://github.com/smithg09/devbox/releases/latest/download/latest.json"]
+      "endpoints": [
+        "https://github.com/smithg09/devbox/releases/latest/download/latest.json"
+      ]
     }
   },
   "app": {
@@ -51,16 +56,24 @@
     "security": {
       "assetProtocol": {
         "enable": true,
-        "scope": ["http://asset.localhost"]
+        "scope": [
+          "http://asset.localhost"
+        ]
       },
-      "dangerousDisableAssetCspModification": ["style-src"],
+      "dangerousDisableAssetCspModification": [
+        "style-src"
+      ],
       "csp": {
         "connect-src": [
           "ipc:",
           "http://ipc.localhost",
           "http://asset.localhost",
           "tauri://localhost",
-          "asset://localhost"
+          "asset://localhost",
+          "https:",
+          "http:",
+          "wss:",
+          "ws:"
         ],
         "default-src": [
           "'self'",
@@ -74,9 +87,19 @@
           "tauri:",
           "asset:"
         ],
-        "worker-src": ["'self'", "blob:", "https://unpkg.com"],
-        "script-src": ["'self'", "'unsafe-inline'"],
-        "style-src": ["'self'", "'unsafe-inline'"]
+        "worker-src": [
+          "'self'",
+          "blob:",
+          "https://unpkg.com"
+        ],
+        "script-src": [
+          "'self'",
+          "'unsafe-inline'"
+        ],
+        "style-src": [
+          "'self'",
+          "'unsafe-inline'"
+        ]
       }
     },
     "windows": []
