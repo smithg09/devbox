@@ -162,7 +162,7 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
                               className={cx(classes.navigationItem, {
                                 [classes.selectedNavigationItem]: location.pathname === tool.to,
                               })}
-                              mt={showDescription ? SIDEBAR_CONSTANTS.SPACING.ITEM_MARGIN_TOP : 4}
+                              mt={SIDEBAR_CONSTANTS.SPACING.ITEM_MARGIN_TOP}
                               onClick={() => handleNavigation(tool.to)}
                             >
                               <Box className={classes.itemContent} w="100%">
