@@ -58,7 +58,7 @@ export default function ParamsHeadersEditor({ title, rows, onChange }: Props) {
                 />
               </Table.Td>
               <Table.Td style={{ width: 56 }}>
-                <ActionIcon color="red" variant="light" onClick={() => removeRow(r.id)}>
+                <ActionIcon color="red" variant="subtle" onClick={() => removeRow(r.id)}>
                   <BsTrash3 size={16} />
                 </ActionIcon>
               </Table.Td>

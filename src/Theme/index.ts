@@ -1,5 +1,5 @@
 import type { MantineThemeOverride } from "@mantine/core";
-import { Card, Container, createTheme, Paper, rem, Select } from "@mantine/core";
+import { Card, Checkbox, Container, createTheme, Paper, rem, Select } from "@mantine/core";
 
 const CONTAINER_SIZES: Record<string, string> = {
   xxs: rem("200px"),
@@ -84,6 +84,11 @@ export const theme: MantineThemeOverride = createTheme({
     Select: Select.extend({
       defaultProps: {
         checkIconPosition: "right",
+      },
+    }),
+    Checkbox: Checkbox.extend({
+      defaultProps: {
+        radius: "sm",
       },
     }),
   },

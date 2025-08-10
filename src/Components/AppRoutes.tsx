@@ -20,6 +20,8 @@ const componentMap = {
   rest: loadable(() => import("../Features/rest/Rest")) as React.ComponentType,
   graphiql: loadable(() => import("../Features/graphiql/GraphiQL")) as React.ComponentType,
   epoch: loadable(() => import("../Features/epoch/Epoch")) as React.ComponentType,
+  "url-parser": loadable(() => import("@/Features/url/UrlParser")) as React.ComponentType,
+  "url-encoder": loadable(() => import("@/Features/url/UrlEncoder")) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools

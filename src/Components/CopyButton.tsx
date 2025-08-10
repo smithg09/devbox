@@ -1,7 +1,7 @@
 import { Button, CopyButton as DefaultCopyButton, MantineSize, Tooltip } from "@mantine/core";
 import {} from "@tauri-apps/api";
-import { TbCheck, TbCopy } from "react-icons/tb";
 import * as clipboard from "@tauri-apps/plugin-clipboard-manager";
+import { BsCheck2, BsCopy } from "react-icons/bs";
 
 type CopyProps = {
   value: number | string;
@@ -23,7 +23,7 @@ export function CopyButton({
       {({ copied, copy }) => (
         <Tooltip label={"Copy"}>
           <Button
-            leftSection={copied ? <TbCheck size={16} /> : <TbCopy size={16} />}
+            leftSection={copied ? <BsCheck2 size={14} /> : <BsCopy size={14} />}
             size={size ?? "xs"}
             fullWidth={fullWidth}
             variant={variant}
