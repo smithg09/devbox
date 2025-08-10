@@ -83,7 +83,7 @@ export default function UrlParser() {
   return (
     <Stack p="sm" gap="xs" style={{ height: "100%", overflow: "auto" }}>
       <Group justify="space-between">
-        <Text fw={600}>URL</Text>
+        <Text fw={600}>URL Parser</Text>
         <CopyButton
           value={state.input}
           label="Copy URL"

@@ -2,8 +2,10 @@ import {
   BsBox,
   BsClock,
   BsClockHistory,
+  BsCodeSlash,
   BsFiletypeSvg,
   BsGlobe,
+  BsHash,
   BsLink45Deg,
   BsMarkdown,
   BsPercent,
@@ -12,7 +14,7 @@ import {
   BsShieldLock,
 } from "react-icons/bs";
 import { SiJsonwebtokens } from "react-icons/si";
-import { TbApi, TbBrandGraphql } from "react-icons/tb";
+import { TbApi, TbBrandGraphql, TbWorldSearch } from "react-icons/tb";
 
 export const tools = [
   {
@@ -65,6 +67,13 @@ export const tools = [
     description: "Inspect performance, requests, and waterfalls from HAR files",
   },
   {
+    id: "dns",
+    path: "/dns",
+    icon: <TbWorldSearch />,
+    text: "DNS Lookup",
+    description: "Query multiple resolvers, DNSSEC, and reverse lookups",
+  },
+  {
     id: "epoch",
     path: "/epoch",
     icon: <BsClockHistory />,
@@ -100,6 +109,13 @@ export const tools = [
     description: "Create UUIDs, NanoIDs, and custom IDs for apps",
   },
   {
+    id: "hmac",
+    path: "/hmac",
+    icon: <BsHash />,
+    text: "HMAC Generator",
+    description: "Compute HMAC signatures using Web Crypto",
+  },
+  {
     id: "url-parser",
     path: "/url-parser",
     icon: <BsLink45Deg />,
@@ -112,5 +128,12 @@ export const tools = [
     icon: <BsPercent />,
     text: "URL Encoder",
     description: "Encode, decode, and sanitize URLs for safe sharing",
+  },
+  {
+    id: "escape",
+    path: "/escape",
+    icon: <BsCodeSlash />,
+    text: "Backslash Escape",
+    description: "Escape or unescape strings with backslash sequences",
   },
 ];

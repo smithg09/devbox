@@ -44,6 +44,10 @@ body {
   z-index: 999999999;
 }
 
+.overflow-auto {
+  overflow: auto;
+}
+
 .overflow-padding {
   padding: 10px;
   padding-top: 1rem;
