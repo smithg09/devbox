@@ -1,8 +1,9 @@
-import React from "react";
+import Settings from "@/Components/Settings";
+import { tools } from "@/constants/tools";
 import loadable from "@loadable/component";
+import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import ErrorBoundary from "./ErrorBoundary";
-import { tools } from "@/constants/tools";
 
 const componentMap = {
   jwt: loadable(() => import("../Features/jwt/JWT")) as React.ComponentType,
@@ -16,6 +17,9 @@ const componentMap = {
     () => import("../Features/bundlephobia/Bundlephobia")
   ) as React.ComponentType,
   regex: loadable(() => import("../Features/regex/RegexAdvanced")) as React.ComponentType,
+  rest: loadable(() => import("../Features/rest/Rest")) as React.ComponentType,
+  graphiql: loadable(() => import("../Features/graphiql/GraphiQL")) as React.ComponentType,
+  epoch: loadable(() => import("../Features/epoch/Epoch")) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools
@@ -34,6 +38,7 @@ export function AppRoutes({ location }: AppRoutesProps) {
     <ErrorBoundary>
       <Routes location={location}>
         <Route path="/" element={<Navigate to="/jwt" replace />} />
+        <Route path="/settings" element={<Settings />} />
         {routes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} />
         ))}

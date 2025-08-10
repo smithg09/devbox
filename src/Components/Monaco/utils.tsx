@@ -20,6 +20,15 @@ export function setMonacoTheme(
     });
 }
 
+// Global Monaco theme synchronization
+export function syncGlobalMonacoTheme(): void {
+  // Check if Monaco is loaded globally
+  if (typeof window !== "undefined" && (window as any).monaco) {
+    const globalMonaco = (window as any).monaco;
+    setMonacoTheme(globalMonaco, defaultMonacoTheme);
+  }
+}
+
 export function monacoOnMountHandler(
   _editor: editor.IStandaloneCodeEditor,
   monaco: typeof import("monaco-editor/esm/vs/editor/editor.api")

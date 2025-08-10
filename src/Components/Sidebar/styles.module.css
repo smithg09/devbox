@@ -1,21 +1,25 @@
 .sidebarContainer {
   height: 100%;
   padding: 18px;
-  padding-top: 25px;
-  padding-left: 5px;
-  padding-inline: 5px;
-  padding-right: 5px;
+  padding: 0 !important;
   box-shadow: var(--mantine-shadow-sm);
   font-size: 15px;
   user-select: none;
   position: relative;
-  padding-bottom: 80px;
 }
 
 .headerSection {
   position: sticky;
   top: 0;
   z-index: 2;
+  padding-top: 25px;
+  padding-inline: 14px;
+  margin-bottom: 10px;
+}
+
+.settingsSection {
+  padding-inline: 14px;
+  padding-bottom: 16px;
 }
 
 .activeItem {
@@ -51,7 +55,23 @@
 
 .navigationSection {
   gap: 0px;
+  flex: 1;
   overflow: auto;
+  padding-inline: 14px;
+}
+
+.navigationSection::-webkit-scrollbar {
+  display: block;
+  width: 5px;
+}
+
+.navigationSection::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.navigationSection::-webkit-scrollbar-thumb {
+  background: #2e2e2e !important;
+  border-radius: 20px;
 }
 
 .navigationItem {
@@ -65,7 +85,6 @@
   align-items: center;
   color: light-dark(black, var(--mantine-color-gray-2));
   font-weight: 500;
-  min-width: max-content;
   margin: 1px;
 }
 
@@ -85,7 +104,7 @@
   gap: 10px;
   align-items: center;
   flex-direction: row;
-  text-align: center;
+  text-align: left;
   align-self: center;
 }
 
