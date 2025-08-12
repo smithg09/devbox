@@ -1,10 +1,21 @@
-import { Box, Divider, Group, Select, Stack, Text, Tooltip, useMantineTheme } from "@mantine/core";
+import {
+  Accordion,
+  Box,
+  Divider,
+  Group,
+  Select,
+  Stack,
+  Text,
+  Tooltip,
+  useMantineTheme,
+} from "@mantine/core";
 import { cloneElement, ReactElement, useCallback, useEffect, useMemo } from "react";
 
 import cx from "clsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import classes from "./styles.module.css";
 
+import { moduleIcons } from "@/constants/tools";
 import { useSidebarShortcuts } from "@/hooks/useSidebarShortcuts";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { DragDropContext, Draggable, Droppable, OnDragEndResponder } from "@hello-pangea/dnd";
@@ -12,6 +23,7 @@ import { useLocalStorage } from "@mantine/hooks";
 import { BsGear, BsSearch } from "react-icons/bs";
 import { SidebarConfig } from "../Settings";
 import { SIDEBAR_CONSTANTS } from "./constants";
+import Tool from "./Tool";
 import { DropDownItem, Props } from "./types";
 
 export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
@@ -25,11 +37,12 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
     key: "sidebarConfig",
     defaultValue: {
       showDescription: false,
+      showModules: false,
       hiddenTools: [],
     },
   });
 
-  const { showDescription, hiddenTools } = sidebarConfig;
+  const { showDescription, hiddenTools, showModules } = sidebarConfig;
 
   useEffect(() => {
     const active = document.querySelector(`.${classes.activeItem}`);
@@ -87,7 +100,8 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
       >
         <Group wrap="nowrap" align="center" gap={2} ml={-4}>
           <Box style={{ color: "#324298" }} p={8} pb={4} size={32}>
-            <svg
+            <img src="/logo.png" alt="DevBox" width={32} height={32} />
+            {/* <svg
               stroke="currentColor"
               fill="currentColor"
               strokeWidth="0"
@@ -97,7 +111,7 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM4.5 7.65788V16.3469L12 20.689V12L4.5 7.65788Z"></path>
-            </svg>
+            </svg> */}
           </Box>
           <Text size={theme?.fontSizes?.xl} fw={700} display={collapsed ? "none" : "block"}>
             DevBox
@@ -137,79 +151,101 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
       {collapsed && <Divider w="90%" mx="auto" />}
 
       {!collapsed ? (
-        <Stack className={classes.navigationSection}>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
-              {provided => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {sidebarTools
-                    .filter(tool => !hiddenTools.includes(tool.id))
-                    .map((tool, index) => (
-                      <Draggable key={tool.id} draggableId={tool.id.toString()} index={index}>
-                        {provided => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={{
-                              ...provided.draggableProps.style,
-                              userSelect: "none",
-                            }}
-                            title={tool.description}
-                          >
-                            <Box
-                              key={tool.id}
-                              className={cx(classes.navigationItem, {
-                                [classes.selectedNavigationItem]: location.pathname === tool.to,
-                              })}
-                              mt={SIDEBAR_CONSTANTS.SPACING.ITEM_MARGIN_TOP}
-                              onClick={() => handleNavigation(tool.to)}
-                            >
-                              <Box className={classes.itemContent} w="100%">
-                                {cloneElement(tool.icon as ReactElement, {
-                                  size: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM,
-                                  background: theme.colors?.blue[5],
-                                  flex: 1,
-                                  style: { minWidth: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM },
-                                  className: "demo-test",
-                                })}
-                                <Box w="80%">
-                                  <Text
-                                    size="xs"
-                                    fw={location.pathname === tool.to ? "600" : "450"}
-                                  >
-                                    {tool.text}
-                                  </Text>
-                                  {showDescription && tool.description && (
-                                    <Text
-                                      size="xs"
-                                      c="dimmed"
-                                      mt={2}
-                                      w="100%"
-                                      styles={{
-                                        root: {
-                                          whiteSpace: "nowrap",
-                                          overflow: "hidden",
-                                          textOverflow: "ellipsis",
-                                        },
-                                      }}
-                                    >
-                                      {tool.description}
-                                    </Text>
-                                  )}
-                                </Box>
-                              </Box>
-                            </Box>
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </Stack>
+        <>
+          {showModules ? (
+            <Stack className={classes.moduleNavigationSection}>
+              <Accordion
+                variant="filled"
+                radius={0}
+                mb={10}
+                classNames={{
+                  item: classes.accordionItem,
+                  content: classes.accordionContent,
+                }}
+                defaultValue={"Encoders / Decoders"}
+              >
+                {sidebarTools
+                  .reduce((acc, tool) => {
+                    if (!acc.find(t => t === tool.module)) {
+                      acc.push(tool.module);
+                    }
+                    return acc;
+                  }, [] as string[])
+                  .filter(module => module !== "")
+                  .map(module => (
+                    <Accordion.Item key={module} value={module}>
+                      <Accordion.Control>
+                        <Group wrap="nowrap" style={{ whiteSpace: "nowrap" }} gap={8}>
+                          {cloneElement(moduleIcons[module] as ReactElement, {
+                            size: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM,
+                            flex: 1,
+                            style: {
+                              minWidth: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM,
+                              marginRight: 1,
+                            },
+                          })}
+                          <Text size="13px" fw="500">
+                            {module}
+                          </Text>
+                        </Group>
+                      </Accordion.Control>
+                      <Accordion.Panel>
+                        <Box>
+                          {sidebarTools
+                            .filter(t => t.module === module)
+                            .filter(t => !hiddenTools.includes(t.id))
+                            .map(tool => (
+                              <Tool
+                                key={tool.id}
+                                tool={tool}
+                                showDescription={showDescription}
+                                handleNavigation={handleNavigation}
+                              />
+                            ))}
+                        </Box>
+                      </Accordion.Panel>
+                    </Accordion.Item>
+                  ))}
+              </Accordion>
+            </Stack>
+          ) : (
+            <Stack className={classes.navigationSection}>
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="droppable">
+                  {provided => (
+                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                      {sidebarTools
+                        .filter(tool => !hiddenTools.includes(tool.id))
+                        .map((tool, index) => (
+                          <Draggable key={tool.id} draggableId={tool.id.toString()} index={index}>
+                            {provided => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={{
+                                  ...provided.draggableProps.style,
+                                  userSelect: "none",
+                                }}
+                                title={tool.description}
+                              >
+                                <Tool
+                                  tool={tool}
+                                  showDescription={showDescription}
+                                  handleNavigation={handleNavigation}
+                                />
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            </Stack>
+          )}
+        </>
       ) : (
         <Stack className={classes.collapsedIconsContainer}>
           {sidebarTools.map(tool => (

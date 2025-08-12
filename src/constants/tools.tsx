@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import {
   BsBox,
   BsClock,
@@ -13,6 +14,7 @@ import {
   BsRegex,
   BsShieldCheck,
   BsShieldLock,
+  BsType,
 } from "react-icons/bs";
 import { SiJsonwebtokens } from "react-icons/si";
 import { TbApi, TbBrandGraphql, TbWorldSearch } from "react-icons/tb";
@@ -24,6 +26,7 @@ export const tools = [
     icon: <SiJsonwebtokens />,
     text: "JWT Tools",
     description: "Securely decode, inspect, and verify JWTs in seconds",
+    module: "Encoders / Decoders",
   },
   {
     id: "markdown",
@@ -31,6 +34,7 @@ export const tools = [
     icon: <BsMarkdown />,
     text: "Markdown",
     description: "Write, preview, and export Markdown with live formatting",
+    module: "Text",
   },
   {
     id: "graphiql",
@@ -38,6 +42,7 @@ export const tools = [
     icon: <TbBrandGraphql />,
     text: "GraphiQL",
     description: "Explore schemas, run queries, and debug GraphQL responses",
+    module: "API Tools",
   },
   {
     id: "rest",
@@ -45,6 +50,7 @@ export const tools = [
     icon: <TbApi />,
     text: "REST Client",
     description: "Build, send, and debug HTTP requests with rich tooling",
+    module: "API Tools",
   },
   {
     id: "regex",
@@ -52,6 +58,7 @@ export const tools = [
     icon: <BsRegex />,
     text: "Regex Tester",
     description: "Craft, test, and visualize regular expressions interactively with highlights",
+    module: "Testers",
   },
   {
     id: "cron",
@@ -59,6 +66,7 @@ export const tools = [
     icon: <BsClock />,
     text: "Cron",
     description: "Build, parse, and validate cron expressions with schedule previews",
+    module: "Converters",
   },
   {
     id: "har-viewer",
@@ -66,6 +74,7 @@ export const tools = [
     icon: <BsGlobe />,
     text: "HAR Viewer",
     description: "Inspect performance, requests, and waterfalls from HAR files",
+    module: "API Tools",
   },
   {
     id: "dns",
@@ -73,6 +82,7 @@ export const tools = [
     icon: <TbWorldSearch />,
     text: "DNS Lookup",
     description: "Query multiple resolvers, DNSSEC, and reverse lookups",
+    module: "Utilities",
   },
   {
     id: "epoch",
@@ -80,6 +90,7 @@ export const tools = [
     icon: <BsClockHistory />,
     text: "Epoch Converter",
     description: "Convert epoch timestamps to readable dates and timezones",
+    module: "Converters",
   },
   {
     id: "ssh-keys",
@@ -87,6 +98,7 @@ export const tools = [
     icon: <BsShieldLock />,
     text: "SSH Keys",
     description: "Generate, validate, and copy SSH keys securely for servers",
+    module: "Encoders / Decoders",
   },
   {
     id: "svg-preview",
@@ -94,6 +106,7 @@ export const tools = [
     icon: <BsFiletypeSvg />,
     text: "SVG Preview",
     description: "Preview, inspect, and optimize SVGs with DOM and path details",
+    module: "Preview Tools",
   },
   {
     id: "bundlephobia",
@@ -101,6 +114,7 @@ export const tools = [
     icon: <BsBox />,
     text: "Bundle Analyzer",
     description: "Check npm package size, exports, and dependency impact",
+    module: "Utilities",
   },
   {
     id: "ids",
@@ -108,6 +122,7 @@ export const tools = [
     icon: <BsPersonVcard />,
     text: "ID Generator",
     description: "Create UUIDs, NanoIDs, and custom IDs for apps",
+    module: "Generators",
   },
   {
     id: "hmac",
@@ -115,6 +130,7 @@ export const tools = [
     icon: <BsHash />,
     text: "HMAC Generator",
     description: "Compute HMAC signatures using Web Crypto",
+    module: "Generators",
   },
   {
     id: "certificate-decoder",
@@ -122,6 +138,7 @@ export const tools = [
     icon: <BsShieldCheck />,
     text: "Certificate Decoder",
     description: "Decode X.509 certs and CSRs, view fields, extensions, fingerprints",
+    module: "Encoders / Decoders",
   },
   {
     id: "url-parser",
@@ -129,6 +146,7 @@ export const tools = [
     icon: <BsLink45Deg />,
     text: "URL Parser",
     description: "Parse, edit, and validate URL components for debugging",
+    module: "Encoders / Decoders",
   },
   {
     id: "url-encoder",
@@ -136,6 +154,7 @@ export const tools = [
     icon: <BsPercent />,
     text: "URL Encoder",
     description: "Encode, decode, and sanitize URLs for safe sharing",
+    module: "Encoders / Decoders",
   },
   {
     id: "escape",
@@ -143,5 +162,17 @@ export const tools = [
     icon: <BsCodeSlash />,
     text: "Backslash Escape",
     description: "Escape or unescape strings with backslash sequences",
+    module: "Text",
   },
 ];
+
+export const moduleIcons: Record<string, ReactElement> = {
+  "Encoders / Decoders": <BsCodeSlash />,
+  "API Tools": <TbApi />,
+  Text: <BsType />,
+  Testers: <BsRegex />,
+  Converters: <BsClock />,
+  Utilities: <TbWorldSearch />,
+  Generators: <BsPersonVcard />,
+  "Preview Tools": <BsFiletypeSvg />,
+};

@@ -8,6 +8,7 @@ export type SidebarTool = {
   text: string;
   extra?: string;
   description?: string;
+  module: string;
 };
 
 export type DropDownItem = {

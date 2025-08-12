@@ -50,7 +50,7 @@ export default function UrlEncoder() {
   }, [mode, preset]);
 
   return (
-    <Stack p="sm" gap="md" style={{ height: "100%" }}>
+    <Stack className="overflow-padding overflow-auto" gap="md" style={{ height: "100%" }}>
       <Group justify="space-between">
         <SegmentedControl
           size="xs"

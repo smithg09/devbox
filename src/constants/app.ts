@@ -1,9 +1,9 @@
 export const APP_CONFIG = {
   PANEL: {
     sidebar: {
-      defaultSize: 5,
+      defaultSize: 15,
       maxSize: 20,
-      minSize: 8,
+      minSize: 10,
       collapsedSize: 5,
     },
     resizeHandle: {

@@ -55,7 +55,7 @@ export default function GraphiQL() {
   }, [graphqlState.endpoint, updateGraphqlState]);
 
   return (
-    <Stack h="100vh" gap={0}>
+    <Stack gap={0} style={{ height: "100%" }}>
       <Paper p="sm" radius={0} withBorder={false} mt="xs">
         <Group gap="sm">
           <TbBrandGraphql size={20} />

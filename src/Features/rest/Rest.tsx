@@ -83,7 +83,7 @@ export default function Rest() {
   };
 
   return (
-    <Stack p="sm" style={{ height: "100%" }}>
+    <Stack className="overflow-padding overflow-auto" style={{ height: "100%" }}>
       <TabStrip
         tabs={tabs}
         activeId={activeId}

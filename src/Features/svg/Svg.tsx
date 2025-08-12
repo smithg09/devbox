@@ -1,11 +1,19 @@
-import { Box, Button, Group, Stack } from "@mantine/core";
 import { MonacoEditor } from "@/Components/Monaco/Editor";
-import { useState } from "react";
+import { Box, Button, Group, Stack } from "@mantine/core";
 import { open } from "@tauri-apps/plugin-dialog";
 import { readTextFile } from "@tauri-apps/plugin-fs";
+import { useState } from "react";
 
 export default function SvgPreview() {
-  const [svg, setSvg] = useState("");
+  const [svg, setSvg] = useState(`<svg
+  stroke="#273988"
+  fill="#273988"
+  strokeWidth="0"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM4.5 7.65788V16.3469L12 20.689V12L4.5 7.65788Z"></path>
+</svg>`);
 
   const readFile = async () => {
     const path = await open({

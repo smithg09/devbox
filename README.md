@@ -24,15 +24,14 @@ Devbox is a lightweight, cross-platform desktop application built with Tauri (Ru
 
 - [x] Move tool position
 - [x] Quick access icon on menu
-- [ ] Grouped tools
+- [x] Grouped tools
 - [x] Hide/Unhide tools
-- [ ] Smart clipboard
 - [ ] Dashboard
   - [ ] Pin notes
   - [ ] Frequently used tools
   - [ ] All tools
   - [ ] Add Custom RSS Feed (maybe)
-- [ ] Quick access tools from menu toolbar (maybe)
+- [ ] Smart clipboard
 - [ ] Tools shortcut from MAC spotlight (maybe)
 
 ### Tools
@@ -79,6 +78,6 @@ Devbox is a lightweight, cross-platform desktop application built with Tauri (Ru
 - [ ] Hashing Text
 - [ ] Hasing Files
 - [ ] Notes
-- [ ] World clock
+- [ ] Timezone
 - [ ] WebSocket Client
 - [ ] Mock API Server / Webhook test
