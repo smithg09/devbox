@@ -81,7 +81,7 @@ export default function UrlParser() {
   };
 
   return (
-    <Stack p="sm" gap="xs" style={{ height: "100%", overflow: "auto" }}>
+    <Stack className="overflow-padding overflow-auto" gap="xs" style={{ height: "100%" }}>
       <Group justify="space-between">
         <Text fw={600}>URL Parser</Text>
         <CopyButton

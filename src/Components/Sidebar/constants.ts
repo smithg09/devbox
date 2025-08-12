@@ -1,11 +1,11 @@
 export const SIDEBAR_CONSTANTS = {
   ICON_SIZE: {
-    SMALL: 16,
+    SMALL: 15,
     MEDIUM: 18,
     LARGE: 20,
   },
   SPACING: {
-    ITEM_MARGIN_TOP: 2,
+    ITEM_MARGIN_TOP: 6,
   },
   SCROLL_BEHAVIOR: {
     BLOCK: "center" as const,

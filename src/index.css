@@ -29,7 +29,18 @@ html,
 
 body {
   background: transparent;
-  background: rgba(26, 26, 25, 0.5) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: rgba(26, 26, 25, 0.5) !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background: rgba(26, 26, 25) !important;
+  }
 }
 
 .dragble-state {
@@ -49,7 +60,7 @@ body {
 }
 
 .overflow-padding {
-  padding: 10px;
+  padding: 20px;
   padding-top: 1rem;
 }
 

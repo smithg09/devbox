@@ -60,6 +60,13 @@
   padding-inline: 14px;
 }
 
+.moduleNavigationSection {
+  gap: 0px;
+  flex: 1;
+  overflow: auto;
+  padding-inline: 0px;
+}
+
 .navigationSection::-webkit-scrollbar {
   display: block;
   width: 5px;
@@ -119,4 +126,20 @@
   color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-gray-2));
   box-shadow: 0 0 2px 0.2px light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-6));
   background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+}
+
+.accordionItem {
+  z-index: 0;
+  transition: transform 150ms ease;
+
+  &[data-active] {
+    transform: scale(1.02);
+    z-index: 1;
+    background-color: rgba(45, 45, 45, 0.55);
+  }
+}
+
+.accordionContent {
+  padding-top: 0px;
+  padding-inline: var(--mantine-spacing-md);
 }

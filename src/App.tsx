@@ -1,29 +1,29 @@
-import classes from "./App.module.css";
-import "@mantine/spotlight/styles.css";
 import "@mantine/dropzone/styles.css";
+import "@mantine/spotlight/styles.css";
+import classes from "./App.module.css";
 
 import { Box, Stack } from "@mantine/core";
 import { Spotlight } from "@mantine/spotlight";
 import { loader as monacoLoader } from "@monaco-editor/react";
+import { relaunch } from "@tauri-apps/plugin-process";
+import { check } from "@tauri-apps/plugin-updater";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import {
   ImperativePanelHandle,
   Panel,
   PanelGroup,
   PanelResizeHandle,
 } from "react-resizable-panels";
-import { check } from "@tauri-apps/plugin-updater";
-import { relaunch } from "@tauri-apps/plugin-process";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { Sidebar } from "./Components/Sidebar";
 import { BsSearch } from "react-icons/bs";
-import { useRouteTransition } from "./hooks/useRouteAnim";
-import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
-import { insertTauriDragRegion } from "./utils/dragRegion";
-import { APP_CONFIG } from "./constants/app";
 import { AppRoutes } from "./Components/AppRoutes";
+import { Sidebar } from "./Components/Sidebar";
+import { APP_CONFIG } from "./constants/app";
 import { sidebarTools } from "./constants/sidebar";
+import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
+import { useRouteTransition } from "./hooks/useRouteAnim";
+import { insertTauriDragRegion } from "./utils/dragRegion";
 
 const PANEL_CONFIG = APP_CONFIG.PANEL;
 

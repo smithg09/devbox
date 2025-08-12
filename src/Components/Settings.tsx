@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 export interface SidebarConfig {
   showDescription: boolean;
+  showModules: boolean;
   hiddenTools: string[];
 }
 
@@ -13,6 +14,7 @@ export default function Settings() {
     key: "sidebarConfig",
     defaultValue: {
       showDescription: false,
+      showModules: true,
       hiddenTools: [],
     },
   });
@@ -24,6 +26,11 @@ export default function Settings() {
 
   const handleToggle = async (checked: boolean) => {
     const newConfig = { ...sidebarConfig, showDescription: checked };
+    setSidebarConfig(newConfig);
+  };
+
+  const handleToggleModules = async (checked: boolean) => {
+    const newConfig = { ...sidebarConfig, showModules: checked };
     setSidebarConfig(newConfig);
   };
 
@@ -56,6 +63,11 @@ export default function Settings() {
           label="Show sidebar descriptions"
           checked={!!sidebarConfig.showDescription}
           onChange={e => handleToggle(e.currentTarget.checked)}
+        />
+        <Switch
+          label="Group tools by module"
+          checked={!!sidebarConfig.showModules}
+          onChange={e => handleToggleModules(e.currentTarget.checked)}
         />
 
         {/* Manage Tools */}
