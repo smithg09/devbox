@@ -1,9 +1,12 @@
 import { ReactElement } from "react";
 import {
+  BsArrowLeftRight,
   BsBox,
+  BsCheckCircle,
   BsClock,
   BsClockHistory,
   BsCodeSlash,
+  BsFileText,
   BsFiletypeSvg,
   BsGlobe,
   BsHash,
@@ -14,10 +17,20 @@ import {
   BsRegex,
   BsShieldCheck,
   BsShieldLock,
-  BsType,
+  BsStars,
+  BsTools,
+  BsViewList,
 } from "react-icons/bs";
 import { SiJsonwebtokens } from "react-icons/si";
-import { TbApi, TbBrandGraphql, TbWorldSearch } from "react-icons/tb";
+import { TbApi, TbBrandGraphql, TbNetwork, TbWorldSearch } from "react-icons/tb";
+
+export interface ToolModule {
+  id: string;
+  name: string;
+  description: string;
+  icon: ReactElement;
+  order: number;
+}
 
 export const tools = [
   {
@@ -26,7 +39,7 @@ export const tools = [
     icon: <SiJsonwebtokens />,
     text: "JWT Tools",
     description: "Securely decode, inspect, and verify JWTs in seconds",
-    module: "Encoders / Decoders",
+    module: "security",
   },
   {
     id: "markdown",
@@ -34,7 +47,7 @@ export const tools = [
     icon: <BsMarkdown />,
     text: "Markdown",
     description: "Write, preview, and export Markdown with live formatting",
-    module: "Text",
+    module: "viewers",
   },
   {
     id: "graphiql",
@@ -42,7 +55,7 @@ export const tools = [
     icon: <TbBrandGraphql />,
     text: "GraphiQL",
     description: "Explore schemas, run queries, and debug GraphQL responses",
-    module: "API Tools",
+    module: "network",
   },
   {
     id: "rest",
@@ -50,7 +63,7 @@ export const tools = [
     icon: <TbApi />,
     text: "REST Client",
     description: "Build, send, and debug HTTP requests with rich tooling",
-    module: "API Tools",
+    module: "network",
   },
   {
     id: "regex",
@@ -58,7 +71,7 @@ export const tools = [
     icon: <BsRegex />,
     text: "Regex Tester",
     description: "Craft, test, and visualize regular expressions interactively with highlights",
-    module: "Testers",
+    module: "testers",
   },
   {
     id: "cron",
@@ -66,7 +79,7 @@ export const tools = [
     icon: <BsClock />,
     text: "Cron",
     description: "Build, parse, and validate cron expressions with schedule previews",
-    module: "Converters",
+    module: "utilities",
   },
   {
     id: "har-viewer",
@@ -74,7 +87,7 @@ export const tools = [
     icon: <BsGlobe />,
     text: "HAR Viewer",
     description: "Inspect performance, requests, and waterfalls from HAR files",
-    module: "API Tools",
+    module: "network",
   },
   {
     id: "dns",
@@ -82,7 +95,7 @@ export const tools = [
     icon: <TbWorldSearch />,
     text: "DNS Lookup",
     description: "Query multiple resolvers, DNSSEC, and reverse lookups",
-    module: "Utilities",
+    module: "network",
   },
   {
     id: "epoch",
@@ -90,7 +103,7 @@ export const tools = [
     icon: <BsClockHistory />,
     text: "Epoch Converter",
     description: "Convert epoch timestamps to readable dates and timezones",
-    module: "Converters",
+    module: "converters",
   },
   {
     id: "ssh-keys",
@@ -98,7 +111,7 @@ export const tools = [
     icon: <BsShieldLock />,
     text: "SSH Keys",
     description: "Generate, validate, and copy SSH keys securely for servers",
-    module: "Encoders / Decoders",
+    module: "security",
   },
   {
     id: "svg-preview",
@@ -106,7 +119,7 @@ export const tools = [
     icon: <BsFiletypeSvg />,
     text: "SVG Preview",
     description: "Preview, inspect, and optimize SVGs with DOM and path details",
-    module: "Preview Tools",
+    module: "viewers",
   },
   {
     id: "bundlephobia",
@@ -114,7 +127,7 @@ export const tools = [
     icon: <BsBox />,
     text: "Bundle Analyzer",
     description: "Check npm package size, exports, and dependency impact",
-    module: "Utilities",
+    module: "utilities",
   },
   {
     id: "ids",
@@ -122,7 +135,7 @@ export const tools = [
     icon: <BsPersonVcard />,
     text: "ID Generator",
     description: "Create UUIDs, NanoIDs, and custom IDs for apps",
-    module: "Generators",
+    module: "generators",
   },
   {
     id: "hmac",
@@ -130,7 +143,7 @@ export const tools = [
     icon: <BsHash />,
     text: "HMAC Generator",
     description: "Compute HMAC signatures using Web Crypto",
-    module: "Generators",
+    module: "security",
   },
   {
     id: "certificate-decoder",
@@ -138,7 +151,7 @@ export const tools = [
     icon: <BsShieldCheck />,
     text: "Certificate Decoder",
     description: "Decode X.509 certs and CSRs, view fields, extensions, fingerprints",
-    module: "Encoders / Decoders",
+    module: "security",
   },
   {
     id: "url-parser",
@@ -146,7 +159,7 @@ export const tools = [
     icon: <BsLink45Deg />,
     text: "URL Parser",
     description: "Parse, edit, and validate URL components for debugging",
-    module: "Encoders / Decoders",
+    module: "converters",
   },
   {
     id: "url-encoder",
@@ -154,7 +167,7 @@ export const tools = [
     icon: <BsPercent />,
     text: "URL Encoder",
     description: "Encode, decode, and sanitize URLs for safe sharing",
-    module: "Encoders / Decoders",
+    module: "converters",
   },
   {
     id: "escape",
@@ -162,17 +175,65 @@ export const tools = [
     icon: <BsCodeSlash />,
     text: "Backslash Escape",
     description: "Escape or unescape strings with backslash sequences",
-    module: "Text",
+    module: "converters",
   },
 ];
 
-export const moduleIcons: Record<string, ReactElement> = {
-  "Encoders / Decoders": <BsCodeSlash />,
-  "API Tools": <TbApi />,
-  Text: <BsType />,
-  Testers: <BsRegex />,
-  Converters: <BsClock />,
-  Utilities: <TbWorldSearch />,
-  Generators: <BsPersonVcard />,
-  "Preview Tools": <BsFiletypeSvg />,
+export const moduleRegistry: Record<string, ToolModule> = {
+  network: {
+    id: "network",
+    name: "Network",
+    description: "API development, testing, and network diagnostics",
+    icon: <TbNetwork />,
+    order: 1,
+  },
+  formatters: {
+    id: "formatters",
+    name: "Formatters",
+    description: "Text manipulation, formatting, and code processing",
+    icon: <BsFileText />,
+    order: 2,
+  },
+  security: {
+    id: "security",
+    name: "Security",
+    description: "Security, authentication, and cryptographic utilities",
+    icon: <BsShieldCheck />,
+    order: 3,
+  },
+  converters: {
+    id: "converters",
+    name: "Converters",
+    description: "Convert between different data formats and encodings",
+    icon: <BsArrowLeftRight />,
+    order: 4,
+  },
+  utilities: {
+    id: "utilities",
+    name: "Utilities",
+    description: "Essential utilities for software development workflows",
+    icon: <BsTools />,
+    order: 5,
+  },
+  generators: {
+    id: "generators",
+    name: "Generators",
+    description: "Generate content, data, and assets for development",
+    icon: <BsStars />,
+    order: 6,
+  },
+  viewers: {
+    id: "viewers",
+    name: "Viewers",
+    description: "Preview, process, and manipulate files and media",
+    icon: <BsViewList />,
+    order: 7,
+  },
+  testers: {
+    id: "testers",
+    name: "Testers",
+    description: "Test, validate, and verify data and functionality",
+    icon: <BsCheckCircle />,
+    order: 8,
+  },
 };

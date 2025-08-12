@@ -12,9 +12,10 @@ type ToolProps = {
   tool: SidebarTool;
   handleNavigation: (to: string) => void;
   showDescription: boolean;
+  isModule?: boolean;
 };
 
-const Tool = ({ tool, showDescription, handleNavigation }: ToolProps) => {
+const Tool = ({ tool, showDescription, handleNavigation, isModule }: ToolProps) => {
   const location = useLocation();
   const theme = useMantineTheme();
 
@@ -26,13 +27,18 @@ const Tool = ({ tool, showDescription, handleNavigation }: ToolProps) => {
       })}
       mt={SIDEBAR_CONSTANTS.SPACING.ITEM_MARGIN_TOP}
       onClick={() => handleNavigation(tool.to)}
+      title={tool.description}
     >
       <Box className={classes.itemContent} w="100%">
         {cloneElement(tool.icon as ReactElement, {
-          size: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM,
+          size: isModule ? SIDEBAR_CONSTANTS.ICON_SIZE.SMALL : SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM,
           background: theme.colors?.blue[5],
           flex: 1,
-          style: { minWidth: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM },
+          style: {
+            minWidth: isModule
+              ? SIDEBAR_CONSTANTS.ICON_SIZE.SMALL
+              : SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM,
+          },
         })}
         <Box w="80%">
           <Text size="xs" fw={location.pathname === tool.to ? "600" : "400"}>

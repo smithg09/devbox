@@ -15,7 +15,7 @@ import cx from "clsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import classes from "./styles.module.css";
 
-import { moduleIcons } from "@/constants/tools";
+import { moduleRegistry, ToolModule } from "@/constants/tools";
 import { useSidebarShortcuts } from "@/hooks/useSidebarShortcuts";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { DragDropContext, Draggable, Droppable, OnDragEndResponder } from "@hello-pangea/dnd";
@@ -162,21 +162,21 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
                   item: classes.accordionItem,
                   content: classes.accordionContent,
                 }}
-                defaultValue={"Encoders / Decoders"}
+                defaultValue={"Network"}
               >
-                {sidebarTools
-                  .reduce((acc, tool) => {
-                    if (!acc.find(t => t === tool.module)) {
-                      acc.push(tool.module);
-                    }
-                    return acc;
-                  }, [] as string[])
-                  .filter(module => module !== "")
+                {Object.values(moduleRegistry)
+                  .sort((a: ToolModule, b: ToolModule) => a.order - b.order)
+                  .filter(module => sidebarTools.find(tool => tool.module === module.id))
                   .map(module => (
-                    <Accordion.Item key={module} value={module}>
+                    <Accordion.Item key={module.id} value={module.id}>
                       <Accordion.Control>
-                        <Group wrap="nowrap" style={{ whiteSpace: "nowrap" }} gap={8}>
-                          {cloneElement(moduleIcons[module] as ReactElement, {
+                        <Group
+                          wrap="nowrap"
+                          style={{ whiteSpace: "nowrap" }}
+                          gap={8}
+                          title={module.description}
+                        >
+                          {cloneElement(module.icon as ReactElement, {
                             size: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM,
                             flex: 1,
                             style: {
@@ -184,15 +184,33 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
                               marginRight: 1,
                             },
                           })}
-                          <Text size="13px" fw="500">
-                            {module}
-                          </Text>
+                          <Group gap={8} w="95%">
+                            <Text size="12px" fw="500">
+                              {module.name}
+                            </Text>
+                            {showDescription && (
+                              <Text
+                                size="11px"
+                                c="dimmed"
+                                w="80%"
+                                styles={{
+                                  root: {
+                                    whiteSpace: "nowrap",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                  },
+                                }}
+                              >
+                                {module.description}
+                              </Text>
+                            )}
+                          </Group>
                         </Group>
                       </Accordion.Control>
                       <Accordion.Panel>
                         <Box>
                           {sidebarTools
-                            .filter(t => t.module === module)
+                            .filter(t => t.module === module.id)
                             .filter(t => !hiddenTools.includes(t.id))
                             .map(tool => (
                               <Tool
@@ -200,6 +218,7 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
                                 tool={tool}
                                 showDescription={showDescription}
                                 handleNavigation={handleNavigation}
+                                isModule
                               />
                             ))}
                         </Box>
@@ -227,7 +246,6 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
                                   ...provided.draggableProps.style,
                                   userSelect: "none",
                                 }}
-                                title={tool.description}
                               >
                                 <Tool
                                   tool={tool}
