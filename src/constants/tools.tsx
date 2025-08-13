@@ -170,6 +170,14 @@ export const tools = [
     module: "converters",
   },
   {
+    id: "json-formatter",
+    path: "/json-formatter",
+    icon: <BsFileText />,
+    text: "JSON Formatter",
+    description: "Format, minify, and explore JSON with a collapsible tree",
+    module: "formatters",
+  },
+  {
     id: "escape",
     path: "/escape",
     icon: <BsCodeSlash />,

@@ -26,6 +26,7 @@ const componentMap = {
   "url-parser": loadable(() => import("@/Features/url/UrlParser")) as React.ComponentType,
   "url-encoder": loadable(() => import("@/Features/url/UrlEncoder")) as React.ComponentType,
   "certificate-decoder": loadable(() => import("../Features/x509/X509")) as React.ComponentType,
+  "json-formatter": loadable(() => import("../Features/json/JsonFormatter")) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools

@@ -53,6 +53,7 @@
     "graphql": "^16.11.0",
     "graphql-ws": "^6.0.6",
     "jose": "^5.2.3",
+    "json-edit-react": "^1.28.2",
     "mermaid": "^10.8.0",
     "monaco-themes": "^0.4.4",
     "nanoid": "^5.0.9",

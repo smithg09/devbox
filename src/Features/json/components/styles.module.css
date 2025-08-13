@@ -1,0 +1,76 @@
+.containerStack {
+  height: 100%;
+  min-height: 0;
+}
+
+.groupMain {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.panelBox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.resizeHandle {
+  margin-inline: 4px;
+  width: 3px;
+  display: flex;
+  align-items: center;
+}
+.resizeHandler {
+  width: 100%;
+  background: var(--mantine-color-dark-4);
+  height: 10%;
+  border-radius: var(--mantine-radius-md);
+  margin-block: auto;
+}
+
+.tabsRoot {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-radius: var(--mantine-radius-md);
+}
+
+/* Make tabs transparent within this container */
+.tabsRoot :global(.mantine-Tabs-tab) {
+  background: transparent;
+}
+
+.panelTree {
+  flex: 1;
+  overflow: auto;
+  border-radius: 8px;
+  min-height: 0;
+}
+
+.panelText {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  min-height: 0;
+}
+
+.inputBox {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  display: flex;
+}
+
+.jsonTree {
+  height: 100%;
+  overflow: auto;
+  font-size: 10px;
+  padding: 4px;
+  padding-top: 0;
+  background-color: #191919;
+}
+

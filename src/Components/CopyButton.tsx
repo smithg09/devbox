@@ -1,4 +1,10 @@
-import { Button, CopyButton as DefaultCopyButton, MantineSize, Tooltip } from "@mantine/core";
+import {
+  Button,
+  ButtonProps,
+  CopyButton as DefaultCopyButton,
+  MantineSize,
+  Tooltip,
+} from "@mantine/core";
 import {} from "@tauri-apps/api";
 import * as clipboard from "@tauri-apps/plugin-clipboard-manager";
 import { BsCheck2, BsCopy } from "react-icons/bs";
@@ -9,7 +15,7 @@ type CopyProps = {
   size?: MantineSize;
   fullWidth?: boolean;
   variant?: "filled" | "light" | "subtle";
-};
+} & ButtonProps;
 
 export function CopyButton({
   value,
@@ -17,6 +23,7 @@ export function CopyButton({
   size,
   fullWidth = true,
   variant = "filled",
+  ...rest
 }: CopyProps) {
   return (
     <DefaultCopyButton value={value.toString()} timeout={2400}>
@@ -31,6 +38,7 @@ export function CopyButton({
               copy();
               clipboard.writeText(value.toString());
             }}
+            {...rest}
           >
             {copied ? "Copied" : label}
           </Button>
