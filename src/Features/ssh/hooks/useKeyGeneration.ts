@@ -1,5 +1,5 @@
-import { useState, useCallback } from "react";
-import { KeyGenerationOptions, GeneratedKeyPair } from "../types/ssh";
+import { useCallback, useState } from "react";
+import { GeneratedKeyPair, KeyGenerationOptions } from "../types/ssh";
 import { generateKeyPair } from "../utils/crypto";
 
 export function useKeyGeneration() {
@@ -12,12 +12,9 @@ export function useKeyGeneration() {
     setError(null);
 
     try {
-      console.log("Generating keys with options:", options);
       const keyPair = await generateKeyPair(options);
-      console.log("Key generation successful");
       setGeneratedKeys(keyPair);
     } catch (err) {
-      console.error("Key generation failed:", err);
       setError(err instanceof Error ? err.message : "Failed to generate key pair");
     } finally {
       setIsGenerating(false);

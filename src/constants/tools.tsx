@@ -8,7 +8,6 @@ import {
   BsCodeSlash,
   BsFileText,
   BsFiletypeSvg,
-  BsGlobe,
   BsHash,
   BsLink45Deg,
   BsMarkdown,
@@ -22,7 +21,14 @@ import {
   BsViewList,
 } from "react-icons/bs";
 import { SiJsonwebtokens } from "react-icons/si";
-import { TbApi, TbBrandGraphql, TbNetwork, TbWorldSearch } from "react-icons/tb";
+import {
+  TbApi,
+  TbBrandGraphql,
+  TbDeviceAnalytics,
+  TbNetwork,
+  TbWorld,
+  TbWorldSearch,
+} from "react-icons/tb";
 
 export interface ToolModule {
   id: string;
@@ -84,7 +90,7 @@ export const tools = [
   {
     id: "har-viewer",
     path: "/har-viewer",
-    icon: <BsGlobe />,
+    icon: <TbDeviceAnalytics />,
     text: "HAR Viewer",
     description: "Inspect performance, requests, and waterfalls from HAR files",
     module: "network",
@@ -104,6 +110,14 @@ export const tools = [
     text: "Epoch Converter",
     description: "Convert epoch timestamps to readable dates and timezones",
     module: "converters",
+  },
+  {
+    id: "timezone",
+    path: "/timezone",
+    icon: <TbWorld />,
+    text: "Timezone",
+    description: "View multiple timezones with a scrubber and persistent preferences",
+    module: "utilities",
   },
   {
     id: "ssh-keys",

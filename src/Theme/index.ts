@@ -1,5 +1,16 @@
 import type { MantineThemeOverride } from "@mantine/core";
-import { Card, Checkbox, Container, createTheme, Paper, rem, Select, Tooltip } from "@mantine/core";
+import {
+  Button,
+  Card,
+  Checkbox,
+  Container,
+  createTheme,
+  Paper,
+  rem,
+  Select,
+  Tooltip,
+} from "@mantine/core";
+import classes from "../App.module.css";
 
 const CONTAINER_SIZES: Record<string, string> = {
   xxs: rem("200px"),
@@ -54,6 +65,11 @@ export const theme: MantineThemeOverride = createTheme({
   primaryColor: "customPrimary",
   components: {
     /** Put your mantine component override here */
+    Button: Button.extend({
+      classNames: {
+        root: classes.buttonRoot,
+      },
+    }),
     Container: Container.extend({
       vars: (_, { size, fluid }) => ({
         root: {

@@ -18,3 +18,20 @@
   width: 100%;
   overflow: hidden;
 }
+
+.buttonRoot {
+  &[data-variant='danger'] {
+    background-color: var(--mantine-color-red-8);
+    color: var(--mantine-color-white);
+    &:hover {
+      background-color: var(--mantine-color-red-9);
+    }
+  }
+  /* Override default disabled styles */
+  &[data-variant='danger']:disabled {
+    background-color: transparent;
+    color: var(--mantine-color-white);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

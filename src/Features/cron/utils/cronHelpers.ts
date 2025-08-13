@@ -1,7 +1,7 @@
 import parser from "cron-parser";
 import cronstrue from "cronstrue";
-import { formatDistance, format } from "date-fns";
-import { CronValidation, CronExecution } from "../types/cron.types";
+import { format, formatDistance } from "date-fns";
+import { CronExecution, CronValidation } from "../types/cron.types";
 
 export const validateCronExpression = (expression: string): CronValidation => {
   try {
@@ -31,10 +31,6 @@ export const getNextExecutions = (expression: string, count: number = 3): CronEx
 
     for (let i = 0; i < count; i++) {
       const nextDate = interval.next().toDate();
-      console.log(
-        "Next execution date:",
-        formatDistance(new Date(), nextDate, { addSuffix: true })
-      );
       executions.push({
         date: nextDate,
         humanReadable: format(nextDate, "yyyy-MM-dd HH:mm:ss"),
