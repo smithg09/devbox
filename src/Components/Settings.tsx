@@ -13,7 +13,7 @@ export default function Settings() {
   const [sidebarConfig, setSidebarConfig] = useLocalStorage<SidebarConfig>({
     key: "sidebarConfig",
     defaultValue: {
-      showDescription: false,
+      showDescription: true,
       showModules: true,
       hiddenTools: [],
     },

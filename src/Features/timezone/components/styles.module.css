@@ -6,76 +6,76 @@
 }
 
 .sliderTicks {
-    position: absolute;
-    left: 0;
-    top: 10px;
-    bottom: 0;
-    margin-left: 1.5px;
-    margin-right: 1.5px;
-    pointer-events: none;
-    height: 12px;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    flex-direction: row;
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 0;
+  margin-left: 1.5px;
+  margin-right: 1.5px;
+  pointer-events: none;
+  height: 12px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
 }
 
 .sliderTick {
-    width: calc(1.04167%);
-    border-color: var(--mantine-color-dark-2);
-    border-left-width: 1px;
-    border-left-style: solid;
-    height: 100%;
+  width: calc(1.04167%);
+  border-color: var(--mantine-color-dark-2);
+  border-left-width: 1px;
+  border-left-style: solid;
+  height: 100%;
 }
 
 .sliderTickMinor {
-    width: calc(1.04167%);
-    border-color: var(--mantine-color-dark-2);
-    border-left-width: 1px;
-    border-left-style: solid;
-    height: 60%;
+  width: calc(1.04167%);
+  border-color: var(--mantine-color-dark-2);
+  border-left-width: 1px;
+  border-left-style: solid;
+  height: 60%;
 }
 
 .sliderMark {
-    display: none !important;
+  display: none !important;
 }
 
 .sliderMarkWrapper {
-    margin-top: 12px;
+  margin-top: 12px;
 }
 
 .slideBar {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .slideThumb {
-    background-color: var(--mantine-color-gray-4) !important;
-    width: 24px !important;
-    height: 24px !important;
-    margin: 0;
-    border: none;
+  background-color: var(--mantine-color-gray-4) !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0;
+  border: none;
 }
 .slideThumb:hover {
-    background-color: var(--mantine-color-gray-1) !important;
+  background-color: var(--mantine-color-gray-1) !important;
 }
 
 .sliderMarkLabel {
-    color: var(--mantine-color-dark-2) !important;
+  color: var(--mantine-color-dark-2) !important;
 }
 
 .sliderBar {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .timeSeparator {
-    animation: blink-animation 1s linear infinite;
+  animation: blink-animation 1s linear infinite;
 }
 
 @keyframes blink-animation {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }

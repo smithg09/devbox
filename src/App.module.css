@@ -20,7 +20,7 @@
 }
 
 .buttonRoot {
-  &[data-variant='danger'] {
+  &[data-variant="danger"] {
     background-color: var(--mantine-color-red-8);
     color: var(--mantine-color-white);
     &:hover {
@@ -28,7 +28,7 @@
     }
   }
   /* Override default disabled styles */
-  &[data-variant='danger']:disabled {
+  &[data-variant="danger"]:disabled {
     background-color: transparent;
     color: var(--mantine-color-white);
     opacity: 0.5;

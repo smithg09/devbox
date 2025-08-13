@@ -36,8 +36,8 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
   const [sidebarConfig] = useLocalStorage<SidebarConfig>({
     key: "sidebarConfig",
     defaultValue: {
-      showDescription: false,
-      showModules: false,
+      showDescription: true,
+      showModules: true,
       hiddenTools: [],
     },
   });
