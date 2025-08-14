@@ -19,13 +19,22 @@ type FeedItem = {
 const DEFAULT_FEEDS: Omit<Feed, "id" | "addedAt">[] = [
   { url: "https://engineering.atspotify.com/feed", title: "Spotify", enabled: true },
   { url: "https://medium.com/feed/better-programming", title: "Better Programming", enabled: true },
-  { url: "https://blog.cloudflare.com/rss/", title: "Cloudflare Blog", enabled: true },
   { url: "https://overreacted.io/rss.xml", title: "Overreacted", enabled: true },
-  { url: "https://rss.beehiiv.com/feeds/ypr2bi0H9m.xml", title: "Hungry Minds", enabled: true },
+  { url: "https://rss.beehiiv.com/feeds/ypr2bi0H9m.xml", title: "Hungry Minds", enabled: false },
+  { url: "https://css-tricks.com/feed/", title: "CSS Tricks", enabled: true },
+  { url: "https://feeds2.feedburner.com/tympanus", title: "Codrops", enabled: true },
+  { url: "https://github.blog/feed/", title: "GitHub", enabled: true },
+  { url: "https://blog.codinghorror.com/rss/", title: "Coding Horror", enabled: true },
+  { url: "https://martinfowler.com/feed.atom", title: "Martin Fowler", enabled: true },
+  {
+    url: "https://www.tbray.org/ongoing/ongoing.atom",
+    title: "ongoing by Tim Bray",
+    enabled: false,
+  },
   {
     url: "https://www.thecrazyprogrammer.com/category/programming/feed",
     title: "The Crazy Programmer",
-    enabled: true,
+    enabled: false,
   },
 ];
 
@@ -39,7 +48,12 @@ function toRelativeTime(dateStr: string): string {
   const hours = Math.floor(minutes / 60);
   if (hours < 24) return `${hours}h ago`;
   const days = Math.floor(hours / 24);
-  return `${days}d ago`;
+
+  if (days < 30) return `${days}d ago`;
+  const months = Math.floor(days / 30);
+  if (months < 12) return `${months}mo ago`;
+  const years = Math.floor(months / 12);
+  return `${years}y ago`;
 }
 
 export function useRssFeeds() {
@@ -196,9 +210,20 @@ export function useRssFeeds() {
       try {
         const enabledFeeds = feeds.filter(f => f.enabled);
         const results = await Promise.all(enabledFeeds.map(f => parseRss(f.url, force)));
-        const flat = results
-          .flat()
-          .sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime());
+        // mixmatch same source entries, so that no entry with same source appears twice
+        const mixed = results.flat().reduce(
+          (acc, item) => {
+            const key = `${item.source}-${item.title}-${item.link}`;
+            if (!acc[key]) {
+              acc[key] = item;
+            }
+            return acc;
+          },
+          {} as Record<string, FeedItem>
+        );
+        const flat = Object.values(mixed).sort(
+          (a, b) => new Date(b.published).getTime() - new Date(a.published).getTime()
+        );
         setItems(flat);
       } finally {
         setLoading(false);

@@ -53,7 +53,7 @@ function SourceIcon({ item }: { item: RssItem }) {
 export function FeedItem({ item, variant }: FeedItemProps) {
   if (variant === "card") {
     return (
-      <Paper withBorder key={item.link} p="sm">
+      <Paper withBorder key={item.link} p="sm" className={classes.feedCard}>
         <Group align="flex-start" gap={8} wrap="nowrap">
           <SourceIcon item={item} />
           <Stack gap={4} flex={1}>
@@ -62,7 +62,7 @@ export function FeedItem({ item, variant }: FeedItemProps) {
               className={classes.feedTitle}
               onClick={() => openExternal(item.link)}
               ta="left"
-              fw={600}
+              fw={500}
               size="sm"
             >
               {item.title}

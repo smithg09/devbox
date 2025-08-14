@@ -49,16 +49,7 @@ export default function RSSFeed({
       >
         <Group justify="space-between" align="center">
           <Title order={4}>Developer news</Title>
-          <Group gap={4}>
-            <SegmentedControl
-              size="xs"
-              value={viewMode}
-              onChange={v => setViewMode(v as any)}
-              data={[
-                { label: "Card", value: "card" },
-                { label: "List", value: "list" },
-              ]}
-            />
+          <Group gap={8}>
             <Button
               size="xs"
               variant="subtle"
@@ -68,9 +59,18 @@ export default function RSSFeed({
             >
               Refresh feeds
             </Button>
-            <Button size="xs" leftSection={<BsPlus />} variant="light" onClick={onAddRequest}>
+            <Button size="xs" leftSection={<BsPlus />} variant="subtle" onClick={onAddRequest}>
               Add feed
             </Button>
+            <SegmentedControl
+              size="xs"
+              value={viewMode}
+              onChange={v => setViewMode(v as any)}
+              data={[
+                { label: "Card", value: "card" },
+                { label: "List", value: "list" },
+              ]}
+            />
           </Group>
         </Group>
 
@@ -79,8 +79,10 @@ export default function RSSFeed({
             <Badge
               key={f.id}
               size="sm"
-              opacity={f.enabled ? 1 : 0.8}
-              variant={f.enabled ? "filled" : "light"}
+              bg={f.enabled ? "var(--mantine-color-dark-6)" : "var(--mantine-color-dark-7)"}
+              color={f.enabled ? "var(--mantine-color-gray-3)" : "var(--mantine-color-gray-5)"}
+              opacity={f.enabled ? 0.8 : 0.5}
+              variant="outline"
               onClick={() => onToggleFeed(f.id)}
               rightSection={
                 <ActionIcon
@@ -100,7 +102,10 @@ export default function RSSFeed({
                   ×
                 </ActionIcon>
               }
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                border: `1px solid ${f.enabled ? "var(--mantine-color-dark-4)" : "var(--mantine-color-dark-5)"}`,
+              }}
             >
               {f.title || f.url}
             </Badge>
