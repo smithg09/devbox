@@ -113,6 +113,14 @@ export const tools = [
     module: "converters",
   },
   {
+    id: "diff",
+    path: "/diff",
+    icon: <BsArrowLeftRight />,
+    text: "Diff",
+    description: "Compare text, JSON, XML, and code with Monaco diff",
+    module: "viewers",
+  },
+  {
     id: "timezone",
     path: "/timezone",
     icon: <TbWorld />,

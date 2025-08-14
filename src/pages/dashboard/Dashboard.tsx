@@ -34,7 +34,7 @@ export default function Dashboard() {
             Your daily developer hub
           </Text>
         </Stack>
-        <ActionIcon variant="light" size="lg" onClick={() => navigate("/settings")}>
+        <ActionIcon variant="subtle" size="lg" onClick={() => navigate("/settings")}>
           <BsGear />
         </ActionIcon>
       </Group>

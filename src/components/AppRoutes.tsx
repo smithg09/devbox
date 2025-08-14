@@ -21,6 +21,7 @@ const componentMap = {
   epoch: loadable(() => import("../pages/epoch/Epoch")) as React.ComponentType,
   dns: loadable(() => import("../pages/dns/DnsLookup")) as React.ComponentType,
   hmac: loadable(() => import("../pages/hmac/HmacGenerator")) as React.ComponentType,
+  diff: loadable(() => import("../pages/diff")) as React.ComponentType,
   "url-parser": loadable(() => import("@/pages/url/UrlParser")) as React.ComponentType,
   "url-encoder": loadable(() => import("@/pages/url/UrlEncoder")) as React.ComponentType,
   "certificate-decoder": loadable(() => import("../pages/x509/X509")) as React.ComponentType,

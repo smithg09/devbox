@@ -85,7 +85,6 @@
     "@types/loadable__component": "^5.13.9",
     "@types/node": "^24.0.13",
     "@types/react": "^18.2.73",
-    "@types/rss-parser": "^5.0.7",
     "@types/react-dom": "^18.2.23",
     "@types/react-katex": "^3.0.4",
     "@types/uuid": "^9.0.8",

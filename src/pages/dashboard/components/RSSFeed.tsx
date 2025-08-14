@@ -12,6 +12,7 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 import { BsArrowClockwise, BsPlus } from "react-icons/bs";
+import { TbGridDots, TbList } from "react-icons/tb";
 
 type Feed = { id: string; url: string; title?: string; enabled: boolean };
 
@@ -63,12 +64,20 @@ export default function RSSFeed({
               Add feed
             </Button>
             <SegmentedControl
-              size="xs"
+              size="sm"
               value={viewMode}
               onChange={v => setViewMode(v as any)}
+              radius="md"
+              styles={{
+                innerLabel: {
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                },
+              }}
               data={[
-                { label: "Card", value: "card" },
-                { label: "List", value: "list" },
+                { label: <TbGridDots />, value: "card" },
+                { label: <TbList />, value: "list" },
               ]}
             />
           </Group>
