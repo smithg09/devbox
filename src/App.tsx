@@ -17,8 +17,8 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { BsSearch } from "react-icons/bs";
-import { AppRoutes } from "./Components/AppRoutes";
-import { Sidebar } from "./Components/Sidebar";
+import { AppRoutes } from "./components/AppRoutes";
+import { Sidebar } from "./components/Sidebar";
 import { APP_CONFIG } from "./constants/app";
 import { sidebarTools } from "./constants/sidebar";
 import { tools } from "./constants/tools";

@@ -1,4 +1,4 @@
-import Settings from "@/Components/Settings";
+import Settings from "@/components/Settings";
 import { tools } from "@/constants/tools";
 import loadable from "@loadable/component";
 import React from "react";
@@ -6,29 +6,27 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import ErrorBoundary from "./ErrorBoundary";
 
 const componentMap = {
-  jwt: loadable(() => import("../Features/jwt/JWT")) as React.ComponentType,
-  escape: loadable(() => import("../Features/escape/BackslashEscape")) as React.ComponentType,
-  markdown: loadable(() => import("../Features/markdown/Markdown")) as React.ComponentType,
-  "har-viewer": loadable(() => import("../Features/har/HarViewer")) as React.ComponentType,
-  "ssh-keys": loadable(() => import("../Features/ssh/SSH")) as React.ComponentType,
-  "svg-preview": loadable(() => import("../Features/svg/Svg")) as React.ComponentType,
-  ids: loadable(() => import("../Features/ids/Ids")) as React.ComponentType,
-  cron: loadable(() => import("../Features/cron/Cron")) as React.ComponentType,
-  bundlephobia: loadable(
-    () => import("../Features/bundlephobia/Bundlephobia")
-  ) as React.ComponentType,
-  regex: loadable(() => import("../Features/regex/RegexAdvanced")) as React.ComponentType,
-  rest: loadable(() => import("../Features/rest/Rest")) as React.ComponentType,
-  graphiql: loadable(() => import("../Features/graphiql/GraphiQL")) as React.ComponentType,
-  epoch: loadable(() => import("../Features/epoch/Epoch")) as React.ComponentType,
-  dns: loadable(() => import("../Features/dns/DnsLookup")) as React.ComponentType,
-  hmac: loadable(() => import("../Features/hmac/HmacGenerator")) as React.ComponentType,
-  "url-parser": loadable(() => import("@/Features/url/UrlParser")) as React.ComponentType,
-  "url-encoder": loadable(() => import("@/Features/url/UrlEncoder")) as React.ComponentType,
-  "certificate-decoder": loadable(() => import("../Features/x509/X509")) as React.ComponentType,
-  "json-formatter": loadable(() => import("../Features/json/JsonFormatter")) as React.ComponentType,
-  timezone: loadable(() => import("@/Features/timezone/Timezone")) as React.ComponentType,
-  dashboard: loadable(() => import("@/Features/dashboard/Dashboard")) as React.ComponentType,
+  jwt: loadable(() => import("../pages/jwt/JWT")) as React.ComponentType,
+  escape: loadable(() => import("../pages/escape/BackslashEscape")) as React.ComponentType,
+  markdown: loadable(() => import("../pages/markdown/Markdown")) as React.ComponentType,
+  "har-viewer": loadable(() => import("../pages/har/HarViewer")) as React.ComponentType,
+  "ssh-keys": loadable(() => import("../pages/ssh/SSH")) as React.ComponentType,
+  "svg-preview": loadable(() => import("../pages/svg/Svg")) as React.ComponentType,
+  ids: loadable(() => import("../pages/ids/Ids")) as React.ComponentType,
+  cron: loadable(() => import("../pages/cron/Cron")) as React.ComponentType,
+  bundlephobia: loadable(() => import("../pages/bundlephobia/Bundlephobia")) as React.ComponentType,
+  regex: loadable(() => import("../pages/regex/RegexAdvanced")) as React.ComponentType,
+  rest: loadable(() => import("../pages/rest/Rest")) as React.ComponentType,
+  graphiql: loadable(() => import("../pages/graphiql/GraphiQL")) as React.ComponentType,
+  epoch: loadable(() => import("../pages/epoch/Epoch")) as React.ComponentType,
+  dns: loadable(() => import("../pages/dns/DnsLookup")) as React.ComponentType,
+  hmac: loadable(() => import("../pages/hmac/HmacGenerator")) as React.ComponentType,
+  "url-parser": loadable(() => import("@/pages/url/UrlParser")) as React.ComponentType,
+  "url-encoder": loadable(() => import("@/pages/url/UrlEncoder")) as React.ComponentType,
+  "certificate-decoder": loadable(() => import("../pages/x509/X509")) as React.ComponentType,
+  "json-formatter": loadable(() => import("../pages/json/JsonFormatter")) as React.ComponentType,
+  timezone: loadable(() => import("@/pages/timezone/Timezone")) as React.ComponentType,
+  dashboard: loadable(() => import("@/pages/dashboard/Dashboard")) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools

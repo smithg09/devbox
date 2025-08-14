@@ -1,6 +1,6 @@
-import "./index.css";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
+import "./index.css";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
@@ -9,8 +9,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
-import { theme } from "./Theme";
 import { APP_CONFIG } from "./constants/app";
+import { theme } from "./theme";
 
 const root = createRoot(document.getElementById("root") as Element);
 

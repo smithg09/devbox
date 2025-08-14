@@ -1,22 +1,69 @@
-# DevBox
+# Devbox
 
 <p align="center">
-  <img src="public/logo.svg" alt="DevBox Logo" width="120" height="120">
+  <img src="public/logo.png" alt="Devbox Logo" width="120" height="120">
 </p>
+
+<p align="center"><strong>All your everyday developer tools in one fast desktop app</strong></p>
+<p align="center">Devbox is a lightweight, cross‑platform desktop and web app built with Tauri (Rust) and React that bundles everyday developer utilities into a single, streamlined experience. No clutter, no browser tabs — just the tools you need, available offline and optimized for productivity.</p>
 
 <p align="center">
-  <strong>A cross-platform collection of developer utilities</strong>
+  <img src="public/appscreenshot.png" width="800px" alt="Devbox Screenshot">
 </p>
 
-<p align="center">
-Devbox is a lightweight, cross-platform desktop application built with Tauri (Rust + React) that provides essential tools to streamline software development and enhance productivity.
-</p>
+### Overview
 
-## Screenshot
+Devbox helps you work faster by centralizing common developer workflows: inspect JWTs, test REST and GraphQL APIs, format JSON, explore regex, decode certificates, parse cron, and more. The dashboard surfaces frequently used tools and lets you customize the sidebar so your favorites are one click away.
 
-<p align="center">
-  <img src="public/appscreenshot.png" alt="DevBox Logo">
-</p>
+### Highlights
+
+- **Cross‑platform desktop**: Powered by Tauri for a small footprint and native performance.
+- **Web app**: Use it in the browser with a fast Vite dev server and static build.
+- **Productivity‑first UI**: Group and reorder tools, hide what you don’t use, and get to work quickly.
+- **Dashboard**: See recently used tools and follow your own RSS feeds.
+- **Offline‑friendly**: Most tools work entirely locally; network tools only connect when you use them.
+- **No fluff**: Purpose‑built tools with sensible defaults.
+
+### Currently Available Tools
+
+- **Authentication & Security**: JWT Inspector, HMAC Generator, X.509 Certificate Decoder
+- **Data & Formats**: JSON Formatter, Backslash Escape/Unescape, URL Parser, URL Encoder, EPOCH Converter, Timezone
+- **Networking**: REST Client, GraphiQL Client, HAR Viewer, DNS Lookup, SSH Key tools
+- **Dev Utilities**: Regex Tester, Cron Builder & Parser, ID Generators, SVG Viewer, Bundle Analyzer
+
+> Installation and downloads will be added after the first public release.
+
+## Getting Started
+
+### Desktop (Tauri)
+
+1. Install dependencies:
+
+```bash
+  yarn install
+```
+
+2. Start the desktop app:
+
+```bash
+  yarn start
+```
+
+Access app from the browser at `http://localhost:3001`
+
+## Build
+
+### Static web build
+
+```bash
+  yarn build
+```
+
+### Desktop (Tauri) build
+
+```bash
+  yarn tauri build
+```
 
 ## Roadmap
 
@@ -43,8 +90,8 @@ Devbox is a lightweight, cross-platform desktop application built with Tauri (Ru
 - [x] SSH
 - [x] HAR Viewer
 - [x] REST API Testing
-- [x] Graphiql
-- [x] EPOCH Convertor
+- [x] GraphiQL
+- [x] EPOCH Converter
 - [x] URL Parser
 - [x] URL Encoder
 - [x] HMAC Generator
@@ -69,3 +116,7 @@ Devbox is a lightweight, cross-platform desktop application built with Tauri (Ru
 - [ ] Hashing Text
 - [ ] WebSocket Client
 - [ ] Mock API Server / Webhook test
+
+## Contributing
+
+We welcome contributions! Issues for bugs, UX polish, or new tools are all appreciated. Development setup and installation documentation will be added alongside the initial release.

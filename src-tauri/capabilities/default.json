@@ -1,9 +1,7 @@
 {
   "identifier": "default",
   "description": "default permissions",
-  "windows": [
-    "main"
-  ],
+  "windows": ["main"],
   "permissions": [
     "store:default",
     "dialog:default",

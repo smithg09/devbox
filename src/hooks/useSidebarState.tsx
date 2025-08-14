@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
-import { settingsStore } from "@/utils/store";
-import { SidebarTool } from "@/Components/Sidebar/types";
+import { SidebarTool } from "@/components/Sidebar/types";
 import { sidebarTools as defaultSidebarTools } from "@/constants/sidebar";
+import { settingsStore } from "@/utils/store";
+import { useCallback, useEffect, useState } from "react";
 
 export const useSidebarState = () => {
   const [sidebarTools, setSidebarTools] = useState<SidebarTool[]>([]);

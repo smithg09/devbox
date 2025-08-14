@@ -1,4 +1,4 @@
-import { KEYBOARD_SHORTCUTS } from "@/Components/Sidebar/constants";
+import { KEYBOARD_SHORTCUTS } from "@/components/Sidebar/constants";
 import { useWindowEvent } from "@mantine/hooks";
 import { useCallback, useRef } from "react";
 

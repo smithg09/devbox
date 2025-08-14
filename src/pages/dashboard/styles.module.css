@@ -1,0 +1,89 @@
+.recentCard {
+  cursor: pointer;
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: 6px;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.06s ease;
+}
+
+.recentCard:hover {
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.03),
+    0 6px 12px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.iconWrapper {
+  line-height: 0;
+}
+
+.sourceIconContainer {
+  width: 24px;
+  height: 24px;
+  line-height: 0;
+}
+
+.sourceIconImg {
+  display: block;
+  border-radius: 4px;
+}
+
+.sourcePreviewImg {
+  display: block;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.sourceIconPlaceholder {
+  width: 24px;
+  height: 24px;
+  background: var(--mantine-color-gray-3);
+  border-radius: 4px;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.feedTitle {
+  color: inherit;
+  text-decoration: none;
+  text-decoration-color: inherit;
+  text-align: left;
+}
+
+.feedTitle:hover {
+  text-decoration: underline;
+}
+
+.feedListRow {
+  cursor: pointer;
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: 6px;
+  padding: var(--mantine-spacing-xs);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.06s ease;
+}
+
+.feedListRow:hover {
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.03),
+    0 6px 12px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
