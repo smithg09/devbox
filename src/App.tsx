@@ -21,9 +21,11 @@ import { AppRoutes } from "./Components/AppRoutes";
 import { Sidebar } from "./Components/Sidebar";
 import { APP_CONFIG } from "./constants/app";
 import { sidebarTools } from "./constants/sidebar";
+import { tools } from "./constants/tools";
 import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
 import { useRouteTransition } from "./hooks/useRouteAnim";
 import { insertTauriDragRegion } from "./utils/dragRegion";
+import { settingsStore } from "./utils/store";
 
 const PANEL_CONFIG = APP_CONFIG.PANEL;
 
@@ -110,6 +112,23 @@ function App() {
       panelRef.current.resize(PANEL_CONFIG.sidebar.maxSize);
     }
   }, []);
+
+  // Track recent tools usage on route change
+  useEffect(() => {
+    const currentPath = location.pathname;
+    if (currentPath === "/settings" || currentPath === "/dashboard") return;
+    const tool = tools.find(t => t.path === currentPath);
+    if (!tool) return;
+
+    (async () => {
+      const existing = (await settingsStore.getTyped("recentTools")) || [];
+      const withoutCurrent = existing.filter(item => item.id !== tool.id);
+      const updated = [{ id: tool.id, path: tool.path, usedAt: Date.now() }, ...withoutCurrent]
+        .sort((a, b) => b.usedAt - a.usedAt)
+        .slice(0, 20);
+      await settingsStore.updateTyped("recentTools", updated);
+    })();
+  }, [location.pathname]);
 
   useEffect(() => {
     if (panelRef.current) {

@@ -28,6 +28,7 @@ const componentMap = {
   "certificate-decoder": loadable(() => import("../Features/x509/X509")) as React.ComponentType,
   "json-formatter": loadable(() => import("../Features/json/JsonFormatter")) as React.ComponentType,
   timezone: loadable(() => import("@/Features/timezone/Timezone")) as React.ComponentType,
+  dashboard: loadable(() => import("@/Features/dashboard/Dashboard")) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools
@@ -42,11 +43,13 @@ interface AppRoutesProps {
 }
 
 export function AppRoutes({ location }: AppRoutesProps) {
+  const DashboardComponent = componentMap.dashboard;
   return (
     <ErrorBoundary>
       <Routes location={location}>
-        <Route path="/" element={<Navigate to="/jwt" replace />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/dashboard" element={<DashboardComponent />} />
         {routes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} />
         ))}

@@ -13,10 +13,11 @@ export const SIDEBAR_CONSTANTS = {
   },
 } as const;
 
-// Keyboard shortcuts - use CMD on macOS, CTRL on other platforms
+// Keyboard shortcuts - use platform-agnostic MOD (⌘ on macOS, Ctrl on others)
+import { MOD_EVENT_PROP } from "@/utils/keyboard";
+
 export const KEYBOARD_SHORTCUTS = {
-  TOGGLE_SIDEBAR: navigator.platform.includes("Mac") ? "metaKey" : "ctrlKey",
+  MOD_PROP: MOD_EVENT_PROP,
   TOGGLE_KEY: "b",
-  SEARCH_SHORTCUT: navigator.platform.includes("Mac") ? "metaKey" : "ctrlKey",
   SEARCH_KEY: "k",
 } as const;

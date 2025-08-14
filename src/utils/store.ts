@@ -2,7 +2,10 @@ import { LazyStore } from "@tauri-apps/plugin-store";
 
 export interface SettingsValues {
   sidebarTools: string[];
-  // theme: 'light' | 'dark' | 'auto';
+  // Dashboard and personalization
+  recentTools: { id: string; path: string; usedAt: number }[];
+  rssFeeds: { id: string; url: string; title?: string; enabled: boolean; addedAt: number }[];
+  dashboard: { lastTipDate?: string; lastTipId?: string; dismissedTipIds?: string[] };
 }
 
 export type SettingsKey = keyof SettingsValues;
@@ -10,6 +13,9 @@ export type SettingsKey = keyof SettingsValues;
 // Define default values for all settings
 export const DEFAULT_SETTINGS_VALUES: SettingsValues = {
   sidebarTools: [],
+  recentTools: [],
+  rssFeeds: [],
+  dashboard: {},
 };
 
 // IMPORTANT might skip keys if not defined in DEFAULT_SETTINGS_VALUES like for optional settings

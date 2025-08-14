@@ -1,7 +1,22 @@
 import { tools } from "@/constants/tools";
-import { Box, Checkbox, Group, Stack, Switch, Table, Text, TextInput, Title } from "@mantine/core";
+import { confirmDialog } from "@/utils/confirm";
+import { settingsStore } from "@/utils/store";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Group,
+  Stack,
+  Switch,
+  Table,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export interface SidebarConfig {
   showDescription: boolean;
@@ -10,6 +25,8 @@ export interface SidebarConfig {
 }
 
 export default function Settings() {
+  const navigate = useNavigate();
+
   const [sidebarConfig, setSidebarConfig] = useLocalStorage<SidebarConfig>({
     key: "sidebarConfig",
     defaultValue: {
@@ -70,6 +87,56 @@ export default function Settings() {
           onChange={e => handleToggleModules(e.currentTarget.checked)}
         />
 
+        {/* Danger zone */}
+        <Stack gap={6} mt="md">
+          <Title order={4}>Danger zone</Title>
+          <Group>
+            <Button
+              color="red"
+              variant="light"
+              onClick={async () => {
+                const proceed = await confirmDialog(
+                  "This will reset any stored data and app settings. Continue?",
+                  {
+                    title: "Reset DevBox",
+                    kind: "warning",
+                    okLabel: "Reset",
+                    cancelLabel: "Cancel",
+                  }
+                );
+                console.log("proceed", proceed);
+                if (!proceed) return;
+                try {
+                  // Clear browser storage
+                  try {
+                    window.localStorage.clear();
+                  } catch (_e) {
+                    // ignore
+                  }
+                  try {
+                    window.sessionStorage.clear();
+                  } catch (_e) {
+                    // ignore
+                  }
+                  // Clear app settings store
+                  await settingsStore.resetToDefaults();
+                  notifications.show({ color: "green", message: "All settings have been reset." });
+                  // Optional: reload app to ensure fresh state
+                  setTimeout(() => {
+                    navigate("/");
+                    window.location.reload();
+                  }, 400);
+                } catch (e) {
+                  console.error(e);
+                  notifications.show({ color: "red", message: "Failed to reset settings." });
+                }
+              }}
+            >
+              Reset DevBox
+            </Button>
+          </Group>
+        </Stack>
+
         {/* Manage Tools */}
         <Stack gap="xs" mt="md">
           <Title order={4}>Manage Tools</Title>
@@ -123,6 +190,25 @@ export default function Settings() {
           </Table>
         </Stack>
       </Stack>
+      <Group justify="space-between" align="center" mt="md">
+        {/* Bottom bar with credits and file issue link */}
+        <Text size="sm" c="dimmed">
+          Made with ❤️ by{" "}
+          <a href="https://github.com/smithg09/devbox" target="_blank" rel="noopener noreferrer">
+            DevBox
+          </a>
+        </Text>
+        <Text size="sm" c="dimmed">
+          File an issue at{" "}
+          <a
+            href="https://github.com/smithg09/devbox/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            https://github.com/smithg09/devbox/issues
+          </a>
+        </Text>
+      </Group>
     </Box>
   );
 }

@@ -9,7 +9,7 @@ import {
   Tooltip,
   useMantineTheme,
 } from "@mantine/core";
-import { cloneElement, ReactElement, useCallback, useEffect, useMemo } from "react";
+import { cloneElement, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 
 import cx from "clsx";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -18,13 +18,15 @@ import classes from "./styles.module.css";
 import { moduleRegistry, ToolModule } from "@/constants/tools";
 import { useSidebarShortcuts } from "@/hooks/useSidebarShortcuts";
 import { useSidebarState } from "@/hooks/useSidebarState";
+import { isTauri } from "@/utils/isTauri";
+import { formatShortcutDisplay } from "@/utils/keyboard";
 import { DragDropContext, Draggable, Droppable, OnDragEndResponder } from "@hello-pangea/dnd";
 import { useLocalStorage } from "@mantine/hooks";
-import { BsGear, BsSearch } from "react-icons/bs";
+import { BsGear, BsHouse, BsSearch } from "react-icons/bs";
 import { SidebarConfig } from "../Settings";
 import { SIDEBAR_CONSTANTS } from "./constants";
 import Tool from "./Tool";
-import { DropDownItem, Props } from "./types";
+import { DropDownItem, Props, SidebarTool } from "./types";
 
 export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
   const location = useLocation();
@@ -43,6 +45,7 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
   });
 
   const { showDescription, hiddenTools, showModules } = sidebarConfig;
+  const [openedModule, setOpenedModule] = useState<string | null>(null);
 
   useEffect(() => {
     const active = document.querySelector(`.${classes.activeItem}`);
@@ -53,6 +56,15 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
       });
     }
   }, [classes.activeItem, location.pathname, sidebarTools]);
+
+  useEffect(() => {
+    const activeTool = sidebarTools.find(tool => tool.to === location.pathname);
+    if (activeTool && activeTool.module) {
+      setOpenedModule(activeTool.module);
+    } else {
+      setOpenedModule(null);
+    }
+  }, [location.pathname, sidebarTools]);
 
   const dropDownItems: DropDownItem[] = useMemo(() => {
     return sidebarTools.map(tool => ({
@@ -92,26 +104,22 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
       w={"auto"}
       px="sm"
       align={collapsed ? "center" : undefined}
-      gap={10}
+      gap={4}
     >
       <Stack
-        className={cx(classes.headerSection, { [classes.collapsedHeaderSection]: collapsed })}
+        className={cx(classes.headerSection, {
+          [classes.collapsedHeaderSection]: collapsed,
+          [classes.tauriHeaderSection]: isTauri(),
+        })}
         gap={2}
       >
         <Group wrap="nowrap" align="center" gap={2} ml={-4}>
           <Box style={{ color: "#324298" }} p={8} pb={4} size={32}>
-            <img src="/logo.png" alt="DevBox" width={32} height={32} />
-            {/* <svg
-              stroke="currentColor"
-              fill="currentColor"
-              strokeWidth="0"
-              viewBox="0 0 24 24"
-              height={32}
-              width={32}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM4.5 7.65788V16.3469L12 20.689V12L4.5 7.65788Z"></path>
-            </svg> */}
+            {isTauri() ? (
+              <img src="/logo.png" alt="DevBox" width={32} height={32} />
+            ) : (
+              <img src="/logo.png" alt="DevBox" width={38} height={38} />
+            )}
           </Box>
           <Text size={theme?.fontSizes?.xl} fw={700} display={collapsed ? "none" : "block"}>
             DevBox
@@ -131,7 +139,7 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
             }
           }}
           size="xs"
-          placeholder="Search tools... (⌘K)"
+          placeholder={`Search tools... (${formatShortcutDisplay("K")})`}
           display={collapsed ? "none" : "block"}
           styles={{
             input: {
@@ -148,7 +156,44 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
         />
       </Stack>
 
-      {collapsed && <Divider w="90%" mx="auto" />}
+      {/* Dashboard fixed item below search */}
+      {!collapsed ? (
+        <Stack className={classes.dashboardContainer} gap={4}>
+          <Tool
+            tool={
+              {
+                id: "dashboard",
+                to: "/dashboard",
+                icon: <BsHouse />,
+                text: "Dashboard",
+                description: "Your daily developer hub",
+                module: "utilities",
+              } as SidebarTool
+            }
+            showDescription={showDescription}
+            handleNavigation={handleNavigation}
+          />
+          <Divider w="100%" mx="auto" mt={4} />
+        </Stack>
+      ) : (
+        <>
+          <Tooltip label={"Dashboard"} position="left" multiline>
+            <Box
+              className={cx(classes.collapsedIconItem, {
+                [classes.activeItem]: location.pathname === "/dashboard",
+              })}
+              onClick={() => handleNavigation("/dashboard")}
+              mt={8}
+              mb={4}
+            >
+              {cloneElement((<BsHouse />) as ReactElement, {
+                size: SIDEBAR_CONSTANTS.ICON_SIZE.LARGE,
+              })}
+            </Box>
+          </Tooltip>
+          <Divider w="90%" mx="auto" />
+        </>
+      )}
 
       {!collapsed ? (
         <>
@@ -162,7 +207,8 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
                   item: classes.accordionItem,
                   content: classes.accordionContent,
                 }}
-                defaultValue={"Network"}
+                value={openedModule}
+                onChange={setOpenedModule}
               >
                 {Object.values(moduleRegistry)
                   .sort((a: ToolModule, b: ToolModule) => a.order - b.order)
@@ -285,7 +331,7 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
       )}
 
       <Divider w="90%" mx="auto" mt={0} />
-      <Stack className={classes.settingsSection}>
+      <Stack className={classes.settingsSection} mt={4}>
         <Box
           className={cx(classes.navigationItem, {
             [classes.selectedNavigationItem]: location.pathname === "/settings",

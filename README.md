@@ -26,13 +26,10 @@ Devbox is a lightweight, cross-platform desktop application built with Tauri (Ru
 - [x] Quick access icon on menu
 - [x] Grouped tools
 - [x] Hide/Unhide tools
-- [ ] Dashboard
-  - [ ] Pin notes
-  - [ ] Frequently used tools
-  - [ ] All tools
-  - [ ] Add Custom RSS Feed (maybe)
+- [x] Dashboard
+  - [x] Frequently used tools
+  - [x] Add Custom RSS Feed
 - [ ] Smart clipboard
-- [ ] Tools shortcut from MAC spotlight (maybe)
 
 ### Tools
 

@@ -1,6 +1,6 @@
-import { useCallback, useRef } from "react";
-import { useWindowEvent } from "@mantine/hooks";
 import { KEYBOARD_SHORTCUTS } from "@/Components/Sidebar/constants";
+import { useWindowEvent } from "@mantine/hooks";
+import { useCallback, useRef } from "react";
 
 interface UseSidebarShortcutsProps {
   collapsed: boolean;
@@ -20,10 +20,10 @@ export const useSidebarShortcuts = ({ collapsed, setCollapsed }: UseSidebarShort
         target.contentEditable === "true";
 
       const isToggleShortcut =
-        e[KEYBOARD_SHORTCUTS.TOGGLE_SIDEBAR] && e.key === KEYBOARD_SHORTCUTS.TOGGLE_KEY;
+        e[KEYBOARD_SHORTCUTS.MOD_PROP] && e.key === KEYBOARD_SHORTCUTS.TOGGLE_KEY;
 
       const isSearchShortcut =
-        e[KEYBOARD_SHORTCUTS.SEARCH_SHORTCUT] && e.key === KEYBOARD_SHORTCUTS.SEARCH_KEY;
+        e[KEYBOARD_SHORTCUTS.MOD_PROP] && e.key === KEYBOARD_SHORTCUTS.SEARCH_KEY;
 
       if (isToggleShortcut) {
         e.preventDefault();

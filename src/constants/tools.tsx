@@ -2,11 +2,12 @@ import { ReactElement } from "react";
 import {
   BsArrowLeftRight,
   BsBox,
+  BsBraces,
   BsCheckCircle,
   BsClock,
   BsClockHistory,
   BsCodeSlash,
-  BsFileText,
+  BsEye,
   BsFiletypeSvg,
   BsHash,
   BsLink45Deg,
@@ -17,8 +18,8 @@ import {
   BsShieldCheck,
   BsShieldLock,
   BsStars,
+  BsTextParagraph,
   BsTools,
-  BsViewList,
 } from "react-icons/bs";
 import { SiJsonwebtokens } from "react-icons/si";
 import {
@@ -186,7 +187,7 @@ export const tools = [
   {
     id: "json-formatter",
     path: "/json-formatter",
-    icon: <BsFileText />,
+    icon: <BsBraces />,
     text: "JSON Formatter",
     description: "Format, minify, and explore JSON with a collapsible tree",
     module: "formatters",
@@ -213,7 +214,7 @@ export const moduleRegistry: Record<string, ToolModule> = {
     id: "formatters",
     name: "Formatters",
     description: "Text manipulation, formatting, and code processing",
-    icon: <BsFileText />,
+    icon: <BsTextParagraph />,
     order: 2,
   },
   security: {
@@ -248,7 +249,7 @@ export const moduleRegistry: Record<string, ToolModule> = {
     id: "viewers",
     name: "Viewers",
     description: "Preview, process, and manipulate files and media",
-    icon: <BsViewList />,
+    icon: <BsEye />,
     order: 7,
   },
   testers: {

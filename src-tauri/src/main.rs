@@ -8,18 +8,34 @@ use tauri::{
   tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
   Manager, WebviewUrl, WebviewWindowBuilder, WindowEvent,
 };
+use reqwest::Client;
+use tauri_plugin_opener::OpenerExt;
 
 #[cfg(target_os = "macos")]
 use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
 
+mod commands;
+use commands::{fetch_rss, RssCache};
+
+#[tauri::command]
+async fn open_external(app: tauri::AppHandle, url: String) -> Result<(), String> {
+  app
+    .opener()
+    .open_url(url, None::<String>)
+    .map_err(|e| e.to_string())
+}
+
 fn main() {
   tauri::Builder::default()
+    .plugin(tauri_plugin_opener::init())
     .plugin(tauri_plugin_process::init())
     .plugin(tauri_plugin_store::Builder::default().build())
     .plugin(tauri_plugin_dialog::init())
     .plugin(tauri_plugin_fs::init())
     .plugin(tauri_plugin_clipboard_manager::init())
     .setup(|app| {
+      app.manage(Client::builder().build().unwrap());
+      app.manage(RssCache::new());
       #[cfg(desktop)]
       let res = app
         .handle()
@@ -30,7 +46,7 @@ fn main() {
       // Create window with transparency enabled
       let window = WebviewWindowBuilder::new(app, "main", WebviewUrl::App("index.html".into()))
         .title("")
-        .inner_size(900.0, 700.0)
+        .inner_size(1100.0, 800.0)
         .resizable(true)
         .min_inner_size(850.0, 600.0)
         .fullscreen(false)
@@ -86,6 +102,7 @@ fn main() {
         .build(app)?;
       Ok(())
     })
+    .invoke_handler(tauri::generate_handler![fetch_rss, open_external])
     .run(tauri::generate_context!())
     .expect("[TAURI] Error running application");
 }

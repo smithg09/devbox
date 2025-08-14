@@ -1,3 +1,7 @@
+:root {
+  --sidebar-padding: 14px;
+}
+
 .sidebarContainer {
   height: 100%;
   padding: 18px;
@@ -12,13 +16,17 @@
   position: sticky;
   top: 0;
   z-index: 2;
+  padding-top: 12px;
+  padding-inline: var(--sidebar-padding);
+  margin-bottom: 0px;
+}
+
+.tauriHeaderSection {
   padding-top: 25px;
-  padding-inline: 14px;
-  margin-bottom: 10px;
 }
 
 .settingsSection {
-  padding-inline: 14px;
+  padding-inline: var(--sidebar-padding);
   padding-bottom: 16px;
 }
 
@@ -57,7 +65,7 @@
   gap: 0px;
   flex: 1;
   overflow: auto;
-  padding-inline: 14px;
+  padding-inline: var(--sidebar-padding);
 }
 
 .moduleNavigationSection {
@@ -70,6 +78,10 @@
 .navigationSection::-webkit-scrollbar {
   display: block;
   width: 5px;
+}
+
+.dashboardContainer {
+  padding-inline: var(--sidebar-padding);
 }
 
 .navigationSection::-webkit-scrollbar-track {

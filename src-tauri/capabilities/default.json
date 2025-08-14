@@ -1,7 +1,9 @@
 {
   "identifier": "default",
   "description": "default permissions",
-  "windows": ["main"],
+  "windows": [
+    "main"
+  ],
   "permissions": [
     "store:default",
     "dialog:default",
@@ -11,6 +13,8 @@
     "updater:default",
     "updater:allow-check",
     "process:allow-restart",
+    "opener:default",
+    "opener:allow-open-url",
     "core:window:default",
     "core:window:allow-start-dragging"
   ]
