@@ -111,7 +111,7 @@ Access app from the browser at `http://localhost:3001`
 - [x] CSS Formatter
 - [x] JS/TS Formatter
 - [x] Stateless password
-- [ ] Faker
+- [x] Data Faker
 - [ ] WebSocket Client
 - [ ] Mock API Server / Webhook test
 
