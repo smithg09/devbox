@@ -56,7 +56,13 @@ export const primitiveTypes = [
 export function generateFromField(field: FieldConfig): any {
   if (field.array) {
     const len = field.arrayLength ?? 3;
-    return Array.from({ length: len }, () => generateFromField({ ...field, array: false }));
+    return Array.from({ length: len }, () => {
+      const inner: FieldConfig = { ...field, array: false };
+      if (inner.type === "object") {
+        return buildObject(inner.children || []);
+      }
+      return generateFromField(inner);
+    });
   }
   if (field.type === "object") {
     return buildObject(field.children || []);
@@ -136,8 +142,8 @@ export function generateFromField(field: FieldConfig): any {
 export function buildObject(fields: FieldConfig[]): any {
   const obj: Record<string, any> = {};
   for (const f of fields) {
-    obj[f.name] =
-      f.children && f.children.length > 0 ? buildObject(f.children) : generateFromField(f);
+    // Always delegate to generateFromField so arrays (including arrays of objects) are respected.
+    obj[f.name] = generateFromField(f);
   }
   return obj;
 }

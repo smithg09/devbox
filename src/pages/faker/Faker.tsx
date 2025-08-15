@@ -309,53 +309,69 @@ export default function FakerTool() {
   );
 
   function fieldToSchema(f: FieldConfig): any {
-    if (f.type === "object") {
+    // Helper to build the non-array schema for a field
+    function buildInner(field: FieldConfig): any {
+      if (field.type === "object") {
+        return {
+          type: "object",
+          properties: (field.children || []).reduce<Record<string, any>>((acc, c) => {
+            acc[c.name] = fieldToSchema(c);
+            return acc;
+          }, {}),
+        };
+      }
+      const map: Record<string, any> = {
+        string: { type: "string" },
+        number: { type: "number" },
+        boolean: { type: "boolean" },
+        uuid: { type: "string" },
+        date: { type: "string", format: "date-time" },
+        email: { type: "string" },
+        firstName: { type: "string" },
+        lastName: { type: "string" },
+        fullName: { type: "string" },
+        jobTitle: { type: "string" },
+        phone: { type: "string" },
+        streetAddress: { type: "string" },
+        city: { type: "string" },
+        country: { type: "string" },
+        countryCode: { type: "string" },
+        latitude: { type: "number" },
+        longitude: { type: "number" },
+        ip: { type: "string" },
+        url: { type: "string" },
+        domain: { type: "string" },
+        username: { type: "string" },
+        password: { type: "string" },
+        company: { type: "string" },
+        avatar: { type: "string" },
+        color: { type: "string" },
+        currencyCode: { type: "string" },
+        iban: { type: "string" },
+        bitcoinAddress: { type: "string" },
+        sentence: { type: "string" },
+        paragraph: { type: "string" },
+        imageUrl: { type: "string" },
+      };
+      const base = map[field.type] || { type: "string" };
+      const fakerPath = typeToFaker[field.type];
+      if (fakerPath) (base as any).faker = fakerPath;
+      return base;
+    }
+
+    if (f.array) {
+      const innerSchema = buildInner({ ...f, array: false });
+      // Preserve fixed length with both standard keywords and custom extension
+      const len = f.arrayLength || 3;
       return {
-        type: "object",
-        properties: (f.children || []).reduce<Record<string, any>>((acc, c) => {
-          acc[c.name] = fieldToSchema(c);
-          return acc;
-        }, {}),
+        type: "array",
+        items: innerSchema,
+        minItems: len,
+        maxItems: len,
+        "x-arrayLength": len,
       };
     }
-    const map: Record<string, any> = {
-      string: { type: "string" },
-      number: { type: "number" },
-      boolean: { type: "boolean" },
-      uuid: { type: "string" },
-      date: { type: "string", format: "date-time" },
-      email: { type: "string" },
-      firstName: { type: "string" },
-      lastName: { type: "string" },
-      fullName: { type: "string" },
-      jobTitle: { type: "string" },
-      phone: { type: "string" },
-      streetAddress: { type: "string" },
-      city: { type: "string" },
-      country: { type: "string" },
-      countryCode: { type: "string" },
-      latitude: { type: "number" },
-      longitude: { type: "number" },
-      ip: { type: "string" },
-      url: { type: "string" },
-      domain: { type: "string" },
-      username: { type: "string" },
-      password: { type: "string" },
-      company: { type: "string" },
-      avatar: { type: "string" },
-      color: { type: "string" },
-      currencyCode: { type: "string" },
-      iban: { type: "string" },
-      bitcoinAddress: { type: "string" },
-      sentence: { type: "string" },
-      paragraph: { type: "string" },
-      imageUrl: { type: "string" },
-    };
-    const base = map[f.type] || { type: "string" };
-    const fakerPath = typeToFaker[f.type];
-    if (fakerPath) (base as any).faker = fakerPath;
-    if (f.array) return { type: "array", items: base };
-    return base;
+    return buildInner(f);
   }
   function fieldsToSchema(list: FieldConfig[]) {
     return {
@@ -379,7 +395,19 @@ export default function FakerTool() {
     }
     if (node.type === "array") {
       const inner = schemaNodeToField(name, node.items || { type: "string" });
-      return { ...inner, array: true, arrayLength: 3 };
+      const inferredLength = ((): number => {
+        if (
+          typeof node.minItems === "number" &&
+          typeof node.maxItems === "number" &&
+          node.minItems === node.maxItems
+        )
+          return node.minItems;
+        if (typeof node["x-arrayLength"] === "number") return node["x-arrayLength"];
+        if (typeof node.minItems === "number") return node.minItems;
+        if (typeof node.maxItems === "number") return node.maxItems;
+        return 3;
+      })();
+      return { ...inner, array: true, arrayLength: inferredLength };
     }
     return { id: faker.string.uuid(), name, type: guessFieldType(node) };
   }
@@ -913,10 +941,10 @@ export default function FakerTool() {
                 }}
                 title={
                   <span>
-                    <b>Tip:</b> Drag top-level items to reorder only.
+                    <b>Tip:</b> Drag top-level items to reorder only. Use Add Object then + Child
+                    buttons to manage nesting;
                     <br />
-                    Use Add Object then + Child buttons to manage nesting; dragging into nested
-                    levels is disabled.
+                    All the changes are saved automatically, you can come back later and edit them.
                   </span>
                 }
               />
