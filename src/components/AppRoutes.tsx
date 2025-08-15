@@ -24,6 +24,7 @@ const componentMap = {
   dashboard: loadable(() => import("@/pages/dashboard/Dashboard")) as React.ComponentType,
   hash: loadable(() => import("../pages/hash/Hash")) as React.ComponentType,
   quicktype: loadable(() => import("../pages/quicktype/Quicktype")) as React.ComponentType,
+  faker: loadable(() => import("../pages/faker/Faker")) as React.ComponentType,
   sql: loadable(() => import("../pages/sql/Sql")) as React.ComponentType,
   "css-minifier": loadable(() => import("../pages/css/CssMinifier")) as React.ComponentType,
   "html-minifier": loadable(() => import("../pages/html/htmlMinifier")) as React.ComponentType,

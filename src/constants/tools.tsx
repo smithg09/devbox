@@ -6,6 +6,7 @@ import {
   BsClock,
   BsClockHistory,
   BsCodeSlash,
+  BsEmojiSmile,
   BsEye,
   BsFiletypeSvg,
   BsHash,
@@ -263,6 +264,14 @@ export const tools = [
     icon: <TbSchema />,
     text: "QuickType",
     description: "Generate code from JSON with a live preview",
+    module: "generators",
+  },
+  {
+    id: "faker",
+    path: "/faker",
+    icon: <BsEmojiSmile />,
+    text: "Data Faker",
+    description: "Generate realistic mock data from JSON Schema or a visual builder",
     module: "generators",
   },
   {
