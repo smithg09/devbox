@@ -1,7 +1,6 @@
 import { MonacoEditor } from "@/components/Monaco/Editor";
 import { settingsStore } from "@/utils/store";
 import { faker } from "@faker-js/faker";
-import { DragDropContext, Draggable, Droppable, DropResult } from "@hello-pangea/dnd";
 import {
   ActionIcon,
   Alert,
@@ -72,6 +71,202 @@ export default function FakerTool() {
 
   const [output, setOutput] = useState("");
   const [mode, setMode] = useState("pretty");
+
+  // ----------------------
+  // Custom Drag & Drop State
+  // ----------------------
+  interface DragState {
+    id: string; // field id being dragged
+    initialX: number;
+    initialY: number;
+    offsetX: number; // pointer offset inside element
+    offsetY: number;
+    width: number;
+    height: number;
+    sourceParentId: string; // parent droppable id ("root" or field id)
+    sourceIndex: number;
+  }
+  const [dragState, setDragState] = useState<DragState | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number>(-1);
+  const dragGhostRef = useRef<HTMLDivElement | null>(null);
+
+  // Helpers to walk / mutate field tree
+
+  function removeFieldFromTree(
+    list: FieldConfig[],
+    id: string
+  ): { removed: FieldConfig | null; tree: FieldConfig[] } {
+    function walk(arr: FieldConfig[]): [FieldConfig[], FieldConfig | null] {
+      const out: FieldConfig[] = [];
+      let removed: FieldConfig | null = null;
+      for (const f of arr) {
+        if (f.id === id) {
+          removed = f;
+          continue;
+        }
+        if (f.children) {
+          const [childArr, r] = walk(f.children);
+          if (r) removed = r;
+          out.push({ ...f, children: childArr });
+        } else {
+          out.push(f);
+        }
+      }
+      return [out, removed];
+    }
+    const [newTree, removed] = walk(list);
+    return { removed, tree: newTree };
+  }
+
+  function insertFieldIntoTree(
+    list: FieldConfig[],
+    parentId: string,
+    index: number,
+    node: FieldConfig
+  ): FieldConfig[] {
+    if (parentId === "root") {
+      const clone = [...list];
+      clone.splice(index, 0, node);
+      return clone;
+    }
+    function walk(arr: FieldConfig[]): FieldConfig[] {
+      return arr.map(f => {
+        if (f.id === parentId) {
+          const children = f.children ? [...f.children] : [];
+          children.splice(index, 0, node);
+          return { ...f, type: "object", children };
+        }
+        if (f.children) return { ...f, children: walk(f.children) };
+        return f;
+      });
+    }
+    return walk(list);
+  }
+
+  function moveField(dragId: string, destParentId: string, destIndex: number) {
+    if (destIndex < 0) return;
+    setFields(prev => {
+      // Prevent dropping into itself or descendant
+      if (dragId === destParentId) return prev;
+      // Gather ancestor chain for dest to prevent circular moves
+      function isDescendant(targetId: string, maybeDesc: string): boolean {
+        if (targetId === maybeDesc) return true;
+        const stack = [...prev];
+        while (stack.length) {
+          const n = stack.pop()!;
+          if (n.id === targetId) {
+            const checkStack = n.children ? [...n.children] : [];
+            while (checkStack.length) {
+              const c = checkStack.pop()!;
+              if (c.id === maybeDesc) return true;
+              if (c.children) checkStack.push(...c.children);
+            }
+            return false;
+          }
+          if (n.children) stack.push(...n.children);
+        }
+        return false;
+      }
+      if (isDescendant(dragId, destParentId)) return prev;
+      const { removed, tree } = removeFieldFromTree(prev, dragId);
+      if (!removed) return prev;
+      return insertFieldIntoTree(tree, destParentId, destIndex, removed);
+    });
+  }
+
+  function getRootContainer(): HTMLElement | null {
+    return document.querySelector<HTMLElement>("[data-droppable-id='root']");
+  }
+  function getRootDraggables(): HTMLElement[] {
+    const root = getRootContainer();
+    if (!root) return [];
+    return Array.from(root.querySelectorAll<HTMLElement>(":scope > [data-dnd-id]"));
+  }
+
+  function startDrag(id: string, e: React.MouseEvent) {
+    e.preventDefault();
+    const el = document.querySelector<HTMLElement>(`[data-dnd-id='${id}']`);
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const parentId = "root";
+    const siblings = getRootDraggables();
+    const sourceIndex = siblings.indexOf(el);
+    if (sourceIndex === -1) return;
+    setDragState({
+      id,
+      initialX: rect.left,
+      initialY: rect.top,
+      offsetX: e.clientX - rect.left,
+      offsetY: e.clientY - rect.top,
+      width: rect.width,
+      height: rect.height,
+      sourceParentId: parentId,
+      sourceIndex,
+    });
+    setDragOverIndex(sourceIndex);
+    document.body.classList.add("dnd-grabbing");
+  }
+
+  // Effect: attach listeners for active drag
+  useEffect(() => {
+    if (!dragState) return;
+    const current = dragState;
+    function onMove(ev: MouseEvent) {
+      if (dragGhostRef.current) {
+        const x = ev.clientX;
+        const y = ev.clientY;
+        dragGhostRef.current.style.transform = `translate(${x - current.offsetX}px, ${y - current.offsetY}px)`;
+      }
+      const items = getRootDraggables();
+      let index = items.length;
+      for (let i = 0; i < items.length; i++) {
+        const r = items[i].getBoundingClientRect();
+        const mid = r.top + r.height / 2;
+        if (ev.clientY < mid) {
+          index = i;
+          break;
+        }
+      }
+      setDragOverIndex(index);
+    }
+    function onUp() {
+      if (dragState && dragOverIndex > -1) moveField(dragState.id, "root", dragOverIndex);
+      setDragState(null);
+      setDragOverIndex(-1);
+      document.body.classList.remove("dnd-grabbing");
+    }
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp, { once: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+  }, [dragState, dragOverIndex]);
+
+  // Drag ghost element
+  useEffect(() => {
+    if (dragState) {
+      const original = document.querySelector<HTMLElement>(`[data-dnd-id='${dragState.id}']`);
+      if (!original) return;
+      const ghost = original.cloneNode(true) as HTMLDivElement;
+      ghost.style.pointerEvents = "none";
+      ghost.style.position = "fixed";
+      ghost.style.top = "0";
+      ghost.style.left = "0";
+      ghost.style.width = dragState.width + "px";
+      ghost.style.height = dragState.height + "px";
+      ghost.style.zIndex = "9999";
+      ghost.style.opacity = "0.85";
+      ghost.style.boxShadow = "0 4px 12px rgba(0,0,0,0.35)";
+      ghost.classList.add("drag-ghost");
+      document.body.appendChild(ghost);
+      dragGhostRef.current = ghost;
+      return () => {
+        ghost.remove();
+        dragGhostRef.current = null;
+      };
+    }
+  }, [dragState]);
 
   // Sync + persistence refs
   const updatingFromBuilder = useRef(false);
@@ -421,9 +616,8 @@ export default function FakerTool() {
     dragHandleProps?: any;
   }
 
-  const FieldEditor = ({ field, depth = 0, dragHandleProps }: FieldEditorProps) => {
+  const FieldEditor = ({ field, depth = 0 }: FieldEditorProps) => {
     const isObject = field.type === "object";
-    const hasChildren = !!field.children?.length;
     const isCollapsed = collapsed[field.id];
     const isPreviewing = previewOpen[field.id];
     const [localName, setLocalName] = useState(field.name);
@@ -460,15 +654,17 @@ export default function FakerTool() {
                   {isCollapsed ? <BsChevronRight size={14} /> : <BsChevronDown size={14} />}
                 </ActionIcon>
               )}
-              <ActionIcon
-                size="md"
-                variant="subtle"
-                aria-label="drag-handle"
-                style={{ cursor: "grab", alignSelf: "center" }}
-                {...dragHandleProps}
-              >
-                <BsArrowsMove size={14} />
-              </ActionIcon>
+              {depth === 0 && (
+                <ActionIcon
+                  size="md"
+                  variant="subtle"
+                  aria-label="drag-handle"
+                  style={{ cursor: dragState ? "grabbing" : "grab", alignSelf: "center" }}
+                  onMouseDown={e => startDrag(field.id, e)}
+                >
+                  <BsArrowsMove size={14} />
+                </ActionIcon>
+              )}
               <TextInput
                 style={{ flex: 1 }}
                 label={depth === 0 ? "Name" : undefined}
@@ -562,45 +758,15 @@ export default function FakerTool() {
               />
             </div>
           )}
-          {hasChildren && !isCollapsed && (
-            <Droppable droppableId={field.id} type="FIELD">
-              {provided => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    paddingLeft: isObject ? 4 : 0,
-                  }}
-                >
-                  {field.children!.map((c, idx) => (
-                    <Draggable draggableId={c.id} index={idx} key={c.id}>
-                      {dragProvided => (
-                        <div
-                          ref={dragProvided.innerRef}
-                          {...dragProvided.draggableProps}
-                          style={{
-                            ...(dragProvided.draggableProps.style || {}),
-                            marginTop: idx === 0 ? 0 : 6,
-                            width: "100%",
-                            boxSizing: "border-box",
-                          }}
-                        >
-                          <FieldEditor
-                            field={c}
-                            depth={depth + 1}
-                            dragHandleProps={dragProvided.dragHandleProps}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
+          {isObject && !isCollapsed && field.children?.length ? (
+            <div style={{ display: "flex", flexDirection: "column", paddingLeft: 4, marginTop: 6 }}>
+              {field.children.map((c, idx) => (
+                <div key={c.id} style={{ marginTop: idx === 0 ? 0 : 6 }}>
+                  <FieldEditor field={c} depth={depth + 1} />
                 </div>
-              )}
-            </Droppable>
-          )}
+              ))}
+            </div>
+          ) : null}
         </Stack>
       </Paper>
     );
@@ -636,39 +802,6 @@ export default function FakerTool() {
       ...f,
       children: f.children ? cloneFields(f.children) : undefined,
     }));
-  }
-
-  // Drag and drop reorder logic
-  function getArrayByDroppableId(list: FieldConfig[], id: string): FieldConfig[] | null {
-    if (id === "root") return list;
-    const stack: FieldConfig[] = [...list];
-    while (stack.length) {
-      const cur = stack.pop()!;
-      if (cur.id === id) return cur.children || (cur.children = []);
-      if (cur.children) stack.push(...cur.children);
-    }
-    return null;
-  }
-
-  function onDragEnd(result: DropResult) {
-    const { destination, source } = result;
-    if (!destination) return;
-    if (destination.droppableId === source.droppableId && destination.index === source.index)
-      return;
-    setFields(prev => {
-      const rootClone = cloneFields(prev);
-      const sourceArr = getArrayByDroppableId(
-        rootClone,
-        source.droppableId === "root" ? "root" : source.droppableId
-      )!;
-      const [moved] = sourceArr.splice(source.index, 1);
-      const destArr = getArrayByDroppableId(
-        rootClone,
-        destination.droppableId === "root" ? "root" : destination.droppableId
-      )!;
-      destArr.splice(destination.index, 0, moved);
-      return rootClone;
-    });
   }
 
   function expandAll(value: boolean) {
@@ -780,45 +913,55 @@ export default function FakerTool() {
                 }}
                 title={
                   <span>
-                    <b>Tip:</b> Drag to reorder. For nested objects, use Add Object then + Child.
-                    Open preview to inspect object structure.
+                    <b>Tip:</b> Drag top-level items to reorder only.
+                    <br />
+                    Use Add Object then + Child buttons to manage nesting; dragging into nested
+                    levels is disabled.
                   </span>
                 }
-              ></Alert>
-              <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="root" type="FIELD">
-                  {provided => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      style={{ display: "flex", flexDirection: "column", width: "100%" }}
-                    >
-                      {fields.map((field, index) => (
-                        <Draggable draggableId={field.id} index={index} key={field.id}>
-                          {dragProvided => (
-                            <div
-                              ref={dragProvided.innerRef}
-                              {...dragProvided.draggableProps}
-                              style={{
-                                ...dragProvided.draggableProps.style,
-                                width: "100%",
-                                boxSizing: "border-box",
-                                marginTop: index === 0 ? 0 : 8,
-                              }}
-                            >
-                              <FieldEditor
-                                field={field}
-                                dragHandleProps={dragProvided.dragHandleProps}
-                              />
-                            </div>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </DragDropContext>
+              />
+              <div
+                data-droppable-id="root"
+                style={{ display: "flex", flexDirection: "column", width: "100%" }}
+              >
+                {fields.map((field, index) => (
+                  <div
+                    key={field.id}
+                    data-dnd-id={field.id}
+                    style={{
+                      width: "100%",
+                      boxSizing: "border-box",
+                      marginTop: index === 0 ? 0 : 8,
+                      position: "relative",
+                    }}
+                  >
+                    {dragState && dragOverIndex === index && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: -6,
+                          left: 0,
+                          right: 0,
+                          height: 4,
+                          background: "var(--mantine-color-blue-5)",
+                          borderRadius: 2,
+                        }}
+                      />
+                    )}
+                    <FieldEditor field={field} />
+                  </div>
+                ))}
+                {dragState && dragOverIndex === fields.length && (
+                  <div
+                    style={{
+                      height: 4,
+                      background: "var(--mantine-color-blue-5)",
+                      borderRadius: 2,
+                      marginTop: 8,
+                    }}
+                  />
+                )}
+              </div>
             </Stack>
           </Tabs.Panel>
           <Tabs.Panel value="schema" pt="md" h="100%">
