@@ -9,9 +9,6 @@ const componentMap = {
   jwt: loadable(() => import("../pages/jwt/JWT")) as React.ComponentType,
   escape: loadable(() => import("../pages/escape/BackslashEscape")) as React.ComponentType,
   markdown: loadable(() => import("../pages/markdown/Markdown")) as React.ComponentType,
-  "har-viewer": loadable(() => import("../pages/har/HarViewer")) as React.ComponentType,
-  "ssh-keys": loadable(() => import("../pages/ssh/SSH")) as React.ComponentType,
-  "svg-preview": loadable(() => import("../pages/svg/Svg")) as React.ComponentType,
   ids: loadable(() => import("../pages/ids/Ids")) as React.ComponentType,
   cron: loadable(() => import("../pages/cron/Cron")) as React.ComponentType,
   bundlephobia: loadable(() => import("../pages/bundlephobia/Bundlephobia")) as React.ComponentType,
@@ -22,12 +19,29 @@ const componentMap = {
   dns: loadable(() => import("../pages/dns/DnsLookup")) as React.ComponentType,
   hmac: loadable(() => import("../pages/hmac/HmacGenerator")) as React.ComponentType,
   diff: loadable(() => import("../pages/diff")) as React.ComponentType,
+  base64: loadable(() => import("../pages/base64/Base64")) as React.ComponentType,
+  timezone: loadable(() => import("@/pages/timezone/Timezone")) as React.ComponentType,
+  dashboard: loadable(() => import("@/pages/dashboard/Dashboard")) as React.ComponentType,
+  hash: loadable(() => import("../pages/hash/Hash")) as React.ComponentType,
+  quicktype: loadable(() => import("../pages/quicktype/Quicktype")) as React.ComponentType,
+  sql: loadable(() => import("../pages/sql/Sql")) as React.ComponentType,
+  "css-minifier": loadable(() => import("../pages/css/CssMinifier")) as React.ComponentType,
+  "html-minifier": loadable(() => import("../pages/html/htmlMinifier")) as React.ComponentType,
+  "js-minifier": loadable(() => import("../pages/js-minifier/jsMinifier")) as React.ComponentType,
+  "har-viewer": loadable(() => import("../pages/har/HarViewer")) as React.ComponentType,
+  "ssh-keys": loadable(() => import("../pages/ssh/SSH")) as React.ComponentType,
+  "svg-preview": loadable(() => import("../pages/svg/Svg")) as React.ComponentType,
   "url-parser": loadable(() => import("@/pages/url/UrlParser")) as React.ComponentType,
   "url-encoder": loadable(() => import("@/pages/url/UrlEncoder")) as React.ComponentType,
   "certificate-decoder": loadable(() => import("../pages/x509/X509")) as React.ComponentType,
   "json-formatter": loadable(() => import("../pages/json/JsonFormatter")) as React.ComponentType,
-  timezone: loadable(() => import("@/pages/timezone/Timezone")) as React.ComponentType,
-  dashboard: loadable(() => import("@/pages/dashboard/Dashboard")) as React.ComponentType,
+  "html-preview": loadable(() => import("../pages/html/HtmlPreview")) as React.ComponentType,
+  "json-yaml": loadable(
+    () => import("../pages/json-yaml-converter/JsonYaml")
+  ) as React.ComponentType,
+  "stateless-password": loadable(
+    () => import("../pages/stateless-password/StatelessPassword")
+  ) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools

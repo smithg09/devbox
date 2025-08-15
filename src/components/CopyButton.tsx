@@ -14,7 +14,8 @@ type CopyProps = {
   label: string;
   size?: MantineSize;
   fullWidth?: boolean;
-  variant?: "filled" | "light" | "subtle";
+  onClick?: () => void;
+  variant?: "filled" | "light" | "subtle" | "default";
 } & ButtonProps;
 
 export function CopyButton({
@@ -23,6 +24,7 @@ export function CopyButton({
   size,
   fullWidth = true,
   variant = "filled",
+  onClick,
   ...rest
 }: CopyProps) {
   return (
@@ -37,6 +39,7 @@ export function CopyButton({
             onClick={() => {
               copy();
               clipboard.writeText(value.toString());
+              onClick?.();
             }}
             {...rest}
           >
