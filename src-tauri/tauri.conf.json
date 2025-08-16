@@ -1,25 +1,28 @@
 {
   "bundle": {
-    "active": true,
     "targets": "all",
+    "active": true,
     "windows": {
+      "timestampUrl": "",
       "certificateThumbprint": null,
-      "digestAlgorithm": "sha256",
-      "timestampUrl": ""
+      "digestAlgorithm": "sha256"
     },
-    "icon": ["icons/icon.png", "icons/icon.icns"],
     "resources": [],
     "externalBin": [],
+    "icon": [
+      "icons/icon.png",
+      "icons/icon.icns"
+    ],
     "copyright": "",
     "category": "DeveloperTool",
-    "shortDescription": "Developer Tools",
-    "longDescription": "A cross-platform collection of developer friendly utilities provides essential tools to streamline software development and enhance productivity.",
+    "shortDescription": "Developer Utilities",
+    "longDescription": "A cross-platform developer friendly utilities that provides essential tools to streamline software development and enhance productivity.",
     "macOS": {
       "frameworks": [],
-      "minimumSystemVersion": "",
+      "entitlements": null,
       "exceptionDomain": "",
       "signingIdentity": null,
-      "entitlements": null
+      "minimumSystemVersion": ""
     },
     "linux": {
       "deb": {
@@ -30,20 +33,22 @@
     "createUpdaterArtifacts": true
   },
   "build": {
-    "beforeBundleCommand": "node scripts/compress.mjs",
     "frontendDist": "../dist",
     "beforeDevCommand": "yarn dev",
     "beforeBuildCommand": "yarn build",
+    "beforeBundleCommand": "node buildScripts/compressBinary.mjs",
     "devUrl": "http://localhost:3001"
   },
+  "identifier": "com.smith.devbox",
+  "version": "1.0.0",
   "productName": "Devbox",
   "mainBinaryName": "devbox",
-  "version": "0.1.1",
-  "identifier": "com.smith.devbox",
   "plugins": {
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEE1RDRCNkNFQTVBRERBMTQKUldRVTJxMmx6cmJVcFR3UWtxdnZWdVlCL3RRVUFwOE9ReDB3cDc3VGd4NjVJOGtzQnJZZDlUU24K",
-      "endpoints": ["https://github.com/smithg09/devbox/releases/latest/download/latest.json"]
+      "endpoints": [
+        "https://github.com/smithg09/devbox/releases/latest/download/latest.json"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEE1RDRCNkNFQTVBRERBMTQKUldRVTJxMmx6cmJVcFR3UWtxdnZWdVlCL3RRVUFwOE9ReDB3cDc3VGd4NjVJOGtzQnJZZDlUU24K"
     }
   },
   "app": {
@@ -51,9 +56,13 @@
     "security": {
       "assetProtocol": {
         "enable": true,
-        "scope": ["http://asset.localhost"]
+        "scope": [
+          "http://asset.localhost"
+        ]
       },
-      "dangerousDisableAssetCspModification": ["style-src"],
+      "dangerousDisableAssetCspModification": [
+        "style-src"
+      ],
       "csp": {
         "connect-src": [
           "https://www.google-analytics.com",
@@ -81,7 +90,11 @@
           "tauri:",
           "asset:"
         ],
-        "worker-src": ["'self'", "blob:", "https://unpkg.com"],
+        "worker-src": [
+          "'self'",
+          "blob:",
+          "https://unpkg.com"
+        ],
         "script-src": [
           "'self'",
           "'unsafe-inline'",

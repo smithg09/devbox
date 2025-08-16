@@ -19,19 +19,75 @@ Devbox helps you work faster by centralizing common developer workflows: inspect
 
 - **Cross‑platform desktop**: Powered by Tauri for a small footprint and native performance.
 - **Web app**: Use it in the browser with a fast Vite dev server and static build.
-- **Productivity‑first UI**: Group and reorder tools, hide what you don’t use, and get to work quickly.
+- **Productivity‑first UI**: Reorder tools, hide what you don’t use, group them modules and get to work quickly.
 - **Dashboard**: See recently used tools and follow your own RSS feeds.
 - **Offline‑friendly**: Most tools work entirely locally; network tools only connect when you use them.
-- **No fluff**: Purpose‑built tools with sensible defaults.
+- **No fluff / no filler**: Only tools developers actually reach for daily—focused, fast, and maintained (no novelty widgets).
 
-### Currently Available Tools
+### Installation
 
-- **Authentication & Security**: JWT Inspector, HMAC Generator, X.509 Certificate Decoder
-- **Data & Formats**: JSON Formatter, Backslash Escape/Unescape, URL Parser, URL Encoder, EPOCH Converter, Timezone
-- **Networking**: REST Client, GraphiQL Client, HAR Viewer, DNS Lookup, SSH Key tools
-- **Dev Utilities**: Regex Tester, Cron Builder & Parser, ID Generators, SVG Viewer, Bundle Analyzer
+> Binaries will be published with the first public release. Paths below are placeholders until then.
 
-> Installation and downloads will be added after the first public release.
+Download the latest release for your platform from the (upcoming) [GitHub Releases page](https://github.com/your-org/devbox/releases)
+
+After installing, launch Devbox and start using tools immediately—no sign‑in, anonymous usage counts stored locally.
+
+### Available Tools
+
+#### Network
+
+- GraphiQL – Explore schemas, run queries, debug responses
+- REST Client – Compose & send HTTP requests
+- HAR Viewer – Inspect performance waterfalls & request details
+- DNS Lookup – Query records across resolvers
+
+#### Security
+
+- JWT Tools – Decode & inspect JSON Web Tokens
+- HMAC Generator – Compute signatures (Web Crypto)
+- Certificate Decoder – Parse X.509 certificates / CSRs
+- Hashing Text – Compute hashes for input text
+- SSH Keys – Generate & validate SSH key pairs
+
+#### Utilities
+
+- Timezone – Multi‑zone time scrubber with persistence
+- Regex Tester – Live highlighting & match exploration
+- Cron – Build, parse, and preview cron expressions
+- Bundle Analyzer – Inspect npm package size & exports
+
+#### Generators
+
+- Stateless Password – Deterministic site passwords (no storage)
+- QuickType – Generate types / interfaces from JSON
+- Data Faker – Mock data from schema or visual builder
+- ID Generator – UUID, NanoID, custom patterns
+
+#### Viewers
+
+- Markdown – Live preview & export
+- Diff – Monaco diff for text / JSON / code
+- SVG Preview – Inspect & optimize SVG
+- HTML/CSS Preview – Live HTML playground
+
+#### Formatters
+
+- JSON Formatter – Pretty print & tree explorer
+- SQL Formatter – Format SQL queries
+- JS/TS Minifier – Minify JavaScript / TypeScript
+- CSS Minifier – Minify CSS
+- HTML Minifier – Minify HTML
+
+#### Converters
+
+- JSON ⇄ YAML – Bi‑directional conversion
+- Backslash Escape – Escape / unescape sequences
+- URL Parser – Parse & edit URL components
+- URL Encoder – Encode / decode URLs
+- Base64 – Encode / decode text
+- Epoch Converter – Epoch ↔ human time
+
+> Planned: WebSocket Client, Mock API Server / Webhook tester.
 
 ## Getting Started
 
@@ -65,56 +121,28 @@ Access app from the browser at `http://localhost:3001`
   yarn tauri build
 ```
 
-## Roadmap
+### Inspiration
 
-### Features
+Devbox draws conceptual inspiration from modern multi‑tool developer workbenches. Special thanks to:
 
-- [x] Move tool position
-- [x] Quick access icon on menu
-- [x] Grouped tools
-- [x] Hide/Unhide tools
-- [x] Dashboard
-  - [x] Frequently used tools
-  - [x] Add Custom RSS Feed
-- [ ] Smart clipboard
+- **devtools-x** – For pioneering the idea of a cohesive, high‑performance toolbox and influencing early architectural choices (sidebar ergonomics, and tech stack direction).
+- **devutils** – For further inspiration on focused, single‑purpose utility design and polished UX details.
 
-### Tools
-
-- [x] JWT
-- [x] Markdown
-- [x] SVG
-- [x] Cron
-- [x] ID Generator
-- [x] Regex Tester
-- [x] Bundle Analyzer
-- [x] SSH
-- [x] HAR Viewer
-- [x] REST API Testing
-- [x] GraphiQL
-- [x] EPOCH Converter
-- [x] URL Parser
-- [x] URL Encoder
-- [x] HMAC Generator
-- [x] Backslash Escape/Unescape
-- [x] DNS Lookup Tool
-- [x] Certificate Decoder X.509
-- [x] JSON Formatter
-- [x] Timezone
-- [x] Diff tools
-- [x] Base64 Text (encode/decode)
-- [x] HTM/CSS Preview
-- [x] JSON <> YAML
-- [x] Hashing Text
-- [x] Quick Type
-- [x] SQL Formatter
-- [x] HTML Formatter
-- [x] CSS Formatter
-- [x] JS/TS Formatter
-- [x] Stateless password
-- [x] Data Faker
-- [ ] WebSocket Client
-- [ ] Mock API Server / Webhook test
+Devbox builds on those ideas with a unified dashboard (usage‑aware surfacing + RSS), stronger module abstraction, no filler tools and an offline‑first Tauri desktop focus.
 
 ## Contributing
 
-We welcome contributions! Issues for bugs, UX polish, or new tools are all appreciated. Development setup and installation documentation will be added alongside the initial release.
+We welcome contributions! We're especially looking to improve:
+
+- **UX / UI polish** – Interaction flow, keyboard shortcuts, accessibility, visual consistency, dark/light contrast.
+- **Performance** – Faster startup, smaller bundle size, memory efficiency, render minimization.
+- **Essential new tools** – Only high‑signal utilities devs actually use daily (no novelty / filler). Open an issue first to discuss scope & fit.
+- **Cross‑platform parity** – macOS, Linux, Windows nuances (menus, drag regions, file dialogs, notifications).
+- **Module quality** – Better defaults, validation, helpful empty states, clearer errors.
+- **Documentation** – Usage tips, adding a new tool module, troubleshooting.
+
+Before implementing a new tool, please file an issue describing: the problem it solves, expected users, overlap with existing tools, and proposed module placement. We bias toward depth & quality over breadth.
+
+To run locally, follow the [Getting Started](#getting-started) section (clone → `yarn install` → `yarn start`). Web build also runs from the same dev server.
+
+Bug reports, focused PRs, profiling traces, and thoughtful design discussions are all appreciated.
