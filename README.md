@@ -11,7 +11,7 @@
   <img src="public/appscreenshot.png" width="800px" alt="Devbox Screenshot">
 </p>
 
-### Overview
+## Overview
 
 Devbox helps you work faster by centralizing common developer workflows: inspect JWTs, test REST and GraphQL APIs, format JSON, explore regex, decode certificates, parse cron, and more. The dashboard surfaces frequently used tools and lets you customize the sidebar so your favorites are one click away.
 
@@ -24,7 +24,7 @@ Devbox helps you work faster by centralizing common developer workflows: inspect
 - **Offline‑friendly**: Most tools work entirely locally; network tools only connect when you use them.
 - **No fluff / no filler**: Only tools developers actually reach for daily—focused, fast, and maintained (no novelty widgets).
 
-### Installation
+## Installation
 
 Download the latest release for your platform from the [releases page](https://github.com/smithg09/devbox/releases).
 
@@ -47,7 +47,7 @@ For more binaries open the full [Releases page](https://github.com/smithg09/devb
 
 After installing, launch Devbox and start using tools immediately—no sign‑in, anonymous usage counts stored locally.
 
-### Available Tools
+## Available Tools
 
 #### Network
 
@@ -122,21 +122,21 @@ After installing, launch Devbox and start using tools immediately—no sign‑in
 
 Access app from the browser at `http://localhost:3001`
 
-## Build
+### Build
 
-### Static web build
+__Static web build__
 
 ```bash
   yarn build
 ```
 
-### Desktop (Tauri) build
+__Desktop (Tauri) build__
 
 ```bash
   yarn tauri build
 ```
 
-### Inspiration
+## Inspiration
 
 Devbox draws conceptual inspiration from modern multi‑tool developer workbenches. Special thanks to:
 
