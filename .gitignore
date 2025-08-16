@@ -11,3 +11,6 @@ stats.html
 .eslintcache
 .env
 .github/copilot-instructions.md
+
+devbox
+devbox.pub

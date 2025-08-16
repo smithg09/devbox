@@ -39,7 +39,7 @@ fn main() {
       #[cfg(desktop)]
       let res = app
         .handle()
-        .plugin(tauri_plugin_updater::Builder::new().pubkey("dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEE1RDRCNkNFQTVBRERBMTQKUldRVTJxMmx6cmJVcFR3UWtxdnZWdVlCL3RRVUFwOE9ReDB3cDc3VGd4NjVJOGtzQnJZZDlUU24K").build());
+        .plugin(tauri_plugin_updater::Builder::new().pubkey("dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IENFNzFGMjVDNjFFMEI3QkIKUldTN3QrQmhYUEp4em5JRjBvTkFPRG1Zd1RsMkVuOUZKcnhwc1JOWnA4Vm03RkZocHFhTzBwY0IK").build());
       if res.is_err() {
         println!("Error: {:?}", res.err());
       }

@@ -49,7 +49,7 @@
       "endpoints": [
         "https://github.com/smithg09/devbox/releases/latest/download/latest.json"
       ],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEE1RDRCNkNFQTVBRERBMTQKUldRVTJxMmx6cmJVcFR3UWtxdnZWdVlCL3RRVUFwOE9ReDB3cDc3VGd4NjVJOGtzQnJZZDlUU24K"
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IENFNzFGMjVDNjFFMEI3QkIKUldTN3QrQmhYUEp4em5JRjBvTkFPRG1Zd1RsMkVuOUZKcnhwc1JOWnA4Vm03RkZocHFhTzBwY0IK"
     }
   },
   "app": {
