@@ -239,7 +239,7 @@ function PerCardControls({
         <Slider
           min={0}
           max={1440}
-          step={1}
+          step={5}
           value={value}
           onChange={minutes => {
             if (!draggingRef.current) {

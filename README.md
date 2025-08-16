@@ -100,20 +100,18 @@ Access app from the browser at `http://localhost:3001`
 - [x] Certificate Decoder X.509
 - [x] JSON Formatter
 - [x] Timezone
-- [ ] Diff tools
-- [ ] CSS Playground
-- [ ] Quick Type
-- [ ] Stateless password
-- [ ] Lorem Ipsum
-- [ ] Faker
-- [ ] HTML Formatter
-- [ ] CSS Formatter
-- [ ] JS/TS Formatter
-- [ ] SQL Formatter
-- [ ] HTML Preview
-- [ ] Base64 Text (encode/decode)
-- [ ] JSON <> YAML
-- [ ] Hashing Text
+- [x] Diff tools
+- [x] Base64 Text (encode/decode)
+- [x] HTM/CSS Preview
+- [x] JSON <> YAML
+- [x] Hashing Text
+- [x] Quick Type
+- [x] SQL Formatter
+- [x] HTML Formatter
+- [x] CSS Formatter
+- [x] JS/TS Formatter
+- [x] Stateless password
+- [x] Data Faker
 - [ ] WebSocket Client
 - [ ] Mock API Server / Webhook test
 
