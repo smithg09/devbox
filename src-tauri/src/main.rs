@@ -44,15 +44,21 @@ fn main() {
         println!("Error: {:?}", res.err());
       }
       // Create window with transparency enabled
-      let window = WebviewWindowBuilder::new(app, "main", WebviewUrl::App("index.html".into()))
-        .title("")
-        .inner_size(1100.0, 800.0)
-        .resizable(true)
-        .min_inner_size(850.0, 600.0)
-        .fullscreen(false)
-        .transparent(true)
-        .title_bar_style(tauri::TitleBarStyle::Overlay)
-        .build()?;
+      let builder = {
+        let b = WebviewWindowBuilder::new(app, "main", WebviewUrl::App("index.html".into()))
+          .title("")
+          .inner_size(1100.0, 800.0)
+          .resizable(true)
+          .min_inner_size(850.0, 600.0)
+          .fullscreen(false)
+          .transparent(true);
+        // Only set title_bar_style on platforms that support it (macOS, Windows).
+        #[cfg(any(target_os = "macos", target_os = "windows"))]
+        let b = b.title_bar_style(tauri::TitleBarStyle::Overlay);
+        b
+      };
+
+      let window = builder.build()?;
 
       // Apply macOS translucent vibrancy effect immediately
       #[cfg(target_os = "macos")]
@@ -61,12 +67,14 @@ fn main() {
           .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
       }
 
-      // Handle window close events for macOS
-      #[cfg(target_os = "macos")]
+      // Handle window close events on desktop (macOS, Windows, Linux)
+      // On close, hide the window instead of exiting the app.
+      #[cfg(any(target_os = "macos", target_os = "windows", target_os = "linux"))]
       {
         let window_clone = window.clone();
         window.on_window_event(move |event| {
           if let WindowEvent::CloseRequested { api, .. } = event {
+            // hide() and prevent_close() are cross-platform; keep vibrancy mac-only.
             window_clone.hide().unwrap();
             api.prevent_close();
           }

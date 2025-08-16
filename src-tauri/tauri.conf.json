@@ -2,6 +2,11 @@
   "bundle": {
     "targets": "all",
     "active": true,
+    "icon": [
+      "icons/icon.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
     "windows": {
       "timestampUrl": "",
       "certificateThumbprint": null,
@@ -9,10 +14,6 @@
     },
     "resources": [],
     "externalBin": [],
-    "icon": [
-      "icons/icon.png",
-      "icons/icon.icns"
-    ],
     "copyright": "",
     "category": "DeveloperTool",
     "shortDescription": "Developer Utilities",

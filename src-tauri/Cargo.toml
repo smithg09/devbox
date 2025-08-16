@@ -64,3 +64,6 @@ incremental = false
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-updater = "2"
+
+[package.metadata]
+tauri = { icon = ["icons/icon.ico", "icons/icon.png", "icons/icon.icns"] }
