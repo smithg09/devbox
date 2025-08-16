@@ -26,9 +26,24 @@ Devbox helps you work faster by centralizing common developer workflows: inspect
 
 ### Installation
 
-> Binaries will be published with the first public release. Paths below are placeholders until then.
+Download the latest release for your platform from the [releases page](https://github.com/smithg09/devbox/releases).
 
-Download the latest release for your platform from the (upcoming) [GitHub Releases page](https://github.com/your-org/devbox/releases)
+Quick downloads (choose the asset that matches your OS and CPU):
+
+- macOS — Apple Silicon (aarch64): [Devbox_1.0.0_aarch64.dmg](https://github.com/smithg09/devbox/releases/latest/download/Devbox_1.0.0_aarch64.dmg)
+  - Note: If macOS reports the app as “damaged” or prevents opening, remove the quarantine attribute and try again:
+
+    ```bash
+    xattr -r -c /Applications/Devbox.app
+    ```
+
+    If Gatekeeper still blocks the app, Control‑click the app icon and choose “Open” to allow it.
+
+- macOS — Intel (x64): [Devbox_1.0.0_x64.dmg](https://github.com/smithg09/devbox/releases/latest/download/Devbox_1.0.0_x64.dmg)
+
+- Windows — EXE installer (x64): [Devbox_1.0.0_x64-setup.exe](https://github.com/smithg09/devbox/releases/latest/download/Devbox_1.0.0_x64-setup.exe)
+
+For more binaries open the full [Releases page](https://github.com/smithg09/devbox/releases) and choose the asset that matches your OS/architecture.
 
 After installing, launch Devbox and start using tools immediately—no sign‑in, anonymous usage counts stored locally.
 

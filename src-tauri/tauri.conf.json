@@ -22,7 +22,7 @@
       "frameworks": [],
       "entitlements": null,
       "exceptionDomain": "",
-      "signingIdentity": null,
+      "signingIdentity": "-",
       "minimumSystemVersion": ""
     },
     "linux": {
