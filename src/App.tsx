@@ -22,6 +22,7 @@ import { Sidebar } from "./components/Sidebar";
 import { APP_CONFIG } from "./constants/app";
 import { sidebarTools } from "./constants/sidebar";
 import { tools } from "./constants/tools";
+import { useAnalytics } from "./hooks/useAnalytics";
 import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
 import { useRouteTransition } from "./hooks/useRouteAnim";
 import { insertTauriDragRegion } from "./utils/dragRegion";
@@ -32,6 +33,9 @@ const PANEL_CONFIG = APP_CONFIG.PANEL;
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Analytics Tracker
+  useAnalytics();
 
   // Route transition animation state
   const { animation, routeLocation, setRouteAnimation } = useRouteTransition();
@@ -98,7 +102,6 @@ function App() {
 
     init();
   }, []);
-
   useEffect(() => {
     // This is necessary for Tauri to allow dragging the window
     insertTauriDragRegion();

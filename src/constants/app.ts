@@ -27,4 +27,9 @@ export const APP_CONFIG = {
       },
     },
   },
+  GA: {
+    MEASUREMENT_ID: import.meta.env.VITE_GA_MEASUREMENT_ID,
+    FORCE_BEACON: import.meta.env.VITE_GA_FORCE_BEACON,
+    DEBUG: import.meta.env.VITE_GA_DEBUG,
+  },
 } as const;
