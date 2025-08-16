@@ -145,7 +145,7 @@ function App() {
   }, [location, setRouteAnimation]);
 
   return (
-    <Box className={classes.appWrapper} role="application" aria-label="DevBox Developer Tools">
+    <Box className={classes.appWrapper} role="application" aria-label="Devbox Developer Tools">
       <PanelGroup direction="horizontal" autoSaveId="devbox-sidebar">
         <Panel
           id="sidebar"

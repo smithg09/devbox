@@ -98,7 +98,7 @@ export default function Settings() {
                 const proceed = await confirmDialog(
                   "This will reset any stored data and app settings. Continue?",
                   {
-                    title: "Reset DevBox",
+                    title: "Reset Devbox",
                     kind: "warning",
                     okLabel: "Reset",
                     cancelLabel: "Cancel",
@@ -132,7 +132,7 @@ export default function Settings() {
                 }
               }}
             >
-              Reset DevBox
+              Reset Devbox
             </Button>
           </Group>
         </Stack>
@@ -195,7 +195,7 @@ export default function Settings() {
         <Text size="sm" c="dimmed">
           Made with ❤️ by{" "}
           <a href="https://github.com/smithg09/devbox" target="_blank" rel="noopener noreferrer">
-            DevBox
+            Devbox
           </a>
         </Text>
         <Text size="sm" c="dimmed">

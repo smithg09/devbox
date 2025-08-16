@@ -15,7 +15,7 @@ import cx from "clsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import classes from "./styles.module.css";
 
-import { moduleRegistry, ToolModule } from "@/constants/tools";
+import { moduleRegistry } from "@/constants/tools";
 import { useSidebarShortcuts } from "@/hooks/useSidebarShortcuts";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { isTauri } from "@/utils/isTauri";
@@ -116,9 +116,9 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
         <Group wrap="nowrap" align="center" gap={2} ml={-4}>
           <Box style={{ color: "#324298" }} p={8} pb={4} size={32}>
             {isTauri() ? (
-              <img src="/logo.png" alt="DevBox" width={32} height={32} />
+              <img src="/logo.png" alt="Devbox" width={32} height={32} />
             ) : (
-              <img src="/logo.png" alt="DevBox" width={38} height={38} />
+              <img src="/logo.png" alt="Devbox" width={38} height={38} />
             )}
           </Box>
           <Text size={theme?.fontSizes?.xl} fw={700} display={collapsed ? "none" : "block"}>
@@ -211,7 +211,6 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
                 onChange={setOpenedModule}
               >
                 {Object.values(moduleRegistry)
-                  .sort((a: ToolModule, b: ToolModule) => a.order - b.order)
                   .filter(module => sidebarTools.find(tool => tool.module === module.id))
                   .map(module => (
                     <Accordion.Item key={module.id} value={module.id}>
@@ -350,6 +349,23 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
                 <Box w="80%">
                   <Text size="xs" fw={location.pathname === "/settings" ? "600" : "450"}>
                     Settings
+                    {showDescription && (
+                      <Text
+                        size="11px"
+                        c="dimmed"
+                        mt={2}
+                        w="100%"
+                        styles={{
+                          root: {
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          },
+                        }}
+                      >
+                        Customize your experience
+                      </Text>
+                    )}
                   </Text>
                 </Box>
               </>
