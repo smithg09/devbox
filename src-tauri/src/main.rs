@@ -37,11 +37,13 @@ fn main() {
       app.manage(Client::builder().build().unwrap());
       app.manage(RssCache::new());
       #[cfg(desktop)]
-      let res = app
-        .handle()
-        .plugin(tauri_plugin_updater::Builder::new().pubkey("dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IENFNzFGMjVDNjFFMEI3QkIKUldTN3QrQmhYUEp4em5JRjBvTkFPRG1Zd1RsMkVuOUZKcnhwc1JOWnA4Vm03RkZocHFhTzBwY0IK").build());
-      if res.is_err() {
-        println!("Error: {:?}", res.err());
+      {
+        let res = app
+          .handle()
+          .plugin(tauri_plugin_updater::Builder::new().pubkey("dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IENFNzFGMjVDNjFFMEI3QkIKUldTN3QrQmhYUEp4em5JRjBvTkFPRG1Zd1RsMkVuOUZKcnhwc1JOWnA4Vm03RkZocHFhTzBwY0IK").build());
+        if res.is_err() {
+          println!("Error: {:?}", res.err());
+        }
       }
       // Create window with transparency enabled
       let builder = {
@@ -52,8 +54,12 @@ fn main() {
           .min_inner_size(850.0, 600.0)
           .fullscreen(false)
           .transparent(true);
-        // Only set title_bar_style on platforms that support it (macOS, Windows).
-        #[cfg(any(target_os = "macos", target_os = "windows"))]
+        // Only set title_bar_style on platforms that support it (macOS).
+        // The `TitleBarStyle` type and `title_bar_style` builder are gated
+        // behind macOS in this tauri version, so don't reference them on
+        // non-macOS targets to avoid unresolved-symbol errors when building
+        // for Windows or other OSes.
+        #[cfg(target_os = "macos")]
         let b = b.title_bar_style(tauri::TitleBarStyle::Overlay);
         b
       };
