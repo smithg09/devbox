@@ -124,13 +124,13 @@ Access app from the browser at `http://localhost:3001`
 
 ### Build
 
-__Static web build__
+**Static web build**
 
 ```bash
   yarn build
 ```
 
-__Desktop (Tauri) build__
+**Desktop (Tauri) build**
 
 ```bash
   yarn tauri build

@@ -1,4 +1,6 @@
 export const APP_CONFIG = {
+  PROJECT_URL: "https://github.com/smithg09/devbox",
+  RELEASES_URL: "https://github.com/smithg09/devbox/releases",
   PANEL: {
     sidebar: {
       defaultSize: 15,

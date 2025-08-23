@@ -33,6 +33,10 @@ export default function Timezone() {
       if (mounted && saved && saved.version === 1) {
         setPreferences(saved);
         setReference(saved.lastReferenceIso ? new Date(saved.lastReferenceIso) : new Date());
+        console.log("Loaded timezone prefs", saved);
+        if (saved.live !== undefined) {
+          setLive(saved.live);
+        }
       }
     })();
     return () => {
@@ -43,6 +47,7 @@ export default function Timezone() {
   useEffect(() => {
     const toSave: TimezonePreferencesV1 = {
       ...preferences,
+      live,
       lastReferenceIso: reference.toISOString(),
     };
     settingsStore.update(TIMEZONE_PREFERENCES_KEY, toSave);

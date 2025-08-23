@@ -22,11 +22,12 @@ import { isTauri } from "@/utils/isTauri";
 import { formatShortcutDisplay } from "@/utils/keyboard";
 import { DragDropContext, Draggable, Droppable, OnDragEndResponder } from "@hello-pangea/dnd";
 import { useLocalStorage } from "@mantine/hooks";
-import { BsGear, BsHouse, BsSearch } from "react-icons/bs";
+import { BsDownload, BsGear, BsHouse, BsSearch } from "react-icons/bs";
 import { SidebarConfig } from "../Settings";
 import { SIDEBAR_CONSTANTS } from "./constants";
 import Tool from "./Tool";
 import { DropDownItem, Props, SidebarTool } from "./types";
+import { APP_CONFIG } from "@/constants/app";
 
 export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
   const location = useLocation();
@@ -331,6 +332,47 @@ export const Sidebar = ({ collapsed, setCollapsed }: Props) => {
 
       <Divider w="90%" mx="auto" mt={0} />
       <Stack className={classes.settingsSection} mt={4}>
+        {!isTauri() && (
+          <Box
+            className={cx(classes.navigationItem)}
+            onClick={() => window.open(APP_CONFIG.RELEASES_URL, "_blank")}
+          >
+            <Box className={classes.itemContent} w="100%">
+              {collapsed ? (
+                <BsGear size={SIDEBAR_CONSTANTS.ICON_SIZE.LARGE} />
+              ) : (
+                <>
+                  <BsDownload
+                    size={SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM}
+                    style={{ minWidth: SIDEBAR_CONSTANTS.ICON_SIZE.MEDIUM }}
+                  />
+                  <Box w="80%">
+                    <Text size="xs" fw="450">
+                      Download App
+                      {showDescription && (
+                        <Text
+                          size="11px"
+                          c="dimmed"
+                          mt={2}
+                          w="100%"
+                          styles={{
+                            root: {
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                            },
+                          }}
+                        >
+                          Get the desktop app for the best experience
+                        </Text>
+                      )}
+                    </Text>
+                  </Box>
+                </>
+              )}
+            </Box>
+          </Box>
+        )}
         <Box
           className={cx(classes.navigationItem, {
             [classes.selectedNavigationItem]: location.pathname === "/settings",

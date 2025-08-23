@@ -62,16 +62,16 @@ export function KeyDisplay({ keys, handleBack }: KeyDisplayProps) {
               <Text fw={600} size="sm" c="red">
                 Private Key
               </Text>
-              <CopyButton value={keys.privateKey} label="Copy Private Key" />
+              <CopyButton variant="light" value={keys.privateKey} label="Copy Private Key" />
             </Group>
             <Textarea
               value={keys.privateKey}
               readOnly
-              rows={6}
+              rows={8}
               styles={{
                 input: {
                   fontFamily: "monospace",
-                  fontSize: "11px",
+                  fontSize: "13px",
                 },
               }}
             />
@@ -83,16 +83,16 @@ export function KeyDisplay({ keys, handleBack }: KeyDisplayProps) {
               <Text fw={600} size="sm" c="green">
                 Public Key
               </Text>
-              <CopyButton value={keys.publicKey} label="Copy Public Key" />
+              <CopyButton variant="light" value={keys.publicKey} label="Copy Public Key" />
             </Group>
             <Textarea
               value={keys.publicKey}
               readOnly
-              rows={6}
+              rows={8}
               styles={{
                 input: {
                   fontFamily: "monospace",
-                  fontSize: "11px",
+                  fontSize: "13px",
                 },
               }}
             />
@@ -120,7 +120,7 @@ export function KeyDisplay({ keys, handleBack }: KeyDisplayProps) {
             <Text size="sm" ff="monospace" c="dark">
               {keys.fingerprint.md5}
             </Text>
-            <CopyButton value={keys.fingerprint.md5} label="Copy MD5" />
+            <CopyButton variant="light" value={keys.fingerprint.md5} label="Copy MD5" />
           </Group>
         </Box>
         <Box>
@@ -131,7 +131,7 @@ export function KeyDisplay({ keys, handleBack }: KeyDisplayProps) {
             <Text size="sm" ff="monospace" c="dark">
               {keys.fingerprint.sha256}
             </Text>
-            <CopyButton value={keys.fingerprint.sha256} label="Copy SHA256" />
+            <CopyButton variant="light" value={keys.fingerprint.sha256} label="Copy SHA256" />
           </Group>
         </Box>
         {keys.comment && (

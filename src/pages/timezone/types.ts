@@ -21,6 +21,7 @@ export interface TimezonePreferencesV1 {
   timeFormat: TimeFormat;
   lastReferenceIso?: string;
   sliderZoom: SliderZoom;
+  live?: boolean;
 }
 
 export const TIMEZONE_PREFERENCES_KEY = "timezone.preferences";
