@@ -1,12 +1,17 @@
 import { HttpMethod, KeyValue, RequestBody } from "../types/rest";
+import { buildUrlWithParams } from "./request";
 
 export function toCurl(args: {
   method: HttpMethod;
   url: string;
   headers: KeyValue[];
   body: RequestBody;
+  params: KeyValue[];
 }): string {
-  const { method, url, headers, body } = args;
+  const { method, url, headers, body, params } = args;
+
+  const finalUrl = buildUrlWithParams(url, params);
+
   const headerFlags = headers
     .filter(h => h.enabled && h.key)
     .map(h => `-H ${JSON.stringify(`${h.key}: ${h.value}`)}`)
@@ -15,12 +20,6 @@ export function toCurl(args: {
   let data = "";
   if (body.mode === "json" || body.mode === "xml" || body.mode === "text") {
     data = `--data ${JSON.stringify(body.text ?? "")}`;
-  } else if (body.mode === "form") {
-    // repeat -d for each field to support same key
-    data = body.fields
-      .filter(f => f.enabled && f.key)
-      .map(f => `-d ${JSON.stringify(`${f.key}=${f.value}`)}`)
-      .join(" ");
   } else if (body.mode === "multipart") {
     data = body.fields
       .filter(f => f.enabled && f.key)
@@ -28,7 +27,7 @@ export function toCurl(args: {
       .join(" ");
   }
 
-  const parts = ["curl", "-X", method, headerFlags, data, JSON.stringify(url)]
+  const parts = ["curl", "-X", method, headerFlags, data, JSON.stringify(finalUrl)]
     .filter(Boolean)
     .join(" ");
   return parts;

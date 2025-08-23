@@ -1,9 +1,11 @@
-import { Button, Flex, Group, NativeSelect, Stack, TextInput } from "@mantine/core";
+import { Button, Flex, Group, NativeSelect, Stack, TextInput, Tooltip } from "@mantine/core";
 import { useEffect, useRef } from "react";
 import { LayoutType } from "../Rest";
 import { HttpMethod, RequestTab } from "../types/rest";
 import RequestEditor from "./RequestEditor";
 import ResponseViewer from "./ResponseViewer";
+import { toCurl } from "../utils/curl";
+import { CopyButton } from "@/components/CopyButton";
 
 type Props = {
   tab: RequestTab;
@@ -67,7 +69,7 @@ export default function RestEditor({ tab, onChange, onSend, sending, layout }: P
 
   return (
     <Stack gap="sm" style={{ overflow: "scroll" }}>
-      <Group wrap="nowrap">
+      <Group wrap="nowrap" gap={6}>
         <Flex
           flex={1}
           styles={{
@@ -84,6 +86,15 @@ export default function RestEditor({ tab, onChange, onSend, sending, layout }: P
         <Button onClick={onSend} loading={sending} disabled={sending} variant="light">
           Send
         </Button>
+        <Tooltip label="Copy CURL" withArrow>
+          <CopyButton
+            value={toCurl(tab)}
+            label="cURL"
+            size="sm"
+            variant="light"
+            fullWidth={false}
+          />
+        </Tooltip>
       </Group>
 
       {layout === "vertical" ? (

@@ -34,18 +34,28 @@ export function buildBody(body: RequestBody): BodyInit | undefined {
   if (body.mode === "json" || body.mode === "xml" || body.mode === "text") {
     return body.text ?? "";
   }
-  if (body.mode === "form") {
-    const usp = new URLSearchParams();
-    body.fields.filter(f => f.enabled && f.key).forEach(f => usp.append(f.key, f.value));
-    return usp as unknown as BodyInit;
-  }
   if (body.mode === "multipart") {
     const fd = new FormData();
     body.fields.filter(f => f.enabled && f.key).forEach(f => fd.append(f.key, f.value));
     // Files: path resolution can be handled later with Tauri FS/Open dialog
     body.files?.forEach(file => {
-      if (file.field && file.name) {
-        // Placeholder: append empty Blob; actual file picking wired in UI
+      if (!file.field) return;
+      const picked = (file as any).file;
+      // Heuristic: treat as picked file when it has a `name` property (File/Blob from FileButton)
+      if (picked && typeof (picked as any).name === "string") {
+        fd.append(
+          file.field,
+          picked as unknown as File,
+          (file as any).name || (picked as any).name
+        );
+        return;
+      }
+      if (file.path) {
+        // Desktop (Tauri) path-only entry: placeholder until FS read is wired
+        fd.append(file.field, new Blob([""]), file.name || file.path);
+        return;
+      }
+      if (file.name) {
         fd.append(file.field, new Blob([""]), file.name);
       }
     });
@@ -81,6 +91,11 @@ export async function sendRequest(args: {
         : body.mode === "xml"
           ? "application/xml"
           : "text/plain";
+  }
+  // For multipart/form-data, remove any Content-Type header so fetch can add the boundary
+  if (body.mode === "multipart") {
+    const cKey = Object.keys(headerRecord).find(k => k.toLowerCase() === "content-type");
+    if (cKey) delete headerRecord[cKey];
   }
 
   const init: RequestInit = {

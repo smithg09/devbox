@@ -7,12 +7,11 @@ export type KeyValue = {
   enabled: boolean;
 };
 
-export type BodyMode = "none" | "json" | "xml" | "text" | "form" | "multipart";
+export type BodyMode = "none" | "json" | "xml" | "text" | "multipart";
 
 export type RequestBody =
   | { mode: "none" }
   | { mode: "json" | "xml" | "text"; text: string }
-  | { mode: "form"; fields: KeyValue[] }
   | {
       mode: "multipart";
       fields: KeyValue[];
