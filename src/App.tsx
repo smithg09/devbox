@@ -4,6 +4,7 @@ import classes from "./App.module.css";
 
 import { Box, Stack } from "@mantine/core";
 import { Spotlight } from "@mantine/spotlight";
+import { WebInterstitial } from "./components/WebInterstitial";
 import { loader as monacoLoader } from "@monaco-editor/react";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { check } from "@tauri-apps/plugin-updater";
@@ -185,6 +186,7 @@ function App() {
         }}
         actions={spotlightActions}
       />
+      <WebInterstitial />
     </Box>
   );
 }
