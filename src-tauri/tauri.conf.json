@@ -2,7 +2,11 @@
   "bundle": {
     "targets": "all",
     "active": true,
-    "icon": ["icons/icon.png", "icons/icon.icns", "icons/icon.ico"],
+    "icon": [
+      "icons/icon.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
     "windows": {
       "timestampUrl": "",
       "certificateThumbprint": null,
@@ -37,12 +41,14 @@
     "devUrl": "http://localhost:3001"
   },
   "identifier": "com.smith.devbox",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "productName": "Devbox",
   "mainBinaryName": "devbox",
   "plugins": {
     "updater": {
-      "endpoints": ["https://github.com/smithg09/devbox/releases/latest/download/latest.json"],
+      "endpoints": [
+        "https://github.com/smithg09/devbox/releases/latest/download/latest.json"
+      ],
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IENFNzFGMjVDNjFFMEI3QkIKUldTN3QrQmhYUEp4em5JRjBvTkFPRG1Zd1RsMkVuOUZKcnhwc1JOWnA4Vm03RkZocHFhTzBwY0IK"
     }
   },
@@ -51,9 +57,13 @@
     "security": {
       "assetProtocol": {
         "enable": true,
-        "scope": ["http://asset.localhost"]
+        "scope": [
+          "http://asset.localhost"
+        ]
       },
-      "dangerousDisableAssetCspModification": ["style-src"],
+      "dangerousDisableAssetCspModification": [
+        "style-src"
+      ],
       "csp": {
         "connect-src": [
           "https://www.google-analytics.com",
@@ -81,7 +91,11 @@
           "tauri:",
           "asset:"
         ],
-        "worker-src": ["'self'", "blob:", "https://unpkg.com"],
+        "worker-src": [
+          "'self'",
+          "blob:",
+          "https://unpkg.com"
+        ],
         "script-src": [
           "'self'",
           "'unsafe-inline'",
@@ -89,8 +103,16 @@
           "https://www.googletagmanager.com",
           "https://www.google-analytics.com"
         ],
-        "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-        "font-src": ["'self'", "data:", "https://fonts.gstatic.com"],
+        "style-src": [
+          "'self'",
+          "'unsafe-inline'",
+          "https://fonts.googleapis.com"
+        ],
+        "font-src": [
+          "'self'",
+          "data:",
+          "https://fonts.gstatic.com"
+        ],
         "img-src": [
           "'self'",
           "data:",
