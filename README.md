@@ -5,6 +5,7 @@
 </p>
 
 <p align="center"><strong>All your everyday developer tools in one fast desktop app</strong></p>
+<p align="center">https://devbox.smithgajjar.dev</p>
 <p align="center">Devbox is a lightweight, cross‑platform desktop and web app built with Tauri (Rust) and React that bundles everyday developer utilities into a single, streamlined experience. No clutter, no browser tabs — just the tools you need, available offline and optimized for productivity.</p>
 
 <p align="center">
