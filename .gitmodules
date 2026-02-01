@@ -1,0 +1,3 @@
+[submodule "devbox-web"]
+	path = devbox-web
+	url = https://github.com/smithg09/devbox-web
