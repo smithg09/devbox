@@ -1,4 +1,4 @@
-# Devbox
+# [Devbox](https://devbox.smithgajjar.dev)
 
 <p align="center">
   <img src="public/logo.png" alt="Devbox Logo" width="120" height="120">
@@ -13,7 +13,7 @@
 
 ## Overview
 
-Devbox helps you work faster by centralizing common developer workflows: inspect JWTs, test REST and GraphQL APIs, format JSON, explore regex, decode certificates, parse cron, and more. The dashboard surfaces frequently used tools and lets you customize the sidebar so your favorites are one click away.
+[Devbox](https://devbox.smithgajjar.dev) helps you work faster by centralizing common developer workflows: inspect JWTs, test REST and GraphQL APIs, format JSON, explore regex, decode certificates, parse cron, and more. The dashboard surfaces frequently used tools and lets you customize the sidebar so your favorites are one click away.
 
 ### Highlights
 
