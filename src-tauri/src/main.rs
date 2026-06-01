@@ -9,13 +9,14 @@ use tauri::{
   Manager, WebviewUrl, WebviewWindowBuilder, WindowEvent,
 };
 use reqwest::Client;
+use std::sync::Arc;
 use tauri_plugin_opener::OpenerExt;
 
 #[cfg(target_os = "macos")]
 use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
 
 mod commands;
-use commands::{fetch_rss, RssCache};
+use commands::{fetch_rss, fetch_url, start_webhook_server, stop_webhook_server, RssCache, WebhookServerState};
 
 #[tauri::command]
 async fn open_external(app: tauri::AppHandle, url: String) -> Result<(), String> {
@@ -36,6 +37,7 @@ fn main() {
     .setup(|app| {
       app.manage(Client::builder().build().unwrap());
       app.manage(RssCache::new());
+      app.manage(Arc::new(WebhookServerState::new()));
       #[cfg(desktop)]
       {
         let res = app
@@ -116,7 +118,7 @@ fn main() {
         .build(app)?;
       Ok(())
     })
-    .invoke_handler(tauri::generate_handler![fetch_rss, open_external])
+    .invoke_handler(tauri::generate_handler![fetch_rss, fetch_url, open_external, start_webhook_server, stop_webhook_server])
     .run(tauri::generate_context!())
     .expect("[TAURI] Error running application");
 }

@@ -34,19 +34,23 @@ export interface GraphQLState {
 export const DEFAULT_QUERY = `
 # Welcome to DevBox GraphQL
 
-query GetLaunches {
-  launchesPast(limit: 5) {
-    id
-    mission_name
-    launch_date_local
-    launch_success
-    rocket {
-      rocket_name
-      rocket_type
+query Languages {
+  languages{
+    code
+    countries {
+      awsRegion
+      capital
+      code
+      currencies
+      emoji
+      name
+      native
+      phone
     }
-    links {
-      mission_patch_small
-    }
+    name
+    native
+    rtl
+
   }
 }`;
 
