@@ -56,6 +56,9 @@ After installing, launch Devbox and start using tools immediately—no sign‑in
 - REST Client – Compose & send HTTP requests
 - HAR Viewer – Inspect performance waterfalls & request details
 - DNS Lookup – Query records across resolvers
+- Webhook Inspector – Spin up a local endpoint, log incoming payloads in real time (desktop)
+- CORS Debugger – Paste request + response headers, get plain-English CORS failure explanation + exact fix
+- SSE Debugger – Connect to any SSE endpoint, watch the stream live with filtering and search
 
 #### Security
 
@@ -85,6 +88,7 @@ After installing, launch Devbox and start using tools immediately—no sign‑in
 - Diff – Monaco diff for text / JSON / code
 - SVG Preview – Inspect & optimize SVG
 - HTML/CSS Preview – Live HTML playground
+- Mermaid Diagram Editor – Live editor with flowchart/sequence/ER/gitgraph preview, export SVG/PNG
 
 #### Formatters
 
@@ -103,7 +107,12 @@ After installing, launch Devbox and start using tools immediately—no sign‑in
 - Base64 – Encode / decode text
 - Epoch Converter – Epoch ↔ human time
 
-> Planned: WebSocket Client, Mock API Server / Webhook tester.
+#### AI Tooling
+
+- MCP Server Tester – Connect to any MCP server, browse tools, fire calls, inspect responses
+- llms.txt Generator – From URLs, sitemaps, or raw content, generate structured llms.txt / llms-full.txt
+- Chunking Playground – Paste a doc, pick a strategy (fixed/sentence/recursive/semantic), preview chunks + token counts
+- Prompt Version Manager – Save named prompt versions locally, run against a model, track and compare outputs
 
 ## Getting Started
 

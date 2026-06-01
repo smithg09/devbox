@@ -43,6 +43,22 @@ const componentMap = {
   "stateless-password": loadable(
     () => import("../pages/stateless-password/StatelessPassword")
   ) as React.ComponentType,
+  mermaid: loadable(() => import("../pages/mermaid/Mermaid")) as React.ComponentType,
+  "webhook-inspector": loadable(
+    () => import("../pages/webhook-inspector/WebhookInspector")
+  ) as React.ComponentType,
+  "cors-debugger": loadable(
+    () => import("../pages/cors-debugger/CorsDebugger")
+  ) as React.ComponentType,
+  "mcp-tester": loadable(() => import("../pages/mcp-tester/McpTester")) as React.ComponentType,
+  "llms-txt": loadable(() => import("../pages/llms-txt/LlmsTxt")) as React.ComponentType,
+  "sse-debugger": loadable(
+    () => import("../pages/sse-debugger/SseDebugger")
+  ) as React.ComponentType,
+  chunking: loadable(() => import("../pages/chunking/Chunking")) as React.ComponentType,
+  "prompt-manager": loadable(
+    () => import("../pages/prompt-manager/PromptManager")
+  ) as React.ComponentType,
 };
 // Dynamically create lazy-loaded components
 const routes = tools

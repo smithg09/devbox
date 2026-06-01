@@ -67,3 +67,28 @@ export async function saveDataToFile(
     });
   });
 }
+
+export async function saveBinaryToFile(
+  bytes: Uint8Array,
+  title: string,
+  filters: DialogFilter[],
+  notification?: { message: string; title: string }
+) {
+  const path = await save({ title, filters });
+
+  if (!path) {
+    throw notifications.show({
+      title: "Error!",
+      message: "No path selected",
+      color: "red",
+    });
+  }
+
+  await writeFile(path, bytes).then(() => {
+    notifications.show({
+      title: notification?.title || "Success!",
+      message: notification?.message || "File saved successfully",
+      color: "green",
+    });
+  });
+}
