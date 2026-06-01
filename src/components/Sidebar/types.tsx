@@ -9,6 +9,7 @@ export type SidebarTool = {
   extra?: string;
   description?: string;
   module: string;
+  desktopOnly?: boolean;
 };
 
 export type DropDownItem = {

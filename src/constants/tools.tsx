@@ -6,8 +6,10 @@ import {
   BsClock,
   BsClockHistory,
   BsCodeSlash,
+  BsDiagram3,
   BsEmojiSmile,
   BsEye,
+  BsFiletypeDoc,
   BsFiletypeSvg,
   BsHash,
   BsKey,
@@ -30,16 +32,33 @@ import {
   TbBrandGraphql,
   TbBrandHtml5,
   TbBrandJavascript,
+  TbBroadcast,
   TbDatabase,
   TbDeviceAnalytics,
   TbFileTypeCss,
   TbFileTypeHtml,
   TbFingerprint,
   TbNetwork,
+  TbPlugConnected,
+  TbRobot,
+  TbScissors,
   TbSchema,
+  TbShieldOff,
+  TbVersions,
+  TbWebhook,
   TbWorld,
   TbWorldSearch,
 } from "react-icons/tb";
+
+export interface Tool {
+  id: string;
+  path: string;
+  icon: ReactElement;
+  text: string;
+  description: string;
+  module: string;
+  desktopOnly?: boolean;
+}
 
 export interface ToolModule {
   id: string;
@@ -305,6 +324,78 @@ export const tools = [
     description: "Minify HTML with a live preview",
     module: "formatters",
   },
+  {
+    id: "mermaid",
+    path: "/mermaid",
+    icon: <BsDiagram3 />,
+    text: "Mermaid Diagram Editor",
+    description:
+      "Live diagram editor with flowchart, sequence, ER, and gitgraph support; export SVG/PNG",
+    module: "viewers",
+  },
+  {
+    id: "webhook-inspector",
+    path: "/webhook-inspector",
+    icon: <TbWebhook />,
+    text: "Webhook Inspector",
+    description: "Spin up a local HTTP endpoint, log incoming payloads in real time",
+    module: "network",
+    desktopOnly: true,
+  },
+  {
+    id: "cors-debugger",
+    path: "/cors-debugger",
+    icon: <TbShieldOff />,
+    text: "CORS Debugger",
+    description:
+      "Paste request and response headers, get plain-English CORS failure explanation and exact fix",
+    module: "network",
+  },
+  {
+    id: "mcp-tester",
+    path: "/mcp-tester",
+    icon: <TbPlugConnected />,
+    text: "MCP Server Tester",
+    description:
+      "Connect to any MCP server, browse available tools, fire calls, and inspect responses",
+    module: "ai",
+  },
+  {
+    id: "llms-txt",
+    path: "/llms-txt",
+    icon: <BsFiletypeDoc />,
+    text: "llms.txt Generator",
+    description:
+      "From URLs, sitemaps, or raw content, generate structured llms.txt and llms-full.txt",
+    desktopOnly: true,
+    module: "ai",
+  },
+  {
+    id: "sse-debugger",
+    path: "/sse-debugger",
+    icon: <TbBroadcast />,
+    text: "SSE Debugger",
+    description:
+      "Connect to any Server-Sent Events endpoint and watch the stream live with filtering",
+    module: "network",
+  },
+  {
+    id: "chunking",
+    path: "/chunking",
+    icon: <TbScissors />,
+    text: "Chunking Playground",
+    description:
+      "Paste a document, pick a chunking strategy, preview chunks with token counts and overlap",
+    module: "ai",
+  },
+  {
+    id: "prompt-manager",
+    path: "/prompt-manager",
+    icon: <TbVersions />,
+    text: "Prompt Version Manager",
+    description: "Save named prompt versions locally, run against a model, and compare outputs",
+    module: "ai",
+  },
 ];
 
 export const moduleRegistry: Record<string, ToolModule> = {
@@ -349,5 +440,11 @@ export const moduleRegistry: Record<string, ToolModule> = {
     name: "Converters",
     description: "Convert between different data formats and encodings",
     icon: <BsArrowLeftRight />,
+  },
+  ai: {
+    id: "ai",
+    name: "AI Tooling",
+    description: "Tools for AI development, prompt engineering, and LLM pipelines",
+    icon: <TbRobot />,
   },
 };

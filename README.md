@@ -1,10 +1,11 @@
-# Devbox
+# [Devbox](https://devbox.smithgajjar.dev)
 
 <p align="center">
   <img src="public/logo.png" alt="Devbox Logo" width="120" height="120">
 </p>
 
 <p align="center"><strong>All your everyday developer tools in one fast desktop app</strong></p>
+<p align="center">https://devbox.smithgajjar.dev</p>
 <p align="center">Devbox is a lightweight, cross‑platform desktop and web app built with Tauri (Rust) and React that bundles everyday developer utilities into a single, streamlined experience. No clutter, no browser tabs — just the tools you need, available offline and optimized for productivity.</p>
 
 <p align="center">
@@ -13,7 +14,7 @@
 
 ## Overview
 
-Devbox helps you work faster by centralizing common developer workflows: inspect JWTs, test REST and GraphQL APIs, format JSON, explore regex, decode certificates, parse cron, and more. The dashboard surfaces frequently used tools and lets you customize the sidebar so your favorites are one click away.
+[Devbox](https://devbox.smithgajjar.dev) helps you work faster by centralizing common developer workflows: inspect JWTs, test REST and GraphQL APIs, format JSON, explore regex, decode certificates, parse cron, and more. The dashboard surfaces frequently used tools and lets you customize the sidebar so your favorites are one click away.
 
 ### Highlights
 
@@ -55,6 +56,9 @@ After installing, launch Devbox and start using tools immediately—no sign‑in
 - REST Client – Compose & send HTTP requests
 - HAR Viewer – Inspect performance waterfalls & request details
 - DNS Lookup – Query records across resolvers
+- Webhook Inspector – Spin up a local endpoint, log incoming payloads in real time (desktop)
+- CORS Debugger – Paste request + response headers, get plain-English CORS failure explanation + exact fix
+- SSE Debugger – Connect to any SSE endpoint, watch the stream live with filtering and search
 
 #### Security
 
@@ -84,6 +88,7 @@ After installing, launch Devbox and start using tools immediately—no sign‑in
 - Diff – Monaco diff for text / JSON / code
 - SVG Preview – Inspect & optimize SVG
 - HTML/CSS Preview – Live HTML playground
+- Mermaid Diagram Editor – Live editor with flowchart/sequence/ER/gitgraph preview, export SVG/PNG
 
 #### Formatters
 
@@ -102,7 +107,12 @@ After installing, launch Devbox and start using tools immediately—no sign‑in
 - Base64 – Encode / decode text
 - Epoch Converter – Epoch ↔ human time
 
-> Planned: WebSocket Client, Mock API Server / Webhook tester.
+#### AI Tooling
+
+- MCP Server Tester – Connect to any MCP server, browse tools, fire calls, inspect responses
+- llms.txt Generator – From URLs, sitemaps, or raw content, generate structured llms.txt / llms-full.txt
+- Chunking Playground – Paste a doc, pick a strategy (fixed/sentence/recursive/semantic), preview chunks + token counts
+- Prompt Version Manager – Save named prompt versions locally, run against a model, track and compare outputs
 
 ## Getting Started
 
