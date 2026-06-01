@@ -14,7 +14,7 @@ export default function GraphiQL() {
   const [graphqlState, setGraphqlState] = useState<GraphQLTab>({
     id: crypto.randomUUID(),
     title: "GraphQL",
-    endpoint: "https://spacex-production.up.railway.app/",
+    endpoint: "https://countries.trevorblades.com/",
     query: DEFAULT_QUERY,
     variables: "{}",
     headers: [...DEFAULT_HEADERS],

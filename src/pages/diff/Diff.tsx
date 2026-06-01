@@ -1,3 +1,4 @@
+import { saveDataToFile } from "@/utils/functions";
 import { MonacoEditor } from "@/components/Monaco/Editor";
 import {
   Box,
@@ -345,14 +346,8 @@ export default function Diff() {
     }
   };
 
-  const downloadPatch = () => {
-    const blob = new Blob([patchText], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "diff.patch";
-    a.click();
-    URL.revokeObjectURL(url);
+  const downloadPatch = async () => {
+    await saveDataToFile(patchText, "Save Patch", [{ name: "Patch File", extensions: ["patch"] }]);
   };
 
   return (
