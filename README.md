@@ -31,7 +31,7 @@ Download the latest release for your platform from the [releases page](https://g
 
 Quick downloads (choose the asset that matches your OS and CPU):
 
-- macOS — Apple Silicon (aarch64): [Devbox_1.0.0_aarch64.dmg](https://github.com/smithg09/devbox/releases/latest/download/Devbox_1.0.0_aarch64.dmg)
+- macOS — Apple Silicon (aarch64): [Devbox_2.0.0_aarch64.dmg](https://github.com/smithg09/devbox/releases/download/devbox-v2.0.0/Devbox_2.0.0_aarch64.dmg)
   - Note: If macOS reports the app as “damaged” or prevents opening, remove the quarantine attribute and try again:
 
     ```bash
@@ -40,9 +40,9 @@ Quick downloads (choose the asset that matches your OS and CPU):
 
     If Gatekeeper still blocks the app, Control‑click the app icon and choose “Open” to allow it.
 
-- macOS — Intel (x64): [Devbox_1.0.0_x64.dmg](https://github.com/smithg09/devbox/releases/latest/download/Devbox_1.0.0_x64.dmg)
+- macOS — Intel (x64): [Devbox_2.0.0_x64.dmg](https://github.com/smithg09/devbox/releases/download/devbox-v2.0.0/Devbox_2.0.0_x64.dmg)
 
-- Windows — EXE installer (x64): [Devbox_1.0.0_x64-setup.exe](https://github.com/smithg09/devbox/releases/latest/download/Devbox_1.0.0_x64-setup.exe)
+- Windows — EXE installer (x64): [Devbox_2.0.0_x64-setup.exe](https://github.com/smithg09/devbox/releases/download/devbox-v2.0.0/Devbox_2.0.0_x64-setup.exe)
 
 For more binaries open the full [Releases page](https://github.com/smithg09/devbox/releases) and choose the asset that matches your OS/architecture.
 
